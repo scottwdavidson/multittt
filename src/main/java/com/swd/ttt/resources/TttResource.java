@@ -1,4 +1,4 @@
-package com.swd.boot.web.resources;
+package com.swd.ttt.resources;
 
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,7 @@ import javax.ws.rs.Produces;
 @Produces({ "application/json" })
 @Component
 @Path("/")
-public class DemoResource {
+public class TttResource {
 
     @GET
     @Path("/hello")
