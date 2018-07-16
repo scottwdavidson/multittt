@@ -42,8 +42,8 @@ public class TicTacToeBoardTest {
     @UseDataProvider("generateRepresentationData")
     public void testGenerateRepresentation(TicTacToeBoard tictactoeBoard, Short expectedBoardXPresentation, Short expectedBoardOPresentation){
 
-        Assert.assertEquals(tictactoeBoard.generateXRepresentation(), expectedBoardXPresentation);
-        Assert.assertEquals(tictactoeBoard.generateORepresentation(), expectedBoardOPresentation);
+        Assert.assertEquals("Checking X Representation", tictactoeBoard.generateXRepresentation(), expectedBoardXPresentation);
+        Assert.assertEquals("Checking Y Representation", tictactoeBoard.generateORepresentation(), expectedBoardOPresentation);
 
     }
 
