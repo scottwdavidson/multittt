@@ -15,6 +15,20 @@ public class TicTacToeBoard {
 
     private Cell[] cells = new Cell[9];
 
+    /**
+     * Generates a short integer that represents the current state of the X player on this board.
+     */
+    public Short generateXRepresentation() {
+        return null;
+    }
+
+    /**
+     * Generates a short integer that represents the current state of the O player on this board.
+     */
+    public Short generateORepresentation() {
+        return null;
+    }
+
     public boolean isOpen() {
         return open;
     }
