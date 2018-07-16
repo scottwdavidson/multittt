@@ -36,7 +36,7 @@ public class Automaton {
                 if (1 == moves.size()) {
 
                     // A single move - got to go w/ it
-                    move(board, activeTicTacToeBoard, player, moves.get(0));
+                    move(board, activeTicTacToeBoard, player, moves.get(0));  
                 }
             }
         }
