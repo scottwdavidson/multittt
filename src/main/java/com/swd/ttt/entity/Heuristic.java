@@ -12,5 +12,5 @@ public interface Heuristic {
     /**
      * Provides the list of legal moves on the provided tictactoe board based on this heuristic.
      */
-    List<Integer> moves(TicTacToeBoard tictactoeBoard);
+    List<Integer> moves(TicTacToeBoard tictactoeBoard, Player activePlayer, Player opponent);
 }
