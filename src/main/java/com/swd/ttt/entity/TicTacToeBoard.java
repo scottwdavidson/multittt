@@ -61,15 +61,14 @@ public class TicTacToeBoard {
     /**
      * Generates a short integer that represents the current state of the X player on this board.
      */
-    public Short generateXRepresentation() {
-        return 0;
-    }
-
-    /**
-     * Generates a short integer that represents the current state of the O player on this board.
-     */
-    public Short generateORepresentation() {
-        return 0;
+    public Short generatePlayerRepresentation(Player player) {
+    	short rep = 0;
+        for(int i=0; i<cells.length; i++){
+        	if(cells[i].getPlayer() == player){
+        		rep += Math.pow(2, i);
+        	}
+        }
+        return rep;
     }
 
     public boolean isOpen() {

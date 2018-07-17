@@ -1,8 +1,10 @@
 package com.swd.ttt.entity;
 
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
+
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -17,8 +19,8 @@ public class TicTacToeBoardTest {
     private static TicTacToeBoard X_LAST_COLUMN_FIRST_TWO_O_BLOCK = TicTacToeBoard.emptyTicTacToeBoard();
     private static TicTacToeBoard O_FIRST_COLUMN_FIRST_TWO_BLOCK_X_DIAGONAL = TicTacToeBoard.emptyTicTacToeBoard();
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
 
         {
             X_TOP_ROW_FIRST_TWO.addMove(Player.X, 0);
@@ -42,8 +44,8 @@ public class TicTacToeBoardTest {
     @UseDataProvider("generateRepresentationData")
     public void testGenerateRepresentation(TicTacToeBoard tictactoeBoard, Short expectedBoardXPresentation, Short expectedBoardOPresentation){
 
-        Assert.assertEquals("Checking X Representation", tictactoeBoard.generateXRepresentation(), expectedBoardXPresentation);
-        Assert.assertEquals("Checking Y Representation", tictactoeBoard.generateORepresentation(), expectedBoardOPresentation);
+        Assert.assertEquals("Checking X Representation", expectedBoardXPresentation, tictactoeBoard.generatePlayerRepresentation(Player.X));
+        Assert.assertEquals("Checking O Representation", expectedBoardOPresentation, tictactoeBoard.generatePlayerRepresentation(Player.O));
 
     }
 
@@ -51,8 +53,8 @@ public class TicTacToeBoardTest {
     public static Object[][] generateRepresentationData() {
 
         return new Object[][] {
-//                {X_TOP_ROW_FIRST_TWO, (short) 0b000000011, (short) 0b000000000},
-//                {X_LAST_COLUMN_FIRST_TWO_O_BLOCK, 0b000100100, 0b110000000},
+                {X_TOP_ROW_FIRST_TWO, (short) 0b000000011, (short) 0b000000000},
+                {X_LAST_COLUMN_FIRST_TWO_O_BLOCK, (short) 0b000100100, (short) 0b110000000},
                 {O_FIRST_COLUMN_FIRST_TWO_BLOCK_X_DIAGONAL, (short) 0b100010000, (short) 0b000001001}
         };
     }

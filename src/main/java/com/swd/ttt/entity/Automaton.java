@@ -24,19 +24,19 @@ public class Automaton {
      * @param board
      * @param activeTicTacToeBoard
      */
-    public void move(Board board, int activeTicTacToeBoard, Player player){
+    public void move(Board board, int activeTicTacToeBoard, Player activePlayer, Player opponent){
 
         // Iterate through the prioritized list of Automaton Strategy objects
         for ( Heuristic automatonHeuristic : this.strategy.prioritizedAutomatonHeuristics()){
 
-            List<Integer> moves = automatonHeuristic.moves(board.getTttBoards()[activeTicTacToeBoard]);
+            List<Integer> moves = automatonHeuristic.moves(board.getTttBoards()[activeTicTacToeBoard], activePlayer, opponent);
 
             if ( null != moves && !moves.isEmpty() ){
 
                 if (1 == moves.size()) {
 
                     // A single move - got to go w/ it
-                    move(board, activeTicTacToeBoard, player, moves.get(0));  
+                    move(board, activeTicTacToeBoard, activePlayer, moves.get(0));  
                 }
             }
         }

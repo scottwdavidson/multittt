@@ -21,11 +21,11 @@ public class AggregatedHeuristic implements Heuristic {
     }
 
     @Override
-    public List<Integer> moves(TicTacToeBoard tictactoeBoard) {
+    public List<Integer> moves(TicTacToeBoard tictactoeBoard, Player activePlayer, Player opponent) {
 
         List<Integer> moves = new ArrayList<Integer>();
         for(Heuristic heuristic: this.heuristics){
-            moves.addAll(heuristic.moves(tictactoeBoard));
+            moves.addAll(heuristic.moves(tictactoeBoard, activePlayer, opponent));
         }
         return moves;
     }
