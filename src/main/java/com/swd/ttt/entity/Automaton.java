@@ -64,14 +64,14 @@ public class Automaton {
         for (Heuristic automatonHeuristic : this.strategy.prioritizedAutomatonHeuristics()) {
 
             // Get the possible moves for the next highest priority Heuristic
-            List<Integer> moves = automatonHeuristic.moves(board.getTttBoards()[activeTicTacToeBoard], activePlayer, opponent);
+            Set<Integer> moves = automatonHeuristic.moves(board.getTttBoards()[activeTicTacToeBoard], activePlayer, opponent);
 
             if (null != moves && !moves.isEmpty()) {
 
                 // Only a single move - got to go w/ it
                 if (1 == moves.size()) {
 
-                    move(board, activeTicTacToeBoard, activePlayer, moves.get(0));
+                    move(board, activeTicTacToeBoard, activePlayer, moves.iterator().next());
                     break;
                 }
 
@@ -94,7 +94,7 @@ public class Automaton {
 
                         for (Heuristic opponentHeuristic : this.strategy.prioritizedOpponentHeuristics()) {
 
-                            List<Integer> opponentMoves = opponentHeuristic.moves(ticTacToeBoard, opponent, activePlayer);
+                            Set<Integer> opponentMoves = opponentHeuristic.moves(ticTacToeBoard, opponent, activePlayer);
 
                             if (null != opponentMoves && !opponentMoves.isEmpty()) {
                                 evaluatedMoves.put(opponentHeuristic.relativeValue(), EvaluatedMove.newEvaluatedMove(move, opponentHeuristic.relativeValue()));
@@ -102,12 +102,42 @@ public class Automaton {
                         }
                     }
 
-                    move(board,activeTicTacToeBoard,activePlayer,evaluatedMoves.get(0).getMove());
+                    move(board, activeTicTacToeBoard, activePlayer, evaluatedMoves.get(0).getMove());
                     break;
                 }
 
             }
         }
+    }
+
+    protected SortedMap<Integer, EvaluatedMove> evaluateSecondaryOpponentMoves(Board board, int activeTicTacToeBoard,
+                                                                               Player activePlayer, Player opponent,
+                                                                               List<Integer> moves) {
+        SortedMap<Integer, EvaluatedMove> evaluatedMoves = new TreeMap<>();
+
+        for (Integer move : moves) {
+
+            int tictactoeBoardIndex = move; // clarifies name for part of the algorithm
+
+            // If the move places the opponent on the same board (the active board), create a temporary board
+            // and add the move (so the evaluation will considered the proposed update)
+            TicTacToeBoard ticTacToeBoard = board.getTttBoards()[tictactoeBoardIndex];
+            if (tictactoeBoardIndex == activeTicTacToeBoard) {
+                ticTacToeBoard = TicTacToeBoard.prototypeTicTacToeBoard(board.getTttBoards()[activeTicTacToeBoard]);
+            }
+
+            for (Heuristic opponentHeuristic : this.strategy.prioritizedOpponentHeuristics()) {
+
+                Set<Integer> opponentMoves = opponentHeuristic.moves(ticTacToeBoard, opponent, activePlayer);
+
+                if (null != opponentMoves && !opponentMoves.isEmpty()) {
+                    evaluatedMoves.put(opponentHeuristic.relativeValue(), EvaluatedMove.newEvaluatedMove(move, opponentHeuristic.relativeValue()));
+                }
+            }
+        }
+
+
+        return evaluatedMoves;
     }
 
     private void move(Board board, int activeTicTacToeBoard, Player player, int position) {

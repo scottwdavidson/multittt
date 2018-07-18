@@ -1,14 +1,16 @@
 package com.swd.ttt.entity;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * The aggregation of a set of like valued Heuristic objects.
  */
 public class AggregatedHeuristic implements Heuristic {
 
-    private List<Heuristic> heuristics = new ArrayList<Heuristic>();
+    private Set<Heuristic> heuristics = new HashSet<>();
 
     @Override
     public int relativeValue(){
@@ -17,13 +19,13 @@ public class AggregatedHeuristic implements Heuristic {
             throw new IllegalArgumentException("There are no Heuristics added to this aggregation yet so relative value can't be determined.");
         }
 
-        return heuristics.get(0).relativeValue();
+        return heuristics.iterator().next().relativeValue();
     }
 
     @Override
-    public List<Integer> moves(TicTacToeBoard tictactoeBoard, Player activePlayer, Player opponent) {
+    public Set<Integer> moves(TicTacToeBoard tictactoeBoard, Player activePlayer, Player opponent) {
 
-        List<Integer> moves = new ArrayList<Integer>();
+        Set<Integer> moves = new HashSet<>();
         for(Heuristic heuristic: this.heuristics){
             moves.addAll(heuristic.moves(tictactoeBoard, activePlayer, opponent));
         }

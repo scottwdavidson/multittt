@@ -1,6 +1,6 @@
 package com.swd.ttt.entity;
 
-import java.util.List;
+import java.util.Set;
 
 public interface Heuristic {
 
@@ -12,5 +12,5 @@ public interface Heuristic {
     /**
      * Provides the list of legal moves on the provided tictactoe board based on this heuristic.
      */
-    List<Integer> moves(TicTacToeBoard tictactoeBoard, Player activePlayer, Player opponent);
+    Set<Integer> moves(TicTacToeBoard tictactoeBoard, Player activePlayer, Player opponent);
 }
