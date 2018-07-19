@@ -13,33 +13,30 @@ import java.util.List;
 import java.util.Set;
 
 @RunWith(DataProviderRunner.class)
-public class SingleRowHeuristicTest {
+public class WinRowHeuristicTest {
 
-    private static SingleRowHeuristic SINGLE_ROW_HEURISTIC_SINGLETON =  SingleRowHeuristic.newSingleRowHeuristic();
+    private static WinRowHeuristic WIN_ROW_HEURISTIC_SINGLETON =  new WinRowHeuristic();
 
     private static TicTacToeBoard X_0 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_1 = TicTacToeBoard.emptyTicTacToeBoard();
     private static TicTacToeBoard X_2 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_3 = TicTacToeBoard.emptyTicTacToeBoard();
     private static TicTacToeBoard X_4 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_5 = TicTacToeBoard.emptyTicTacToeBoard();
     private static TicTacToeBoard X_6 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_7 = TicTacToeBoard.emptyTicTacToeBoard();
     private static TicTacToeBoard X_8 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_0_1 = TicTacToeBoard.emptyTicTacToeBoard();
 
     @BeforeClass
     public static void setUp() {
 
         {
             X_0.addMove(Player.X, 0);
-            X_1.addMove(Player.X, 1);
             X_2.addMove(Player.X, 2);
-            X_3.addMove(Player.X, 3);
             X_4.addMove(Player.X, 4);
-            X_5.addMove(Player.X, 5);
             X_6.addMove(Player.X, 6);
-            X_7.addMove(Player.X, 7);
             X_8.addMove(Player.X, 8);
+        }
+        {
+            X_0_1.addMove(Player.X, 0);
+            X_0_1.addMove(Player.X, 1);
         }
     }
 
@@ -47,7 +44,8 @@ public class SingleRowHeuristicTest {
     @UseDataProvider("generateTestMovesData")
     public void testMoves(TicTacToeBoard tictactoeBoard, Player activePlayer, Player opponent, List<Integer> expectedMoves){
 
-        Set<Integer> actualMoves = SINGLE_ROW_HEURISTIC_SINGLETON.moves(tictactoeBoard,activePlayer,opponent);
+        Set<Integer> actualMoves = WIN_ROW_HEURISTIC_SINGLETON.moves(tictactoeBoard,activePlayer,opponent);
+        Assert.assertEquals(expectedMoves.size(),actualMoves.size());
         Assert.assertTrue(actualMoves.containsAll(expectedMoves));
         Assert.assertTrue(expectedMoves.containsAll(actualMoves));
     }
@@ -56,17 +54,8 @@ public class SingleRowHeuristicTest {
     public static Object[][] generateTestMovesData() {
 
         return new Object[][] {
-                {X_0, Player.X, Player.O, Arrays.asList(1 , 2)} ,
-                {X_1, Player.X, Player.O, Arrays.asList(0 , 2)} ,
-                {X_2, Player.X, Player.O, Arrays.asList(0 , 1)} ,
-
-                {X_3, Player.X, Player.O, Arrays.asList(4 , 5)} ,
-                {X_4, Player.X, Player.O, Arrays.asList(3 , 5)} ,
-                {X_5, Player.X, Player.O, Arrays.asList(3 , 4)} ,
-
-                {X_6, Player.X, Player.O, Arrays.asList(7 , 8)} ,
-                {X_7, Player.X, Player.O, Arrays.asList(6 , 8)} ,
-                {X_8, Player.X, Player.O, Arrays.asList(6 , 7)}
+        		
+                {X_0_1, Player.X, Player.O, Arrays.asList(2)}
 
         };
     }
