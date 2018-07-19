@@ -1,8 +1,5 @@
 package com.swd.ttt.entity;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static com.swd.ttt.entity.TicTacToeBoard.Cell.EMPTY_CELL;
 
 public class TicTacToeBoard {
