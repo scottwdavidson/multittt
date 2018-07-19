@@ -80,11 +80,6 @@ public class SingleRowHeuristic extends AbstractSingleHeuristic {
         return returnMoves;
     }
 
-//    protected boolean mask(short playerRepresentation, short mask, short exoectedMaskedPlayerRepresentation){
-//        int maskedPlayerRepresentation = playerRepresentation & mask;
-//        return (short) maskedPlayerRepresentation == exoectedMaskedPlayerRepresentation;
-//    }
-//
     private SingleRowHeuristic(int relativeValue) {
         super(relativeValue);
 

@@ -8,12 +8,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RunWith(DataProviderRunner.class)
 public class SingleDiagonalHeuristicTest {
+
 
     private static SingleDiagonalHeuristic SINGLE_DIAGONAL_HEURISTIC_SINGLETON =  SingleDiagonalHeuristic.newSingleDiagonalHeuristic();
 
@@ -23,6 +22,12 @@ public class SingleDiagonalHeuristicTest {
     private static TicTacToeBoard X_6 = TicTacToeBoard.emptyTicTacToeBoard();
     private static TicTacToeBoard X_8 = TicTacToeBoard.emptyTicTacToeBoard();
     private static TicTacToeBoard X_0_2 = TicTacToeBoard.emptyTicTacToeBoard();
+
+    private static TicTacToeBoard X_0_O_4 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_0_O_8 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_0_O_4_O_8 = TicTacToeBoard.emptyTicTacToeBoard();
+
+
 
     @BeforeClass
     public static void setUp() {
@@ -38,11 +43,23 @@ public class SingleDiagonalHeuristicTest {
             X_0_2.addMove(Player.X, 0);
             X_0_2.addMove(Player.X, 2);
         }
+        {
+            X_0_O_4.addMove(Player.X, 0);
+            X_0_O_4.addMove(Player.O, 4);
+
+            X_0_O_8.addMove(Player.X, 0);
+            X_0_O_8.addMove(Player.O, 8);
+
+            X_0_O_4_O_8.addMove(Player.X, 0);
+            X_0_O_4_O_8.addMove(Player.O, 4);
+            X_0_O_4_O_8.addMove(Player.O, 8);
+
+        }
     }
 
     @Test
     @UseDataProvider("generateTestMovesData")
-    public void testMoves(TicTacToeBoard tictactoeBoard, Player activePlayer, Player opponent, List<Integer> expectedMoves){
+    public void testMoves(TicTacToeBoard tictactoeBoard, Player activePlayer, Player opponent, Set<Integer> expectedMoves){
 
         Set<Integer> actualMoves = SINGLE_DIAGONAL_HEURISTIC_SINGLETON.moves(tictactoeBoard,activePlayer,opponent);
         Assert.assertEquals(expectedMoves.size(),actualMoves.size());
@@ -53,13 +70,19 @@ public class SingleDiagonalHeuristicTest {
     @DataProvider
     public static Object[][] generateTestMovesData() {
 
+        System.out.println("Generating test moves data .... " + X_0_O_4);
         return new Object[][] {
-                {X_0, Player.X, Player.O, Arrays.asList(0b000010000 , 0b100000000)} ,
-                {X_2, Player.X, Player.O, Arrays.asList(0b001000000 , 0b000010000)} ,
-                {X_4, Player.X, Player.O, Arrays.asList(0b000000001 , 0b100000000 , 0b000000100 , 0b001000000)} ,
-                {X_6, Player.X, Player.O, Arrays.asList(0b000000100 , 0b000010000)} ,
-                {X_8, Player.X, Player.O, Arrays.asList(0b000000001 , 0b000010000)} ,
-                {X_0_2, Player.X, Player.O, Arrays.asList(0b000010000 , 0b001000000 , 0b100000000)}
+
+                {X_0, Player.X, Player.O, new HashSet<>(Arrays.asList(4 , 8))} ,
+                {X_2, Player.X, Player.O, new HashSet<>(Arrays.asList(4 , 6))} ,
+                {X_4, Player.X, Player.O, new HashSet<>(Arrays.asList(0 , 2 , 6 , 8))} ,
+                {X_6, Player.X, Player.O, new HashSet<>(Arrays.asList(2 , 4))} ,
+                {X_8, Player.X, Player.O, new HashSet<>(Arrays.asList(0 , 4))} ,
+                {X_0_2, Player.X, Player.O, new HashSet<>(Arrays.asList(4 , 6 , 8))},
+
+                {X_0_O_4, Player.X, Player.O, new HashSet<>(Arrays.asList())},
+                {X_0_O_8, Player.X, Player.O, new HashSet<>(Arrays.asList())},
+                {X_0_O_4_O_8, Player.X, Player.O, new HashSet<>(Arrays.asList())}
 
         };
     }

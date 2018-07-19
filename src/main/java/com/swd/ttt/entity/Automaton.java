@@ -124,6 +124,7 @@ public class Automaton {
             TicTacToeBoard ticTacToeBoard = board.getTttBoards()[tictactoeBoardIndex];
             if (tictactoeBoardIndex == activeTicTacToeBoard) {
                 ticTacToeBoard = TicTacToeBoard.prototypeTicTacToeBoard(board.getTttBoards()[activeTicTacToeBoard]);
+                // apply the move ...
             }
 
             for (Heuristic opponentHeuristic : this.strategy.prioritizedOpponentHeuristics()) {

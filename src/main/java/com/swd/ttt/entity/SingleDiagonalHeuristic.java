@@ -22,20 +22,20 @@ public class SingleDiagonalHeuristic extends AbstractSingleHeuristic {
         if (mask(tictactoeBoard.generatePlayerRepresentation(activePlayer).shortValue(), (short) 0b100010001, (short) 0b00000001) &&
                 mask(tictactoeBoard.generatePlayerRepresentation(opponent).shortValue(), (short) 0b100010000, (short) 0b00000000)) {
 
-            returnMoves.add(0b100000000);
-            returnMoves.add(0b000010000);
+            returnMoves.add(4);
+            returnMoves.add(8);
         }
         else if (mask(tictactoeBoard.generatePlayerRepresentation(activePlayer).shortValue(), (short) 0b100010001, (short) 0b00010000) &&
                 mask(tictactoeBoard.generatePlayerRepresentation(opponent).shortValue(), (short) 0b100000001, (short) 0b00000000)) {
 
-            returnMoves.add(0b000000001);
-            returnMoves.add(0b100000000);
+            returnMoves.add(0);
+            returnMoves.add(8);
         }
         else if (mask(tictactoeBoard.generatePlayerRepresentation(activePlayer).shortValue(), (short) 0b100010001, (short) 0b100000000) &&
                 mask(tictactoeBoard.generatePlayerRepresentation(opponent).shortValue(), (short) 0b000010001, (short) 0b00000000)) {
 
-            returnMoves.add(0b000000001);
-            returnMoves.add(0b000010000);
+            returnMoves.add(0);
+            returnMoves.add(4);
         }
 
 
@@ -43,29 +43,24 @@ public class SingleDiagonalHeuristic extends AbstractSingleHeuristic {
         if (mask(tictactoeBoard.generatePlayerRepresentation(activePlayer).shortValue(), (short) 0b001010100, (short) 0b00000100) &&
                 mask(tictactoeBoard.generatePlayerRepresentation(opponent).shortValue(), (short) 0b001010000, (short) 0b00000000)) {
 
-            returnMoves.add(0b001000000);
-            returnMoves.add(0b000010000);
+            returnMoves.add(4);
+            returnMoves.add(6);
         }
         else if (mask(tictactoeBoard.generatePlayerRepresentation(activePlayer).shortValue(), (short) 0b001010100, (short) 0b00010000) &&
                 mask(tictactoeBoard.generatePlayerRepresentation(opponent).shortValue(), (short) 0b001000100, (short) 0b00000000)) {
 
-            returnMoves.add(0b000000100);
-            returnMoves.add(0b001000000);
+            returnMoves.add(2);
+            returnMoves.add(6);
         }
         else if (mask(tictactoeBoard.generatePlayerRepresentation(activePlayer).shortValue(), (short) 0b001010100, (short) 0b001000000) &&
                 mask(tictactoeBoard.generatePlayerRepresentation(opponent).shortValue(), (short) 0b000010100, (short) 0b00000000)) {
 
-            returnMoves.add(0b000000100);
-            returnMoves.add(0b000010000);
+            returnMoves.add(2);
+            returnMoves.add(4);
         }
 
 
         return returnMoves;
-    }
-
-    protected boolean mask(short playerRepresentation, short mask, short exoectedMaskedPlayerRepresentation) {
-        int maskedPlayerRepresentation = playerRepresentation & mask;
-        return (short) maskedPlayerRepresentation == exoectedMaskedPlayerRepresentation;
     }
 
     private SingleDiagonalHeuristic(int relativeValue) {
