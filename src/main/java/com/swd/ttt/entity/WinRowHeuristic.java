@@ -16,18 +16,64 @@ public class WinRowHeuristic extends AbstractSingleHeuristic {
 		
 		Set<Integer> moves = new HashSet<Integer>();
 		
-		// mask for X|X|_ for X
-		int currentMove = 2;
-		short maskActive = (short) (Math.pow(2, 0) + Math.pow(2, 1) + Math.pow(2, 2));
-		short expectedPostMaskActive = (short) (Math.pow(2, 0) + Math.pow(2, 1));
-		
-		//mask for ?|?|_ for O
-		short maskOpponent = (short) (Math.pow(2, 3));
-		short expectedPostMaskOpponent = 0;
-		if(mask(tictactoeBoard.generatePlayerRepresentation(activePlayer), maskActive, expectedPostMaskActive) && 
-				mask(tictactoeBoard.generatePlayerRepresentation(activePlayer), maskOpponent, expectedPostMaskOpponent)){
-			moves.add(currentMove);
+		//1st row mask for X|X|_ for active, mask for ?|?|_ for opponent
+		if(mask(tictactoeBoard.generatePlayerRepresentation(activePlayer), (short) 0b000000111, (short) 0b000000011) && 
+				mask(tictactoeBoard.generatePlayerRepresentation(opponent), (short) 0b000000100, (short) 0b000000000)){
+			moves.add(2);
 		}
+		
+		//1st row mask for X|_|X for active, mask for ?|_|? for opponent
+		if(mask(tictactoeBoard.generatePlayerRepresentation(activePlayer), (short) 0b000000111, (short) 0b000000101) && 
+				mask(tictactoeBoard.generatePlayerRepresentation(opponent), (short) 0b000000010, (short) 0b000000000)){
+			moves.add(1);
+		}
+		
+		//1st row mask for _|X|X for active, mask for _|?|? for opponent
+		if(mask(tictactoeBoard.generatePlayerRepresentation(activePlayer), (short) 0b000000111, (short) 0b000000110) && 
+				mask(tictactoeBoard.generatePlayerRepresentation(opponent), (short) 0b000000001, (short) 0b000000000)){
+			moves.add(0);
+		}
+		
+		
+		
+		//2nd row mask for X|X|_ for active, mask for ?|?|_ for opponent
+		if(mask(tictactoeBoard.generatePlayerRepresentation(activePlayer), (short) 0b000111000, (short) 0b000011000) && 
+				mask(tictactoeBoard.generatePlayerRepresentation(opponent), (short) 0b000100000, (short) 0b000000000)){
+			moves.add(5);
+		}
+				
+		//2nd row mask for X|_|X for active, mask for ?|_|? for opponent
+		if(mask(tictactoeBoard.generatePlayerRepresentation(activePlayer), (short) 0b000111000, (short) 0b000101000) && 
+				mask(tictactoeBoard.generatePlayerRepresentation(opponent), (short) 0b000010000, (short) 0b000000000)){
+			moves.add(4);
+		}
+		
+		//2nd row mask for _|X|X for active, mask for _|?|? for opponent
+		if(mask(tictactoeBoard.generatePlayerRepresentation(activePlayer), (short) 0b000111000, (short) 0b000110000) && 
+				mask(tictactoeBoard.generatePlayerRepresentation(opponent), (short) 0b000001000, (short) 0b000000000)){
+			moves.add(3);
+		}
+		
+		
+		
+		//3rd row mask for X|X|_ for active, mask for ?|?|_ for opponent
+		if(mask(tictactoeBoard.generatePlayerRepresentation(activePlayer), (short) 0b111000000, (short) 0b011000000) && 
+				mask(tictactoeBoard.generatePlayerRepresentation(opponent), (short) 0b100000000, (short) 0b000000000)){
+			moves.add(8);
+		}
+				
+		//3rd row mask for X|_|X for active, mask for ?|_|? for opponent
+		if(mask(tictactoeBoard.generatePlayerRepresentation(activePlayer), (short) 0b111000000, (short) 0b101000000) && 
+				mask(tictactoeBoard.generatePlayerRepresentation(opponent), (short) 0b010000000, (short) 0b000000000)){
+			moves.add(7);
+		}
+		
+		//3rd row mask for _|X|X for active, mask for _|?|? for opponent
+		if(mask(tictactoeBoard.generatePlayerRepresentation(activePlayer), (short) 0b111000000, (short) 0b110000000) && 
+				mask(tictactoeBoard.generatePlayerRepresentation(opponent), (short) 0b001000000, (short) 0b000000000)){
+			moves.add(6);
+		}
+		
 		
 		return moves;
 	}
