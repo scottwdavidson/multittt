@@ -6,7 +6,7 @@ import java.util.Set;
 public class WinRowHeuristic extends AbstractSingleHeuristic {
 	
 	public WinRowHeuristic(){
-		super(3);
+		super(5);
 	}
 
 	@Override
