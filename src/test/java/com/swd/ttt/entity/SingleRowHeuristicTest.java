@@ -31,15 +31,15 @@ public class SingleRowHeuristicTest {
     public static void setUp() {
 
         {
-            X_0.addMove(Player.X, 0);
-            X_1.addMove(Player.X, 1);
-            X_2.addMove(Player.X, 2);
-            X_3.addMove(Player.X, 3);
-            X_4.addMove(Player.X, 4);
-            X_5.addMove(Player.X, 5);
-            X_6.addMove(Player.X, 6);
-            X_7.addMove(Player.X, 7);
-            X_8.addMove(Player.X, 8);
+            X_0.addMove(Player.X, 0, 10);
+            X_1.addMove(Player.X, 1, 10);
+            X_2.addMove(Player.X, 2, 10);
+            X_3.addMove(Player.X, 3, 10);
+            X_4.addMove(Player.X, 4, 10);
+            X_5.addMove(Player.X, 5, 10);
+            X_6.addMove(Player.X, 6, 10);
+            X_7.addMove(Player.X, 7, 10);
+            X_8.addMove(Player.X, 8, 10);
         }
     }
 

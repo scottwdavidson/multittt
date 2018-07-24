@@ -3,7 +3,7 @@ package com.swd.ttt.entity;
 public class Board {
 
     private int id;  // identifies the specific board
-    private boolean open = true;
+    private String gameState;
     private Player activePlayer = Player.None;
     private Player winningPlayer = Player.None;
     private TicTacToeBoard[] tttBoards = new TicTacToeBoard[9];
@@ -16,12 +16,12 @@ public class Board {
         this.id = id;
     }
 
-    public boolean isOpen() {
-        return open;
+    public String getGameState() {
+        return gameState;
     }
 
-    public void setOpen(boolean open) {
-        this.open = open;
+    public void setGameState(String gameState) {
+        this.gameState = gameState;
     }
 
     public Player getActivePlayer() {

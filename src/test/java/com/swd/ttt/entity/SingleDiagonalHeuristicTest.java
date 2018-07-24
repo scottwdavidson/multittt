@@ -33,26 +33,26 @@ public class SingleDiagonalHeuristicTest {
     public static void setUp() {
 
         {
-            X_0.addMove(Player.X, 0);
-            X_2.addMove(Player.X, 2);
-            X_4.addMove(Player.X, 4);
-            X_6.addMove(Player.X, 6);
-            X_8.addMove(Player.X, 8);
+            X_0.addMove(Player.X, 0, 10);
+            X_2.addMove(Player.X, 2, 10);
+            X_4.addMove(Player.X, 4, 10);
+            X_6.addMove(Player.X, 6, 10);
+            X_8.addMove(Player.X, 8, 10);
         }
         {
-            X_0_2.addMove(Player.X, 0);
-            X_0_2.addMove(Player.X, 2);
+            X_0_2.addMove(Player.X, 0, 10);
+            X_0_2.addMove(Player.X, 2, 10);
         }
         {
-            X_0_O_4.addMove(Player.X, 0);
-            X_0_O_4.addMove(Player.O, 4);
+            X_0_O_4.addMove(Player.X, 0, 10);
+            X_0_O_4.addMove(Player.O, 4, 10);
 
-            X_0_O_8.addMove(Player.X, 0);
-            X_0_O_8.addMove(Player.O, 8);
+            X_0_O_8.addMove(Player.X, 0, 10);
+            X_0_O_8.addMove(Player.O, 8, 10);
 
-            X_0_O_4_O_8.addMove(Player.X, 0);
-            X_0_O_4_O_8.addMove(Player.O, 4);
-            X_0_O_4_O_8.addMove(Player.O, 8);
+            X_0_O_4_O_8.addMove(Player.X, 0, 10);
+            X_0_O_4_O_8.addMove(Player.O, 4, 10);
+            X_0_O_4_O_8.addMove(Player.O, 8, 10);
 
         }
     }

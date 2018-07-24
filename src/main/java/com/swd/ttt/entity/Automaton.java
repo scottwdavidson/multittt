@@ -71,7 +71,7 @@ public class Automaton {
                 // Only a single move - got to go w/ it
                 if (1 == moves.size()) {
 
-                    move(board, activeTicTacToeBoard, activePlayer, moves.iterator().next());
+                    move(board, activeTicTacToeBoard, activePlayer, moves.iterator().next(),10); // TODO hard coded move number
                     break;
                 }
 
@@ -102,7 +102,7 @@ public class Automaton {
                         }
                     }
 
-                    move(board, activeTicTacToeBoard, activePlayer, evaluatedMoves.get(0).getMove());
+                    move(board, activeTicTacToeBoard, activePlayer, evaluatedMoves.get(0).getMove(), 20); // TODO hard coded move number
                     break;
                 }
 
@@ -141,7 +141,7 @@ public class Automaton {
         return evaluatedMoves;
     }
 
-    private void move(Board board, int activeTicTacToeBoard, Player player, int position) {
-        board.getTttBoards()[activeTicTacToeBoard].addMove(player, position);
+    private void move(Board board, int activeTicTacToeBoard, Player player, int position, int moveNumber) {
+        board.getTttBoards()[activeTicTacToeBoard].addMove(player, position, moveNumber);
     }
 }

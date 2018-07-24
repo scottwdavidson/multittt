@@ -11,23 +11,29 @@ public class TicTacToeBoard {
     public static class Cell {
 
         private final Player player;
+        private final int moveNumber;
 
-        public static Cell EMPTY_CELL = newCell(Player.None);
-        public static Cell X_CELL = newCell(Player.X);
-        public static Cell O_CELL = newCell(Player.O);
+        public static Cell EMPTY_CELL = newCell(Player.None,-1);
+        public static Cell X_CELL = newCell(Player.X, -1);
+        public static Cell O_CELL = newCell(Player.O, -1);
 
-        public static Cell newCell(Player player) {
+        public static Cell newCell(Player player, int moveNumber) {
 
             // TODO consider a player check which returns one of the static Cell instances
-            return new Cell(player);
+            return new Cell(player, moveNumber);
         }
 
         public Player getPlayer() {
             return player;
         }
 
-        private Cell(Player player) {
+        public int getMoveNumber() {
+            return moveNumber;
+        }
+
+        private Cell(Player player, int moveNumber) {
             this.player = player;
+            this.moveNumber = moveNumber;
         }
 
 
@@ -36,14 +42,14 @@ public class TicTacToeBoard {
     }
 
     private final static int NUMBER_OF_CELLS = 9;
-    private boolean open = true;
+    private String gameState;
     private boolean active = false;
     private Player winningPlayer = Player.None;
 
     private final Cell[] cells = new Cell[NUMBER_OF_CELLS];
 
     public static TicTacToeBoard emptyTicTacToeBoard() {
-        return new TicTacToeBoard();
+        return newTicTacToeBoard(GameState.Open.name(), true, Player.None);
     }
 
     public static TicTacToeBoard prototypeTicTacToeBoard(TicTacToeBoard prototype) {
@@ -54,10 +60,21 @@ public class TicTacToeBoard {
         return newTicTacToeBoard;
     }
 
-    /**
-     * Add a move to the table
-     */
-    public void addMove(Player player, int position) {
+    public static TicTacToeBoard newTicTacToeBoard(String gameState, boolean active, Player winningPlayer) {
+
+        TicTacToeBoard ticTacToeBoard = new TicTacToeBoard();
+        ticTacToeBoard.setGameState(gameState);
+        ticTacToeBoard.setActive(true);
+        ticTacToeBoard.setWinningPlayer(Player.None);
+
+        return ticTacToeBoard;
+    }
+
+
+        /**
+         * Add a move to the table
+         */
+    public void addMove(Player player, int position, int moveNumber) {
 
         // Error checks
         if (position < 0 || position > NUMBER_OF_CELLS - 1) {
@@ -69,7 +86,7 @@ public class TicTacToeBoard {
                     " ) already contains a player assignment (" + cells[position]);
         }
 
-        cells[position] = Cell.newCell(player);
+        cells[position] = Cell.newCell(player, moveNumber);
     }
 
     /**
@@ -85,12 +102,12 @@ public class TicTacToeBoard {
         return rep;
     }
 
-    public boolean isOpen() {
-        return open;
+    public String getGameState() {
+        return gameState;
     }
 
-    public void setOpen(boolean open) {
-        this.open = open;
+    public void setGameState(String gameState) {
+        this.gameState = gameState;
     }
 
     public boolean isActive() {
@@ -109,7 +126,7 @@ public class TicTacToeBoard {
         this.winningPlayer = winningPlayer;
     }
 
-    public final Cell[] getCells() {
+    public Cell[] getCells() {
         return cells;
     }
 

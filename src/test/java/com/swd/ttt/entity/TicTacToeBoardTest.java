@@ -23,20 +23,20 @@ public class TicTacToeBoardTest {
     public static void setUp() {
 
         {
-            X_TOP_ROW_FIRST_TWO.addMove(Player.X, 0);
-            X_TOP_ROW_FIRST_TWO.addMove(Player.X, 1);
+            X_TOP_ROW_FIRST_TWO.addMove(Player.X, 0, 10);
+            X_TOP_ROW_FIRST_TWO.addMove(Player.X, 1, 10);
         }
         {
-            X_LAST_COLUMN_FIRST_TWO_O_BLOCK.addMove(Player.X, 2);
-            X_LAST_COLUMN_FIRST_TWO_O_BLOCK.addMove(Player.X, 5);
-            X_LAST_COLUMN_FIRST_TWO_O_BLOCK.addMove(Player.O, 7);
-            X_LAST_COLUMN_FIRST_TWO_O_BLOCK.addMove(Player.O, 8);
+            X_LAST_COLUMN_FIRST_TWO_O_BLOCK.addMove(Player.X, 2, 10);
+            X_LAST_COLUMN_FIRST_TWO_O_BLOCK.addMove(Player.X, 5, 10);
+            X_LAST_COLUMN_FIRST_TWO_O_BLOCK.addMove(Player.O, 7, 10);
+            X_LAST_COLUMN_FIRST_TWO_O_BLOCK.addMove(Player.O, 8, 10);
         }
         {
-            O_FIRST_COLUMN_FIRST_TWO_BLOCK_X_DIAGONAL.addMove(Player.X, 4);
-            O_FIRST_COLUMN_FIRST_TWO_BLOCK_X_DIAGONAL.addMove(Player.X, 8);
-            O_FIRST_COLUMN_FIRST_TWO_BLOCK_X_DIAGONAL.addMove(Player.O, 0);
-            O_FIRST_COLUMN_FIRST_TWO_BLOCK_X_DIAGONAL.addMove(Player.O, 3);
+            O_FIRST_COLUMN_FIRST_TWO_BLOCK_X_DIAGONAL.addMove(Player.X, 4, 10);
+            O_FIRST_COLUMN_FIRST_TWO_BLOCK_X_DIAGONAL.addMove(Player.X, 8, 10);
+            O_FIRST_COLUMN_FIRST_TWO_BLOCK_X_DIAGONAL.addMove(Player.O, 0, 10);
+            O_FIRST_COLUMN_FIRST_TWO_BLOCK_X_DIAGONAL.addMove(Player.O, 3, 10);
         }
     }
 
