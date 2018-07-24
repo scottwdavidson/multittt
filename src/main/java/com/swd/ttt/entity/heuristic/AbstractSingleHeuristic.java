@@ -1,4 +1,6 @@
-package com.swd.ttt.entity;
+package com.swd.ttt.entity.heuristic;
+
+import com.swd.ttt.entity.Heuristic;
 
 
 public abstract class AbstractSingleHeuristic implements Heuristic {
