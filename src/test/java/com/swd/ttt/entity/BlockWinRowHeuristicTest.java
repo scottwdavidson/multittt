@@ -73,7 +73,7 @@ public class BlockWinRowHeuristicTest {
         X_0_2_7_8.addMove(Player.O, 2,10);
         X_0_2_7_8.addMove(Player.O, 7,10);
         X_0_2_7_8.addMove(Player.O, 8,10);
-        
+
     }
 
     @Test
