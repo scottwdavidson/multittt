@@ -17,27 +17,49 @@ public class WinRowHeuristicTest {
 
     private static WinRowHeuristic WIN_ROW_HEURISTIC_SINGLETON =  new WinRowHeuristic();
 
-    private static TicTacToeBoard X_0 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_2 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_4 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_6 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_8 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard EMPTY = TicTacToeBoard.emptyTicTacToeBoard();
     private static TicTacToeBoard X_0_1 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_1_2 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_3_5 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_3_5_O_4 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_7_8 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_4 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard BOTTOM2ROWWINS = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard THREEWINS = TicTacToeBoard.emptyTicTacToeBoard();
+
 
     @BeforeClass
     public static void setUp() {
 
-        {
-            X_0.addMove(Player.X, 0, 10);
-            X_2.addMove(Player.X, 2, 10);
-            X_4.addMove(Player.X, 4, 10);
-            X_6.addMove(Player.X, 6, 10);
-            X_8.addMove(Player.X, 8, 10);
-        }
-        {
-            X_0_1.addMove(Player.X, 0, 10);
-            X_0_1.addMove(Player.X, 1, 10);
-        }
+    	X_1_2.addMove(Player.X, 1,10);
+    	X_1_2.addMove(Player.X, 2,10);
+    	
+    	X_3_5.addMove(Player.X, 3,1);
+    	X_3_5.addMove(Player.X, 5,1);
+    	X_3_5.addMove(Player.O, 2,1);
+    	X_3_5.addMove(Player.O, 7,1);
+    	
+    	X_3_5_O_4	= TicTacToeBoard.prototypeTicTacToeBoard(X_3_5);
+    	X_3_5_O_4.addMove(Player.O, 4,1);
+    	
+    	X_7_8.addMove(Player.X, 7,1);
+    	X_7_8.addMove(Player.X, 8,1);
+    	
+    	X_4.addMove(Player.X, 4,1);
+    	X_4.addMove(Player.O, 2,1);
+    	X_4.addMove(Player.O, 8,1);
+    	
+    	BOTTOM2ROWWINS.addMove(Player.X, 3,1);
+    	BOTTOM2ROWWINS.addMove(Player.X, 4,1);
+    	BOTTOM2ROWWINS.addMove(Player.X, 7,1);
+    	BOTTOM2ROWWINS.addMove(Player.X, 8,1);
+
+    	THREEWINS.addMove(Player.X, 0,1);
+    	THREEWINS.addMove(Player.X, 2,1);
+    	THREEWINS.addMove(Player.X, 4,1);
+    	THREEWINS.addMove(Player.X, 5,1);
+    	THREEWINS.addMove(Player.X, 6,1);
+    	THREEWINS.addMove(Player.X, 7,1);
     }
 
     @Test
@@ -55,8 +77,14 @@ public class WinRowHeuristicTest {
 
         return new Object[][] {
         		
-                {X_0_1, Player.X, Player.O, Arrays.asList(2)}
-
+                {X_0_1, Player.X, Player.O, Arrays.asList(2)},
+                {EMPTY, Player.X, Player.O, Arrays.asList()},
+                {X_3_5, Player.X, Player.O, Arrays.asList(4)},
+                {X_3_5_O_4, Player.X, Player.O, Arrays.asList()},
+                {X_7_8, Player.X, Player.O, Arrays.asList(6)},
+                {X_4, Player.X, Player.O, Arrays.asList()},
+                {BOTTOM2ROWWINS, Player.X, Player.O, Arrays.asList(5, 6)},
+                {THREEWINS, Player.X, Player.O, Arrays.asList(1, 3, 8)}
         };
     }
 
