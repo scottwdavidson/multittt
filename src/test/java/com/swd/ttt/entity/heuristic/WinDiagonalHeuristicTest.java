@@ -1,8 +1,13 @@
-package com.swd.ttt.entity;
+package com.swd.ttt.entity.heuristic;
 
+import com.swd.ttt.entity.Heuristic;
+import com.swd.ttt.entity.Player;
+import com.swd.ttt.entity.TicTacToeBoard;
+import com.swd.ttt.entity.heuristic.WinDiagonalHeuristic;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

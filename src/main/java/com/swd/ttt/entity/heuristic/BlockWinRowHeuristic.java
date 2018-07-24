@@ -1,7 +1,10 @@
-package com.swd.ttt.entity;
+package com.swd.ttt.entity.heuristic;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import com.swd.ttt.entity.Player;
+import com.swd.ttt.entity.TicTacToeBoard;
 
 // TODO This is symmetric to WinRowHeuristic ( via player ) - look into abstraction to reduce/reuse
 public class BlockWinRowHeuristic extends AbstractSingleHeuristic {
