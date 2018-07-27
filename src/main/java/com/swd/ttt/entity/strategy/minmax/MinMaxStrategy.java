@@ -1,10 +1,8 @@
-package com.swd.ttt.entity.strategy;
+package com.swd.ttt.entity.strategy.minmax;
 
 import com.swd.ttt.entity.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class MinMaxStrategy implements Strategy {
 
