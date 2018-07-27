@@ -6,7 +6,7 @@ package com.swd.ttt.entity;
  */
 public class MovePosition {
 
-    private final int ticTacToeBoardIndex;
+	private final int ticTacToeBoardIndex;
     private final int position;
 
     public static MovePosition newMovePosition(int ticTacToeBoardIndex, int position){
@@ -17,4 +17,12 @@ public class MovePosition {
         this.ticTacToeBoardIndex = ticTacToeBoardIndex;
         this.position = position;
     }
+    
+    public int getTicTacToeBoardIndex() {
+		return ticTacToeBoardIndex;
+	}
+
+	public int getPosition() {
+		return position;
+	}
 }
