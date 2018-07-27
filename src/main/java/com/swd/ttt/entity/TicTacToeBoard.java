@@ -1,5 +1,6 @@
 package com.swd.ttt.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.swd.ttt.entity.TicTacToeBoard.Cell.EMPTY_CELL;
@@ -76,7 +77,17 @@ public class TicTacToeBoard {
     public List<MovePosition> movePositions(){
 
         // TODO Dylan to implement
-        return null;
+    	
+    	List<MovePosition> moveList = new ArrayList<>();
+    	
+    	for(int i=0; i<cells.length; i++){
+    		if(cells[i].getPlayer() != Player.None){
+    			MovePosition newMove = MovePosition.newMovePosition(this.index, i);
+    			moveList.add(newMove);
+    		}
+    	}
+    	
+        return moveList;
     }
 
     /**

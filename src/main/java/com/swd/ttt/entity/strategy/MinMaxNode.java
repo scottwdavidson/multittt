@@ -12,23 +12,38 @@ import java.util.List;
 public class MinMaxNode {
 
     public static enum MinMax{
-        ROOT, MIN, MAX
+        ROOT, MIN, MAX;
+        
+        public MinMax next(){
+        	if(this == MinMax.MIN || this == MinMax.ROOT){
+        		return MinMax.MAX;
+        	}else{
+        		return MinMax.MIN;
+        	}
+        }
     };
 
     private final MinMaxNode parent;
     private final List<MinMaxNode> children = new ArrayList<MinMaxNode>();
     private final MinMax minMax;
-    private final MovePosition movePosition;
-    private final int boardEvaluation;
+    private MovePosition movePosition;
+    private int boardEvaluation;
 
     // TODO Dylan implement factories methods (one for Root, one for "others" passing in the parent MinMaxNode)
+    
+    //Unsure what board eval should be for root, null not allowed
     public static MinMaxNode newRootMinMaxNode(){
-        return null;
+        return new MinMaxNode(null, MinMax.ROOT, null, 0);
     }
 
-    public static MinMaxNode newMinMaxNode(MinMaxNode prototype // other args ?
-    ){
-        return null;
+    //factory method for new MinMaxNode without a board value
+    public static MinMaxNode newMinMaxNode(MinMaxNode parent, MinMax minMax, MovePosition movePosition){
+        return new MinMaxNode(parent, minMax, movePosition, 0);
+    }
+    
+    //factory method for new MinMaxNode without a board value
+    public static MinMaxNode newMinMaxNode(MinMaxNode parent, MinMax minMax, MovePosition movePosition, int boardEvaluation){
+        return new MinMaxNode(parent, minMax, movePosition, boardEvaluation);
     }
 
     public MinMaxNode getParent() {
@@ -38,6 +53,10 @@ public class MinMaxNode {
     public List<MinMaxNode> getChildren() {
         return children;
     }
+    
+    public void addChild(MinMaxNode child){
+    	this.children.add(child);
+    }
 
     public MinMax getMinMax() {
         return minMax;
@@ -46,9 +65,17 @@ public class MinMaxNode {
     public MovePosition getMovePosition() {
         return movePosition;
     }
+    
+    public void setMovePosition(MovePosition movePosition){
+    	this.movePosition = movePosition;
+    }
 
     public int getBoardEvaluation() {
         return boardEvaluation;
+    }
+    
+    public void setBoardEvaluation(int boardEvaluation){
+    	this.boardEvaluation = boardEvaluation;
     }
 
     // Private constructor to force usage of factory method
@@ -57,5 +84,7 @@ public class MinMaxNode {
         this.minMax = minMax;
         this.movePosition = movePosition;
         this.boardEvaluation = boardEvaluation;
+        
+        parent.addChild(this);
     }
 }
