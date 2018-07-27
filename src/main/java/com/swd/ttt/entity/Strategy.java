@@ -12,11 +12,17 @@ public interface Strategy {
     /**
      * Returns a prioritized list of Heuristics to be applied in order until one yields a valid move for the automaton.
      */
-    List<Heuristic> prioritizedAutomatonHeuristics();
+    @Deprecated List<Heuristic> prioritizedAutomatonHeuristics();
 
     /**
-     * Returns a prioritized list of Heuristics to be applied when tie breaking is required to choose the best valid move for the automaton.
+     * Returns a prioritized list of Heuristics to be applied when tie breaking is required to choose the best
+     * valid move for the automaton.
      */
-    List<Heuristic> prioritizedOpponentHeuristics();
+    @Deprecated List<Heuristic> prioritizedOpponentHeuristics();
+
+    /**
+     * Execute a move on the provided Board ( and return the updated Board )
+     */
+    Board executeMove(Board board);
 
 }

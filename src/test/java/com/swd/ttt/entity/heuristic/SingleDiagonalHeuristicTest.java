@@ -20,16 +20,16 @@ public class SingleDiagonalHeuristicTest {
 
     private static SingleDiagonalHeuristic SINGLE_DIAGONAL_HEURISTIC_SINGLETON =  SingleDiagonalHeuristic.newSingleDiagonalHeuristic();
 
-    private static TicTacToeBoard X_0 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_2 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_4 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_6 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_8 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_0_2 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_0 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_2 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_4 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_6 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_8 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_0_2 = TicTacToeBoard.emptyTicTacToeBoard(0);
 
-    private static TicTacToeBoard X_0_O_4 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_0_O_8 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_0_O_4_O_8 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_0_O_4 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_0_O_8 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_0_O_4_O_8 = TicTacToeBoard.emptyTicTacToeBoard(0);
 
 
 

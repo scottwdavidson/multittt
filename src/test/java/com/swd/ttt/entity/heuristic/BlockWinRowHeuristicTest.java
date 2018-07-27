@@ -21,20 +21,20 @@ public class BlockWinRowHeuristicTest {
 
     private static BlockWinRowHeuristic BLOCK_WIN_ROW_HEURISTIC_SINGLETON =  new BlockWinRowHeuristic();
 
-    private static TicTacToeBoard X_0_1 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_0_2 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_1_2 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_0_1 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_0_2 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_1_2 = TicTacToeBoard.emptyTicTacToeBoard(0);
 
-    private static TicTacToeBoard X_3_4 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_3_5 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_4_5 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_3_4 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_3_5 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_4_5 = TicTacToeBoard.emptyTicTacToeBoard(0);
 
-    private static TicTacToeBoard X_6_7 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_6_8 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_7_8 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_6_7 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_6_8 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_7_8 = TicTacToeBoard.emptyTicTacToeBoard(0);
 
-    private static TicTacToeBoard X_1_2_6_7 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_0_2_7_8 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_1_2_6_7 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_0_2_7_8 = TicTacToeBoard.emptyTicTacToeBoard(0);
 
 
     @BeforeClass

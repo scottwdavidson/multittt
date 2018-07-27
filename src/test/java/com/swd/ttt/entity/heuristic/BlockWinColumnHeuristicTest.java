@@ -21,13 +21,13 @@ public class BlockWinColumnHeuristicTest {
 
     private static BlockWinColumnHeuristic BLOCK_WIN_COLUMN_HEURISTIC_SINGLETON =  new BlockWinColumnHeuristic();
 
-    private static TicTacToeBoard EMPTY = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard O_0_3 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard O_4_7 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard O_2_8_X_5 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard RIGHT2COLUMNSWIN = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard THREEWINS = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard TWOBLOCKEDWINS = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard EMPTY = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard O_0_3 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard O_4_7 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard O_2_8_X_5 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard RIGHT2COLUMNSWIN = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard THREEWINS = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard TWOBLOCKEDWINS = TicTacToeBoard.emptyTicTacToeBoard(0);
 
 
 

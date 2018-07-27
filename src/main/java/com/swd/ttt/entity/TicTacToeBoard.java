@@ -1,5 +1,7 @@
 package com.swd.ttt.entity;
 
+import java.util.List;
+
 import static com.swd.ttt.entity.TicTacToeBoard.Cell.EMPTY_CELL;
 
 public class TicTacToeBoard {
@@ -13,7 +15,7 @@ public class TicTacToeBoard {
         private final Player player;
         private final int moveNumber;
 
-        public static Cell EMPTY_CELL = newCell(Player.None,-1);
+        public static Cell EMPTY_CELL = newCell(Player.None, -1);
         public static Cell X_CELL = newCell(Player.X, -1);
         public static Cell O_CELL = newCell(Player.O, -1);
 
@@ -42,27 +44,28 @@ public class TicTacToeBoard {
     }
 
     private final static int NUMBER_OF_CELLS = 9;
+    private final int index;
     private String gameState;
     private boolean active = false;
     private Player winningPlayer = Player.None;
 
     private final Cell[] cells = new Cell[NUMBER_OF_CELLS];
 
-    public static TicTacToeBoard emptyTicTacToeBoard() {
-        return newTicTacToeBoard(GameState.Open.name(), true, Player.None);
+    public static TicTacToeBoard emptyTicTacToeBoard(int index) {
+        return newTicTacToeBoard(index, GameState.Open.name(), true, Player.None);
     }
 
-    public static TicTacToeBoard prototypeTicTacToeBoard(TicTacToeBoard prototype) {
-        TicTacToeBoard newTicTacToeBoard = new TicTacToeBoard();
+    public static TicTacToeBoard prototypeTicTacToeBoard(int index, TicTacToeBoard prototype) {
+        TicTacToeBoard newTicTacToeBoard = new TicTacToeBoard(index);
         for (int i = 0; i < NUMBER_OF_CELLS; i++) {
             newTicTacToeBoard.getCells()[i] = prototype.getCells()[i];
         }
         return newTicTacToeBoard;
     }
 
-    public static TicTacToeBoard newTicTacToeBoard(String gameState, boolean active, Player winningPlayer) {
+    public static TicTacToeBoard newTicTacToeBoard(int index, String gameState, boolean active, Player winningPlayer) {
 
-        TicTacToeBoard ticTacToeBoard = new TicTacToeBoard();
+        TicTacToeBoard ticTacToeBoard = new TicTacToeBoard(index);
         ticTacToeBoard.setGameState(gameState);
         ticTacToeBoard.setActive(true);
         ticTacToeBoard.setWinningPlayer(Player.None);
@@ -70,10 +73,15 @@ public class TicTacToeBoard {
         return ticTacToeBoard;
     }
 
+    public List<MovePosition> movePositions(){
 
-        /**
-         * Add a move to the table
-         */
+        // TODO Dylan to implement
+        return null;
+    }
+
+    /**
+     * Add a move to the table
+     */
     public void addMove(Player player, int position, int moveNumber) {
 
         // Error checks
@@ -100,6 +108,10 @@ public class TicTacToeBoard {
             }
         }
         return rep;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     public String getGameState() {
@@ -130,7 +142,8 @@ public class TicTacToeBoard {
         return cells;
     }
 
-    private TicTacToeBoard() {
+    private TicTacToeBoard(int index) {
+        this.index = index;
         for (int i = 0; i < NUMBER_OF_CELLS; i++) {
             this.cells[i] = EMPTY_CELL;
         }
