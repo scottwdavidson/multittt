@@ -27,7 +27,7 @@ public class MinMaxNode {
     private final List<MinMaxNode> children = new ArrayList<MinMaxNode>();
     private final MinMax minMax;
     private MovePosition movePosition;
-    private int boardEvaluation;
+    private int boardEvaluation = Integer.MIN_VALUE;
 
     // TODO Dylan implement factories methods (one for Root, one for "others" passing in the parent MinMaxNode)
     
@@ -38,7 +38,7 @@ public class MinMaxNode {
 
     //factory method for new MinMaxNode without a board value
     public static MinMaxNode newMinMaxNode(MinMaxNode parent, MinMax minMax, MovePosition movePosition){
-        return new MinMaxNode(parent, minMax, movePosition, 0);
+        return new MinMaxNode(parent, minMax, movePosition, Integer.MIN_VALUE);
     }
     
     //factory method for new MinMaxNode without a board value
@@ -85,6 +85,6 @@ public class MinMaxNode {
         this.movePosition = movePosition;
         this.boardEvaluation = boardEvaluation;
         
-        parent.addChild(this);
+        parent.getChildren().add(this);
     }
 }
