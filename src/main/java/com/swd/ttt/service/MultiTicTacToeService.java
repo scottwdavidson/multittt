@@ -26,7 +26,7 @@ public class MultiTicTacToeService implements Service {
 
         for(int i=0; i<9; i++){
 
-            TicTacToeBoard tttBoard = TicTacToeBoard.newTicTacToeBoard(GameState.Open.name(),true,Player.None);
+            TicTacToeBoard tttBoard = TicTacToeBoard.newTicTacToeBoard(i,GameState.Open.name(),true,Player.None);
             if ( i == 4 ) {
                  tttBoard.getCells()[4] = TicTacToeBoard.Cell.newCell(Player.None.X,4);
             }

@@ -15,9 +15,9 @@ import com.tngtech.java.junit.dataprovider.UseDataProvider;
 @RunWith(DataProviderRunner.class)
 public class TicTacToeBoardTest {
 
-    private static TicTacToeBoard X_TOP_ROW_FIRST_TWO = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_LAST_COLUMN_FIRST_TWO_O_BLOCK = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard O_FIRST_COLUMN_FIRST_TWO_BLOCK_X_DIAGONAL = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_TOP_ROW_FIRST_TWO = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_LAST_COLUMN_FIRST_TWO_O_BLOCK = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard O_FIRST_COLUMN_FIRST_TWO_BLOCK_X_DIAGONAL = TicTacToeBoard.emptyTicTacToeBoard(0);
 
     @BeforeClass
     public static void setUp() {

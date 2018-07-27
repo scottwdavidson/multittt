@@ -22,27 +22,27 @@ public class WinDiagonalHeuristicTest {
 
     private static Heuristic WIN_DIAGONAL_HEURISTIC_SINGLETON =  new WinDiagonalHeuristic();
 
-    private static TicTacToeBoard X_0_4 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_0_8 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_4_8 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_0_4 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_0_8 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_4_8 = TicTacToeBoard.emptyTicTacToeBoard(0);
 
-    private static TicTacToeBoard X_2_4 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_2_6 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_4_6 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_2_4 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_2_6 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_4_6 = TicTacToeBoard.emptyTicTacToeBoard(0);
 
-    private static TicTacToeBoard X_0_2_4 = TicTacToeBoard.emptyTicTacToeBoard();
-    private static TicTacToeBoard X_0_2_6_8 = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard X_0_2_4 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_0_2_6_8 = TicTacToeBoard.emptyTicTacToeBoard(0);
 
-    private static TicTacToeBoard EMPTY = TicTacToeBoard.emptyTicTacToeBoard();
+    private static TicTacToeBoard EMPTY = TicTacToeBoard.emptyTicTacToeBoard(0);
 
 
-//    private static TicTacToeBoard X_1_2 = TicTacToeBoard.emptyTicTacToeBoard();
-//    private static TicTacToeBoard X_3_5 = TicTacToeBoard.emptyTicTacToeBoard();
-//    private static TicTacToeBoard X_3_5_O_4 = TicTacToeBoard.emptyTicTacToeBoard();
-//    private static TicTacToeBoard X_7_8 = TicTacToeBoard.emptyTicTacToeBoard();
-//    private static TicTacToeBoard X_4 = TicTacToeBoard.emptyTicTacToeBoard();
-//    private static TicTacToeBoard BOTTOM2ROWWINS = TicTacToeBoard.emptyTicTacToeBoard();
-//    private static TicTacToeBoard THREEWINS = TicTacToeBoard.emptyTicTacToeBoard();
+//    private static TicTacToeBoard X_1_2 = TicTacToeBoard.emptyTicTacToeBoard(0);
+//    private static TicTacToeBoard X_3_5 = TicTacToeBoard.emptyTicTacToeBoard(0);
+//    private static TicTacToeBoard X_3_5_O_4 = TicTacToeBoard.emptyTicTacToeBoard(0);
+//    private static TicTacToeBoard X_7_8 = TicTacToeBoard.emptyTicTacToeBoard(0);
+//    private static TicTacToeBoard X_4 = TicTacToeBoard.emptyTicTacToeBoard(0);
+//    private static TicTacToeBoard BOTTOM2ROWWINS = TicTacToeBoard.emptyTicTacToeBoard(0);
+//    private static TicTacToeBoard THREEWINS = TicTacToeBoard.emptyTicTacToeBoard(0);
 
 
     @BeforeClass
