@@ -1,5 +1,6 @@
 package com.swd.ttt.entity;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -7,16 +8,29 @@ import java.util.List;
  */
 public class Board {
 
-    private int id;       // identifies the specific board
-    private int moveNumber;   // identifies the specific version ( based on which move ) of the board
-    private Player activePlayer = Player.None;
-    private int activeTicTacToeBoardIndex = 0;
-    private Score score = Score.newScore();
-    private GameState gameState = GameState.Open;
-    private Player winningPlayer = Player.None;
-    private TicTacToeBoard[] tttBoards = new TicTacToeBoard[9];
+    private final int id;       // identifies the specific board
+    private final int moveNumber;   // identifies the specific version ( based on which move ) of the board
+    private final Player activePlayer;
+    private final int activeTicTacToeBoardIndex;
+    private final Score score;
+    private final GameState gameState;
+    private final Player winningPlayer;
+    private final TicTacToeBoard[] tttBoards = new TicTacToeBoard[9];
 
     // TODO Create a factory method to create an initial board ( id and moveNumber should probably be immutable )
+
+    /**
+     * Factory method for creating the initial board
+     */
+    public static Board initialBoard(int id, Player activePlayer, int activeTicTacToeBoardIndex) {
+        Board initialBoard = new Board(id, activePlayer, activeTicTacToeBoardIndex);
+
+        for (int index = 0; index < initialBoard.getTttBoards().length; index++) {
+            initialBoard.getTttBoards()[index] = TicTacToeBoard.emptyTicTacToeBoard(index);
+        }
+        return initialBoard;
+    }
+
     /**
      * Creates a new Board, updating properties as specified by the arguments. Call the overloaded version which requires the Score.
      */
@@ -29,16 +43,7 @@ public class Board {
      */
     public Board executeTurn(int moveNumber, Player activePlayer, int updatedTicTacToeBoardIndex, TicTacToeBoard updatedTicTacToeBoard, int activeTicTacToeBoardIndex, Score score) {
 
-        Board evolvedBoard = new Board();
-
-        // Directly set values
-        evolvedBoard.setId(this.getId());
-        evolvedBoard.setMoveNumber(moveNumber);
-        evolvedBoard.setActivePlayer(activePlayer);
-        evolvedBoard.setActiveTicTacToeBoardIndex(activeTicTacToeBoardIndex);
-        evolvedBoard.setScore(score);
-        evolvedBoard.setGameState(this.getGameState());
-        evolvedBoard.setWinningPlayer(this.getWinningPlayer());
+        Board evolvedBoard = new Board(this.getId(), moveNumber, activePlayer, activeTicTacToeBoardIndex, score, this.getGameState(), this.winningPlayer);
 
         // Update TTT board related items
         for (int index = 0; index < this.getTttBoards().length; index++) {
@@ -54,67 +59,50 @@ public class Board {
 
     }
 
-    public void gamesOver(Score score, GameState gameState, Player winningPlayer) {
-        this.score = score;
-        this.gameState = gameState;
-        this.winningPlayer = winningPlayer;
+    public Board gamesOver(Score score, GameState gameState, Player winningPlayer) {
+
+        Board gamesOverBoard = new Board(this.getId(), this.getMoveNumber(), this.getActivePlayer(), this.activeTicTacToeBoardIndex, score, gameState, winningPlayer);
+
+        // Copy the TTT boards
+        for (int index = 0; index < this.getTttBoards().length; index++) {
+            gamesOverBoard.getTttBoards()[index] = this.getTttBoards()[index];
+        }
+        return gamesOverBoard;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getMoveNumber() {
         return moveNumber;
     }
 
-    public void setMoveNumber(int moveNumber) {
-        this.moveNumber = moveNumber;
-    }
 
     public Player getActivePlayer() {
         return activePlayer;
     }
 
-    public void setActivePlayer(Player activePlayer) {
-        this.activePlayer = activePlayer;
-    }
 
     public int getActiveTicTacToeBoardIndex() {
         return activeTicTacToeBoardIndex;
     }
 
-    public void setActiveTicTacToeBoardIndex(int activeTicTacToeBoardIndex) {
-        this.activeTicTacToeBoardIndex = activeTicTacToeBoardIndex;
-    }
 
     public Score getScore() {
         return score;
-    }
-
-    public void setScore(Score score) {
-        this.score = score;
     }
 
     public GameState getGameState() {
         return gameState;
     }
 
-    public void setGameState(GameState gameState) {
-        this.gameState = gameState;
-    }
 
     public Player getWinningPlayer() {
         return winningPlayer;
     }
 
-    public void setWinningPlayer(Player winningPlayer) {
-        this.winningPlayer = winningPlayer;
-    }
 
     public TicTacToeBoard[] getTttBoards() {
         return tttBoards;
@@ -129,12 +117,35 @@ public class Board {
         }
     }
 
-    public void setActiveTttBoard(int activeTicTacToeBoard) {
-        this.activeTicTacToeBoardIndex = activeTicTacToeBoard;
-    }
-
     public List<MovePosition> activeTttBoardMovePositions() {
         return this.tttBoards[getActiveTttBoard()].movePositions();
     }
 
+    private Board(int id, Player activePlayer, int activeTicTacToeBoardIndex) {
+        this(id, 0, activePlayer, activeTicTacToeBoardIndex, Score.newScore(), GameState.Open, Player.None);
+    }
+
+    private Board(int id, int moveNumber, Player activePlayer, int activeTicTacToeBoardIndex, Score score, GameState gameState, Player winningPlayer) {
+        this.id = id;
+        this.moveNumber = moveNumber;
+        this.activePlayer = activePlayer;
+        this.activeTicTacToeBoardIndex = activeTicTacToeBoardIndex;
+        this.score = score;
+        this.gameState = gameState;
+        this.winningPlayer = winningPlayer;
+    }
+
+    @Override
+    public String toString() {
+        return "Board{" +
+                "id=" + id +
+                ", moveNumber=" + moveNumber +
+                ", activePlayer=" + activePlayer +
+                ", activeTicTacToeBoardIndex=" + activeTicTacToeBoardIndex +
+                ", score=" + score +
+                ", gameState=" + gameState +
+                ", winningPlayer=" + winningPlayer +
+                ", tttBoards=" + Arrays.toString(tttBoards) +
+                '}';
+    }
 }

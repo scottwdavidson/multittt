@@ -26,6 +26,23 @@ public class TttResource {
     }
 
     @POST
+    @Path("/boards/{activeTicTacToeBoard}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Board newGame(@PathParam("activeTicTacToeBoard") int activeTicTacToeBoard){
+
+        try {
+            return this.tttResourceHelper.newGame(activeTicTacToeBoard);
+        } catch ( WebApplicationException wae ){
+            throw wae;
+        } catch (Throwable cause) {
+
+            throw new WebApplicationException(cause, Response.status(
+                    Response.Status.INTERNAL_SERVER_ERROR).build());
+        }
+    }
+
+    @POST
     @Path("/board/{boardId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -41,4 +58,5 @@ public class TttResource {
                     Response.Status.INTERNAL_SERVER_ERROR).build());
         }
     }
+
 }

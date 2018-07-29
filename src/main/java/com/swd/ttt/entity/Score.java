@@ -37,6 +37,15 @@ public class Score {
         return cats;
     }
 
+    @Override
+    public String toString() {
+        return "Score{" +
+                "xWins=" + xWins +
+                ", oWins=" + oWins +
+                ", cats=" + cats +
+                '}';
+    }
+
     private Score(int xWins, int oWins, int cats) {
         this.xWins = xWins;
         this.oWins = oWins;

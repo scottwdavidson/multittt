@@ -7,6 +7,9 @@ public class Board {
 
     private String gameId;
     private int moveNumber;
+    private String activePlayer;
+    private int activeTicTacToeBoardIndex;
+    private Score score;
     private String gameState; // "Open" or "Closed"
     private String winner; // "X", "O" or "None"
     private List<TicTacToeBoard> tictactoes = new ArrayList<TicTacToeBoard>();
@@ -25,6 +28,30 @@ public class Board {
 
     public void setMoveNumber(int moveNumber) {
         this.moveNumber = moveNumber;
+    }
+
+    public String getActivePlayer() {
+        return activePlayer;
+    }
+
+    public void setActivePlayer(String activePlayer) {
+        this.activePlayer = activePlayer;
+    }
+
+    public int getActiveTicTacToeBoardIndex() {
+        return activeTicTacToeBoardIndex;
+    }
+
+    public void setActiveTicTacToeBoardIndex(int activeTicTacToeBoardIndex) {
+        this.activeTicTacToeBoardIndex = activeTicTacToeBoardIndex;
+    }
+
+    public Score getScore() {
+        return score;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
     }
 
     public String getGameState() {

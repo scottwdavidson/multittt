@@ -11,6 +11,9 @@ public class DtoFactory {
 
         board.setGameId(String.valueOf(boardEntity.getId())); // TODO Need to decide on board id
         board.setMoveNumber(deriveCurrentMoveNumber(boardEntity));
+        board.setActivePlayer(boardEntity.getActivePlayer().name());
+        board.setActiveTicTacToeBoardIndex(boardEntity.getActiveTicTacToeBoardIndex());
+        board.setScore(generateScoreDto(boardEntity.getScore()));
         board.setGameState(boardEntity.getGameState().name());
         board.setWinner(boardEntity.getWinningPlayer().name());
         for(com.swd.ttt.entity.TicTacToeBoard ticTacToeBoardEntity : boardEntity.getTttBoards()){
@@ -49,4 +52,9 @@ public class DtoFactory {
 
         return cellDto;
     }
+
+    public static Score generateScoreDto(com.swd.ttt.entity.Score scoreEntity) {
+        return Score.newScore(scoreEntity.getoWins(), scoreEntity.getoWins(), scoreEntity.getCats());
+    }
+
 }

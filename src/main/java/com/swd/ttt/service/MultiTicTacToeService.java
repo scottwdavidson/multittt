@@ -12,22 +12,9 @@ public class MultiTicTacToeService implements Service {
         return null;
     }
 
-    public Board generateBoardForTest(){
+    public Board generateBoardForTest() {
 
-        Board board = new Board();
-
-        board.setId(1000);
-        board.setGameState(GameState.Open);
-        board.setActivePlayer(Player.O);
-        board.setWinningPlayer(Player.None);
-
-        for(int i=0; i<9; i++){
-            board.getTttBoards()[i] = TicTacToeBoard.emptyTicTacToeBoard(i);
-        }
-
-        board.getTttBoards()[4] = TicTacToeBoard.applyMove(
-                board.getTttBoards()[4], Player.X, MovePosition.newMovePosition(4,4),1);
-
-            return board;
+        Board board = Board.initialBoard(1000, Player.X, 4);
+        return board;
     }
 }

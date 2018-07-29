@@ -1,6 +1,7 @@
 package com.swd.ttt.resources;
 
 import com.swd.ttt.Service;
+import com.swd.ttt.entity.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.WebApplicationException;
@@ -27,5 +28,9 @@ public class TttResourceHelper {
             throw new WebApplicationException(cause.getMessage(), cause, Response.status(
                     Response.Status.INTERNAL_SERVER_ERROR).build());
         }
+    }
+
+    public Board newGame(int activeTicTacToeBoard) {
+        return DtoFactory.generateTicTacToeBoardDto(com.swd.ttt.entity.Board.initialBoard(1000, Player.X, activeTicTacToeBoard));
     }
 }
