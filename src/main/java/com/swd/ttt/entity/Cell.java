@@ -8,7 +8,8 @@ public class Cell {
     private final Player player;
     private final int moveNumber;
 
-    public static Cell EMPTY_CELL = new Cell(Player.None, -1);
+    public final static int NO_MOVE_YET = -1;
+    public static Cell EMPTY_CELL = new Cell(Player.None, NO_MOVE_YET);
 
     public static Cell newXCell(int moveNumber){
         return new Cell(Player.X, moveNumber);

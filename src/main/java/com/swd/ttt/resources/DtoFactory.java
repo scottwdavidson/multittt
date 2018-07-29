@@ -24,29 +24,27 @@ public class DtoFactory {
     }
 
     protected static int deriveCurrentMoveNumber(com.swd.ttt.entity.Board boardEntity){
-        return 22; // TODO Implement this method
+        return boardEntity.getMoveNumber();
     }
 
     public static TicTacToeBoard generateTicTacToeBoardDto(com.swd.ttt.entity.TicTacToeBoard ticTacToeBoardEntity) {
 
         TicTacToeBoard ticTacToeBoardDto = new TicTacToeBoard();
 
+        ticTacToeBoardDto.setIndex(ticTacToeBoardEntity.getIndex());
         ticTacToeBoardDto.setGameState(ticTacToeBoardEntity.getGameState().name());
-        ticTacToeBoardDto.setWinner(ticTacToeBoardEntity.getWinningPlayer().name());
-        int position = 0;
+        ticTacToeBoardDto.setWinningPlayer(ticTacToeBoardEntity.getWinningPlayer().name());
         for (com.swd.ttt.entity.Cell cell : ticTacToeBoardEntity.getCells()) {
-            ticTacToeBoardDto.getCells().add(generateCellDto(position, cell));
-            position++;
+            ticTacToeBoardDto.getCells().add(generateCellDto(cell));
         }
 
         return ticTacToeBoardDto;
     }
 
-    public static TicTacToeBoard.Cell generateCellDto(int position, com.swd.ttt.entity.Cell cellEntity) {
+    public static TicTacToeBoard.Cell generateCellDto(com.swd.ttt.entity.Cell cellEntity) {
 
         TicTacToeBoard.Cell cellDto = new TicTacToeBoard.Cell();
 
-        cellDto.setPosition(position);
         cellDto.setPlayer(cellEntity.getPlayer().name());
         cellDto.setMoveNumber(cellEntity.getMoveNumber());
 

@@ -9,17 +9,8 @@ import java.util.List;
 public class TicTacToeBoard {
 
     public static class Cell {
-        private int position;
         private String player;
         private int moveNumber = -1;
-
-        public int getPosition() {
-            return position;
-        }
-
-        public void setPosition(int position) {
-            this.position = position;
-        }
 
         public String getPlayer() {
             return player;
@@ -39,9 +30,9 @@ public class TicTacToeBoard {
     }
 
     private List<Cell> cells = new ArrayList<Cell>();
+    private int index;
     private String gameState; // "Open" or "Closed"
-    private String winner; // "X", "O" or "None"
-    private boolean active;
+    private String winningPlayer; // "X", "O" or "None"
 
     /**
      * Provides validity checks on the current object
@@ -54,8 +45,8 @@ public class TicTacToeBoard {
             return false;
         }
 
-        if ( GameState.Open.name().equals(this.gameState) && this.winner != Player.None.name()){
-            System.out.println("Validity Check Failure: Game state is Open but winner is selected: " + this.winner);
+        if ( GameState.Open.name().equals(this.gameState) && this.getWinningPlayer() != Player.None.name()){
+            System.out.println("Validity Check Failure: Game state is Open but winner is selected: " + this.getWinningPlayer());
             return false;
         }
 
@@ -70,6 +61,14 @@ public class TicTacToeBoard {
         this.cells = cells;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
     public String getGameState() {
         return gameState;
     }
@@ -78,19 +77,11 @@ public class TicTacToeBoard {
         this.gameState = gameState;
     }
 
-    public String getWinner() {
-        return winner;
+    public String getWinningPlayer() {
+        return winningPlayer;
     }
 
-    public void setWinner(String winner) {
-        this.winner = winner;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setWinningPlayer(String winningPlayer) {
+        this.winningPlayer = winningPlayer;
     }
 }
