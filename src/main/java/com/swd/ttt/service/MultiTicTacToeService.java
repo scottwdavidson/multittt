@@ -1,10 +1,7 @@
 package com.swd.ttt.service;
 
 import com.swd.ttt.Service;
-import com.swd.ttt.entity.Board;
-import com.swd.ttt.entity.GameState;
-import com.swd.ttt.entity.Player;
-import com.swd.ttt.entity.TicTacToeBoard;
+import com.swd.ttt.entity.*;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,20 +17,17 @@ public class MultiTicTacToeService implements Service {
         Board board = new Board();
 
         board.setId(1000);
-        board.setGameState(GameState.Open.name());
+        board.setGameState(GameState.Open);
         board.setActivePlayer(Player.O);
         board.setWinningPlayer(Player.None);
 
         for(int i=0; i<9; i++){
-
-            TicTacToeBoard tttBoard = TicTacToeBoard.newTicTacToeBoard(i,GameState.Open.name(),true,Player.None);
-            if ( i == 4 ) {
-                 tttBoard.getCells()[4] = TicTacToeBoard.Cell.newCell(Player.None.X,4);
-            }
-
-            board.getTttBoards()[i] = tttBoard;
+            board.getTttBoards()[i] = TicTacToeBoard.emptyTicTacToeBoard(i);
         }
 
-        return board;
+        board.getTttBoards()[4] = TicTacToeBoard.applyMove(
+                board.getTttBoards()[4], Player.X, MovePosition.newMovePosition(4,4),1);
+
+            return board;
     }
 }

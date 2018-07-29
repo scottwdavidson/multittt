@@ -25,7 +25,7 @@ public class WinRowHeuristicTest {
     private static TicTacToeBoard X_0_1 = TicTacToeBoard.emptyTicTacToeBoard(0);
     private static TicTacToeBoard X_1_2 = TicTacToeBoard.emptyTicTacToeBoard(0);
     private static TicTacToeBoard X_3_5 = TicTacToeBoard.emptyTicTacToeBoard(0);
-    private static TicTacToeBoard X_3_5_O_4 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_3_5_0_4 = TicTacToeBoard.emptyTicTacToeBoard(0);
     private static TicTacToeBoard X_7_8 = TicTacToeBoard.emptyTicTacToeBoard(0);
     private static TicTacToeBoard X_4 = TicTacToeBoard.emptyTicTacToeBoard(0);
     private static TicTacToeBoard BOTTOM2ROWWINS = TicTacToeBoard.emptyTicTacToeBoard(0);
@@ -36,15 +36,20 @@ public class WinRowHeuristicTest {
     public static void setUp() {
 
     	X_1_2.addMove(Player.X, 1,10);
+        System.out.println("X_1_2: " + X_1_2.toString());
+
     	X_1_2.addMove(Player.X, 2,10);
+    	System.out.println("X_1_2: " + X_1_2.toString());
     	
     	X_3_5.addMove(Player.X, 3,1);
     	X_3_5.addMove(Player.X, 5,1);
     	X_3_5.addMove(Player.O, 2,1);
     	X_3_5.addMove(Player.O, 7,1);
-    	
-    	X_3_5_O_4	= TicTacToeBoard.prototypeTicTacToeBoard(0,X_3_5);
-    	X_3_5_O_4.addMove(Player.O, 4,1);
+
+        X_3_5_0_4.addMove(Player.X, 3,1);
+        X_3_5_0_4.addMove(Player.X, 5,1);
+    	X_3_5_0_4.addMove(Player.O, 4,1);;
+    	X_3_5_0_4.addMove(Player.O, 4,1);
     	
     	X_7_8.addMove(Player.X, 7,1);
     	X_7_8.addMove(Player.X, 8,1);
@@ -70,6 +75,8 @@ public class WinRowHeuristicTest {
     @UseDataProvider("generateTestMovesData")
     public void testMoves(TicTacToeBoard tictactoeBoard, Player activePlayer, Player opponent, List<Integer> expectedMoves){
 
+        System.out.println("TicTacToeBoard: " + tictactoeBoard.toString());
+
         Set<Integer> actualMoves = WIN_ROW_HEURISTIC_SINGLETON.moves(tictactoeBoard,activePlayer,opponent);
         Assert.assertEquals(expectedMoves.size(),actualMoves.size());
         Assert.assertTrue(actualMoves.containsAll(expectedMoves));
@@ -84,7 +91,7 @@ public class WinRowHeuristicTest {
                 {X_0_1, Player.X, Player.O, Arrays.asList(2)},
                 {EMPTY, Player.X, Player.O, Arrays.asList()},
                 {X_3_5, Player.X, Player.O, Arrays.asList(4)},
-                {X_3_5_O_4, Player.X, Player.O, Arrays.asList()},
+                {X_3_5_0_4, Player.X, Player.O, Arrays.asList()},
                 {X_7_8, Player.X, Player.O, Arrays.asList(6)},
                 {X_4, Player.X, Player.O, Arrays.asList()},
                 {BOTTOM2ROWWINS, Player.X, Player.O, Arrays.asList(5, 6)},

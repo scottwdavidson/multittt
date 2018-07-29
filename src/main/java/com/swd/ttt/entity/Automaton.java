@@ -89,7 +89,7 @@ public class Automaton {
                         // and add the move (so the evaluation will considered the proposed update)
                         TicTacToeBoard ticTacToeBoard = board.getTttBoards()[tictactoeBoardIndex];
                         if (tictactoeBoardIndex == activeTicTacToeBoard) {
-                            ticTacToeBoard = TicTacToeBoard.prototypeTicTacToeBoard(0,board.getTttBoards()[activeTicTacToeBoard]);
+//                            ticTacToeBoard = TicTacToeBoard.prototypeTicTacToeBoard(0,board.getTttBoards()[activeTicTacToeBoard]);
                         }
 
                         for (Heuristic opponentHeuristic : this.strategy.prioritizedOpponentHeuristics()) {
@@ -123,7 +123,7 @@ public class Automaton {
             // and add the move (so the evaluation will considered the proposed update)
             TicTacToeBoard ticTacToeBoard = board.getTttBoards()[tictactoeBoardIndex];
             if (tictactoeBoardIndex == activeTicTacToeBoard) {
-                ticTacToeBoard = TicTacToeBoard.prototypeTicTacToeBoard(0,board.getTttBoards()[activeTicTacToeBoard]);
+//                ticTacToeBoard = TicTacToeBoard.prototypeTicTacToeBoard(0,board.getTttBoards()[activeTicTacToeBoard]);
                 // apply the move ...
             }
 

@@ -1,78 +1,46 @@
 package com.swd.ttt.entity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import static com.swd.ttt.entity.TicTacToeBoard.Cell.EMPTY_CELL;
 
 public class TicTacToeBoard {
 
-    /**
-     * Immutable representation of the cell of a Tic Tac Toe board which holds the value of
-     * a single player ( X, O or None )
-     */
-    public static class Cell {
-
-        private final Player player;
-        private final int moveNumber;
-
-        public static Cell EMPTY_CELL = newCell(Player.None, -1);
-        public static Cell X_CELL = newCell(Player.X, -1);
-        public static Cell O_CELL = newCell(Player.O, -1);
-
-        public static Cell newCell(Player player, int moveNumber) {
-
-            // TODO consider a player check which returns one of the static Cell instances
-            return new Cell(player, moveNumber);
-        }
-
-        public Player getPlayer() {
-            return player;
-        }
-
-        public int getMoveNumber() {
-            return moveNumber;
-        }
-
-        private Cell(Player player, int moveNumber) {
-            this.player = player;
-            this.moveNumber = moveNumber;
-        }
-
-
-        // there's probably some other stuff we'll need so let's create a class now and we can refactor
-        // later if needed
-    }
-
     private final static int NUMBER_OF_CELLS = 9;
+    private final static Cell[] EMPTY_CELL_TABLE = new Cell[NUMBER_OF_CELLS];
     private final int index;
-    private String gameState;
-    private boolean active = false;
-    private Player winningPlayer = Player.None;
+    private final GameState gameState;
+    private final Player winningPlayer;
 
     private final Cell[] cells = new Cell[NUMBER_OF_CELLS];
 
+    /**
+     * Factory method to create an empty ( new ) Tic Tac Toe board
+     */
     public static TicTacToeBoard emptyTicTacToeBoard(int index) {
-        return newTicTacToeBoard(index, GameState.Open.name(), true, Player.None);
+        return new TicTacToeBoard(index, GameState.Open, Player.None);
     }
 
-    public static TicTacToeBoard prototypeTicTacToeBoard(int index, TicTacToeBoard prototype) {
-        TicTacToeBoard newTicTacToeBoard = new TicTacToeBoard(index);
-        for (int i = 0; i < NUMBER_OF_CELLS; i++) {
-            newTicTacToeBoard.getCells()[i] = prototype.getCells()[i];
-        }
-        return newTicTacToeBoard;
+    /**
+     * Factory method to apply a move to an existing Tic Tac Toe board
+     */
+    public static TicTacToeBoard applyMove(TicTacToeBoard ticTacToeBoard, Player player, MovePosition movePosition, int moveNumber) {
+        return new TicTacToeBoard(ticTacToeBoard.getIndex(),
+                ticTacToeBoard.getGameState(),
+                ticTacToeBoard.getWinningPlayer(),
+                ticTacToeBoard.getCells(),
+                player,
+                movePosition,
+                moveNumber);
     }
 
-    public static TicTacToeBoard newTicTacToeBoard(int index, String gameState, boolean active, Player winningPlayer) {
-
-        TicTacToeBoard ticTacToeBoard = new TicTacToeBoard(index);
-        ticTacToeBoard.setGameState(gameState);
-        ticTacToeBoard.setActive(true);
-        ticTacToeBoard.setWinningPlayer(Player.None);
-
-        return ticTacToeBoard;
+    /**
+     * Factory method to update the game state on an existing Tic Tac Toe board
+     */
+    public static TicTacToeBoard updateGameState(TicTacToeBoard ticTacToeBoard, GameState gameState, Player winningPlayer) {
+        return new TicTacToeBoard(ticTacToeBoard.getIndex(), gameState, winningPlayer, ticTacToeBoard.getCells());
     }
+
 
     public List<MovePosition> movePositions(){
 
@@ -93,6 +61,7 @@ public class TicTacToeBoard {
     /**
      * Add a move to the table
      */
+    @Deprecated
     public void addMove(Player player, int position, int moveNumber) {
 
         // Error checks
@@ -100,7 +69,7 @@ public class TicTacToeBoard {
             throw new IllegalArgumentException("Invalid position ( " + position + ") argument.");
         }
 
-        if (cells[position] != EMPTY_CELL) {
+        if (cells[position] != Cell.EMPTY_CELL) {
             throw new IllegalArgumentException("Invalid request, can't overwrite existing move; cell ( " + position +
                     " ) already contains a player assignment (" + cells[position]);
         }
@@ -125,39 +94,74 @@ public class TicTacToeBoard {
         return index;
     }
 
-    public String getGameState() {
+    public GameState getGameState() {
         return gameState;
-    }
-
-    public void setGameState(String gameState) {
-        this.gameState = gameState;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     public Player getWinningPlayer() {
         return winningPlayer;
     }
 
-    public void setWinningPlayer(Player winningPlayer) {
-        this.winningPlayer = winningPlayer;
-    }
-
     public Cell[] getCells() {
         return cells;
     }
 
-    private TicTacToeBoard(int index) {
+    private TicTacToeBoard(int index, GameState gameState, Player winningPlayer) {
+        this(index, gameState, winningPlayer, EMPTY_CELL_TABLE);
+    }
+
+    private TicTacToeBoard(int index, GameState gameState, Player winningPlayer, Cell[] cells) {
         this.index = index;
+        this.gameState = gameState;
+        this.winningPlayer = winningPlayer;
         for (int i = 0; i < NUMBER_OF_CELLS; i++) {
-            this.cells[i] = EMPTY_CELL;
+            this.cells[i] = cells[i];
         }
     }
 
+    private TicTacToeBoard(int index, GameState gameState, Player winningPlayer, Cell[] prototypeCells, Player player, MovePosition movePosition, int moveNumber) {
+
+        this.index = index;
+        this.gameState = gameState;
+        this.winningPlayer = winningPlayer;
+        for (int cellIndex = 0; cellIndex < NUMBER_OF_CELLS; cellIndex++) {
+            if (cellIndex == movePosition.getPosition()) {
+                this.cells[cellIndex] = Cell.newCell(player, moveNumber);
+            } else {
+                this.cells[cellIndex] = prototypeCells[cellIndex];
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        boolean firstTime = true;
+        for(int i = 0; i<this.cells.length; i++){
+            if (firstTime){
+                firstTime = false;
+            }
+            else {
+                builder.append(",");
+            }
+            builder.append(cells[i].getPlayer() + ":" + cells[i].getMoveNumber());
+        }
+        builder.append("]");
+        return "TicTacToeBoard{" +
+                "index=" + index +
+                ", gameState=" + gameState +
+                ", winningPlayer=" + winningPlayer +
+                ", cells=" + builder.toString() +
+                '}';
+    }
+
+    /**
+     * Initialize a static empty cell table for the creation of new TicTacToe boards
+     */
+    static {
+        for (int i = 0; i < NUMBER_OF_CELLS; i++) {
+            EMPTY_CELL_TABLE[i] = Cell.EMPTY_CELL;
+        }
+    }
 }
