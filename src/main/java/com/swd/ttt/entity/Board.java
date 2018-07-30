@@ -34,16 +34,18 @@ public class Board {
     /**
      * Creates a new Board, updating properties as specified by the arguments. Call the overloaded version which requires the Score.
      */
-    public Board executeTurn(int moveId, Player activePlayer, int updatedTicTacToeBoardIndex, TicTacToeBoard updatedTicTacToeBoard, int activeTicTacToeBoardIndex) {
-        return executeTurn(moveId, activePlayer, updatedTicTacToeBoardIndex, updatedTicTacToeBoard, activeTicTacToeBoardIndex, this.getScore());
+    // TODO Should pull the highest move number out of the provide upatedTicTacToeBoard instead of accepting as an argument
+    // TODO ActivePlayer argument is ambiguous, is this the player making the move or the new active player -- should this be in MovePosition (renamed Move)
+    public Board executeTurn(int moveNumber, Player newActivePlayer, int updatedTicTacToeBoardIndex, TicTacToeBoard updatedTicTacToeBoard, int activeTicTacToeBoardIndex) {
+        return executeTurn(moveNumber, newActivePlayer, updatedTicTacToeBoardIndex, updatedTicTacToeBoard, activeTicTacToeBoardIndex, this.getScore());
     }
 
     /**
      * Creates a new Board, updating properties as specified by the arguments.
      */
-    public Board executeTurn(int moveNumber, Player activePlayer, int updatedTicTacToeBoardIndex, TicTacToeBoard updatedTicTacToeBoard, int activeTicTacToeBoardIndex, Score score) {
+    public Board executeTurn(int moveNumber, Player newActivePlayer, int updatedTicTacToeBoardIndex, TicTacToeBoard updatedTicTacToeBoard, int activeTicTacToeBoardIndex, Score score) {
 
-        Board evolvedBoard = new Board(this.getId(), moveNumber, activePlayer, activeTicTacToeBoardIndex, score, this.getGameState(), this.winningPlayer);
+        Board evolvedBoard = new Board(this.getId(), moveNumber, newActivePlayer, activeTicTacToeBoardIndex, score, this.getGameState(), this.winningPlayer);
 
         // Update TTT board related items
         for (int index = 0; index < this.getTttBoards().length; index++) {
@@ -108,17 +110,17 @@ public class Board {
         return tttBoards;
     }
 
-    public int getActiveTttBoard() {
-
-        if (this.getGameState().equals(GameState.Open.name())) {
-            return this.activeTicTacToeBoardIndex;
-        } else {
-            throw new IllegalStateException("Don't ask for the active TTT board on a closed board!");
-        }
-    }
+//    public int getActiveTttBoard() {
+//
+//        if (this.getGameState().equals(GameState.Open.name())) {
+//            return this.activeTicTacToeBoardIndex;
+//        } else {
+//            throw new IllegalStateException("Don't ask for the active TTT board on a closed board!");
+//        }
+//    }
 
     public List<MovePosition> activeTttBoardMovePositions() {
-        return this.tttBoards[getActiveTttBoard()].movePositions();
+        return this.tttBoards[this.activeTicTacToeBoardIndex].movePositions();
     }
 
     private Board(int id, Player activePlayer, int activeTicTacToeBoardIndex) {

@@ -94,7 +94,7 @@ public abstract class BoardEvaluator {
         this.assignCoreBoard(board);
 
         // Evaluate the Active TTT Board and then combine it with the core evaluation
-        Evaluation activeTttBoardEvaluation = evaluateTTTBoard(board.getTttBoards()[board.getActiveTttBoard()]);
+        Evaluation activeTttBoardEvaluation = evaluateTTTBoard(board.getTttBoards()[board.getActiveTicTacToeBoardIndex()]);
         Evaluation overallBoardEvaluation = activeTttBoardEvaluation.combineEvalutions(this.coreEvaluation);
 
         // Determine win/loss/draw relative values
@@ -130,7 +130,7 @@ public abstract class BoardEvaluator {
 
         Evaluation evaluation = new Evaluation();
         for(int index = 0; index < board.getTttBoards().length; index++){
-            if ( board.getActiveTttBoard() != index ) {
+            if ( board.getActiveTicTacToeBoardIndex() != index ) {
                 evaluation = evaluation.plus(evaluateTTTBoard(board.getTttBoards()[index]));
             }
         }
