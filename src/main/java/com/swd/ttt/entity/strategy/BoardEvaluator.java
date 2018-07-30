@@ -2,17 +2,14 @@ package com.swd.ttt.entity.strategy;
 
 import com.swd.ttt.entity.Board;
 import com.swd.ttt.entity.TicTacToeBoard;
+import com.swd.ttt.entity.Player;
 
 /**
- * Provides full Board evaluation logic in support of the MinMax strategy, identifying both *definite* cases and
- * more relative cases, encapsulating all evaluation into a single place.
- * <p>
- * A MinMaxBoardEvaluator will also provide some performance efficiency by generating a relative evaluation of the 8 inactive
- * TTT boards upon initialization and persist that state to allow the evaluation of multiple active TTT boards.
- * </p>
+ * Provides a general Board evaluation algorithm in the context of the provided root player, leaving the specific
+ * calculation of a win, loss, draw or other relative score to be determined by a concrete BoardEvaluator.
  */
 
-// TODO Scott update description to account for abastract ( and concrete class approach )
+// TODO Scott update description to account for abstract ( and concrete class approach )
 public abstract class BoardEvaluator {
 
     public static class Evaluation {
@@ -88,13 +85,13 @@ public abstract class BoardEvaluator {
 
     }
 
-    public int evaluate(Board board) {
+    public int evaluate(Player rootPlayer, Board board) {
 
         // Assign ( and update if necessary ) the core board and its evaluation
-        this.assignCoreBoard(board);
+        this.assignCoreBoard(rootPlayer, board);
 
         // Evaluate the Active TTT Board and then combine it with the core evaluation
-        Evaluation activeTttBoardEvaluation = evaluateTTTBoard(board.getTttBoards()[board.getActiveTicTacToeBoardIndex()]);
+        Evaluation activeTttBoardEvaluation = evaluateTTTBoard(rootPlayer, board.getTttBoards()[board.getActiveTicTacToeBoardIndex()]);
         Evaluation overallBoardEvaluation = activeTttBoardEvaluation.combineEvalutions(this.coreEvaluation);
 
         // Determine win/loss/draw relative values
@@ -112,12 +109,12 @@ public abstract class BoardEvaluator {
         return overallBoardEvaluationValue;
     }
 
-    protected void assignCoreBoard(Board coreBoard) {
+    protected void assignCoreBoard(Player rootPlayer, Board coreBoard) {
 
         // If same core, nothing to do ...
         if (this.coreBoard == null || this.coreBoard.getId() != coreBoard.getId()) {
             this.coreBoard = coreBoard;
-            this.coreEvaluation = evaluateCoreBoard(this.coreBoard);
+            this.coreEvaluation = evaluateCoreBoard(rootPlayer, this.coreBoard);
         }
     }
 
@@ -126,18 +123,21 @@ public abstract class BoardEvaluator {
      * core Evaluation member variable. This is not an absolute value b/c an absolute value can't be computed until
      * the
      */
-    protected Evaluation evaluateCoreBoard(Board board) {
+    protected Evaluation evaluateCoreBoard(Player rootPlayer, Board board) {
 
         Evaluation evaluation = new Evaluation();
         for(int index = 0; index < board.getTttBoards().length; index++){
             if ( board.getActiveTicTacToeBoardIndex() != index ) {
-                evaluation = evaluation.plus(evaluateTTTBoard(board.getTttBoards()[index]));
+                evaluation = evaluation.plus(evaluateTTTBoard(rootPlayer, board.getTttBoards()[index]));
+            }
+            else {
+                //TODO Evaluate the inactive TTT Boards
             }
         }
         return evaluation;
     }
 
-    protected Evaluation evaluateTTTBoard(TicTacToeBoard tictactoeBoard) {
+    protected Evaluation evaluateTTTBoard(Player rootPlayer, TicTacToeBoard tictactoeBoard) {
 
         return new Evaluation();
     }

@@ -1,14 +1,15 @@
-package com.swd.ttt.entity.heuristic;
+package com.swd.ttt.entity.eval;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import com.swd.ttt.entity.Player;
 import com.swd.ttt.entity.TicTacToeBoard;
+import com.swd.ttt.entity.heuristic.AbstractSingleHeuristic;
 
-public class DrawBoardHeuristic extends AbstractSingleHeuristic {
+public class DrawEval extends AbstractSingleHeuristic {
 	
-	public DrawBoardHeuristic(){
+	public DrawEval(){
 		super(0);
 	}
 
