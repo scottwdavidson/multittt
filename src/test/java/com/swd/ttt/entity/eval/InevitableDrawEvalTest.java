@@ -11,11 +11,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(DataProviderRunner.class)
-public class DrawEvalTest {
+public class InevitableDrawEvalTest {
 
-    private static DrawEval drawEval = new DrawEval();
+    private static InevitableDrawEval inevitableDrawEval = new InevitableDrawEval();
     private static TicTacToeBoard X_0_4_5_6_O_2_3_7_8 = TicTacToeBoard.emptyTicTacToeBoard(0);
-    private static TicTacToeBoard X_1_2_3_8_6_O_0_4_5_7 = TicTacToeBoard.emptyTicTacToeBoard(0);
+    private static TicTacToeBoard X_1_2_3_8_O_0_4_5_7 = TicTacToeBoard.emptyTicTacToeBoard(0);
     private static TicTacToeBoard X_1_4_7 = TicTacToeBoard.emptyTicTacToeBoard(0);
     private static TicTacToeBoard X_0_1 = TicTacToeBoard.emptyTicTacToeBoard(0);
     private static TicTacToeBoard X_2_5_O_7_8 = TicTacToeBoard.emptyTicTacToeBoard(0);
@@ -29,7 +29,7 @@ public class DrawEvalTest {
     @UseDataProvider("testEvaluationMatchesData")
     public void testEvaluationMatches(TicTacToeBoard tictactoeBoard, Player activePlayer, Player opponent, boolean expectedEvaluationMatchesResult){
 
-        Assert.assertEquals( expectedEvaluationMatchesResult, drawEval.evaluationMatches(tictactoeBoard,activePlayer,opponent) );
+        Assert.assertEquals( expectedEvaluationMatchesResult, inevitableDrawEval.evaluationMatches(tictactoeBoard,activePlayer,opponent) );
 
     }
 
@@ -51,16 +51,14 @@ public class DrawEvalTest {
 
         }
         
-        X_1_2_3_8_6_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_6_O_0_4_5_7, Player.X, MovePosition.newMovePosition(0,1),0);
-        X_1_2_3_8_6_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_6_O_0_4_5_7, Player.X, MovePosition.newMovePosition(0,2),1);
-        X_1_2_3_8_6_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_6_O_0_4_5_7, Player.X, MovePosition.newMovePosition(0,3),2);
-        X_1_2_3_8_6_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_6_O_0_4_5_7, Player.X, MovePosition.newMovePosition(0,8),3);
-        X_1_2_3_8_6_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_6_O_0_4_5_7, Player.O, MovePosition.newMovePosition(0,0),4);
-        X_1_2_3_8_6_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_6_O_0_4_5_7, Player.O, MovePosition.newMovePosition(0,4),5);
-        X_1_2_3_8_6_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_6_O_0_4_5_7, Player.O, MovePosition.newMovePosition(0,5),6);
-        X_1_2_3_8_6_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_6_O_0_4_5_7, Player.O, MovePosition.newMovePosition(0,7),7);
-        X_1_2_3_8_6_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_6_O_0_4_5_7, Player.X, MovePosition.newMovePosition(0,6),3);
-
+        X_1_2_3_8_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_O_0_4_5_7, Player.X, MovePosition.newMovePosition(0,1),0);
+        X_1_2_3_8_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_O_0_4_5_7, Player.X, MovePosition.newMovePosition(0,2),1);
+        X_1_2_3_8_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_O_0_4_5_7, Player.X, MovePosition.newMovePosition(0,3),2);
+        X_1_2_3_8_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_O_0_4_5_7, Player.X, MovePosition.newMovePosition(0,8),3);
+        X_1_2_3_8_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_O_0_4_5_7, Player.O, MovePosition.newMovePosition(0,0),4);
+        X_1_2_3_8_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_O_0_4_5_7, Player.O, MovePosition.newMovePosition(0,4),5);
+        X_1_2_3_8_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_O_0_4_5_7, Player.O, MovePosition.newMovePosition(0,5),6);
+        X_1_2_3_8_O_0_4_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_O_0_4_5_7, Player.O, MovePosition.newMovePosition(0,7),7);
 
         X_1_4_7 = TicTacToeBoard.applyMove(X_1_4_7, Player.X, MovePosition.newMovePosition(0,1),0);
         X_1_4_7 = TicTacToeBoard.applyMove(X_1_4_7, Player.X, MovePosition.newMovePosition(0,4),1);
@@ -83,8 +81,8 @@ public class DrawEvalTest {
         X_1_2_3_8_O_0_5_7 = TicTacToeBoard.applyMove(X_1_2_3_8_O_0_5_7, Player.O, MovePosition.newMovePosition(0,7),7);
 
         return new Object[][] {
-                {X_0_4_5_6_O_2_3_7_8, Player.X, Player.O, false},
-                {X_1_2_3_8_6_O_0_4_5_7, Player.X, Player.O, true},
+                {X_0_4_5_6_O_2_3_7_8, Player.X, Player.O, true},
+                {X_1_2_3_8_O_0_4_5_7, Player.X, Player.O, true},
                 {X_1_4_7, Player.X, Player.O, false},
                 {X_0_1, Player.X, Player.O, false},
                 {X_2_5_O_7_8, Player.X, Player.O, false},
