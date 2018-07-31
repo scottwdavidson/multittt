@@ -3,6 +3,8 @@ package com.swd.ttt.entity.strategy;
 import com.swd.ttt.entity.Board;
 import com.swd.ttt.entity.TicTacToeBoard;
 import com.swd.ttt.entity.Player;
+import com.swd.ttt.entity.eval.DrawEval;
+import com.swd.ttt.entity.eval.WinEval;
 
 /**
  * Provides a general Board evaluation algorithm in the context of the provided root player, leaving the specific
@@ -29,9 +31,9 @@ public abstract class BoardEvaluator {
         }
 
         public Evaluation plus(Evaluation evaluation){
-            this.wins(this.wins).wins(evaluation.wins);
-            this.losses(this.wins).losses(evaluation.wins);
-            this.draws(this.wins).draws(evaluation.wins);
+            this.plusWins(this.wins).plusWins(evaluation.wins);
+            this.plusLosses(this.wins).plusLosses(evaluation.wins);
+            this.plusDraws(this.wins).plusDraws(evaluation.wins);
             this.relativeValues(this.wins).relativeValues(evaluation.wins);
             return this;
         }
@@ -40,7 +42,7 @@ public abstract class BoardEvaluator {
             return wins;
         }
 
-        public Evaluation wins(int wins) {
+        public Evaluation plusWins(int wins) {
             this.wins += wins;
             return this;
         }
@@ -49,7 +51,7 @@ public abstract class BoardEvaluator {
             return losses;
         }
 
-        public Evaluation losses(int losses) {
+        public Evaluation plusLosses(int losses) {
             this.losses += losses;
             return this;
         }
@@ -58,7 +60,7 @@ public abstract class BoardEvaluator {
             return draws;
         }
 
-        public Evaluation draws(int draws) {
+        public Evaluation plusDraws(int draws) {
             this.draws += draws;
             return this;
         }
@@ -99,7 +101,7 @@ public abstract class BoardEvaluator {
         int lossRelativeValue = lossValue(overallBoardEvaluation);
         int drawRelativeValue = drawValue(overallBoardEvaluation);
 
-        // Calculate the overall evaluation - sum up wins versus losses + relative values
+        // Calculate the overall evaluation - sum up plusWins versus plusLosses + relative values
         int overallBoardEvaluationValue =
                 (overallBoardEvaluation.getWins() * winRelativeValue) +
                         (overallBoardEvaluation.getLosses() * lossRelativeValue) +
@@ -139,7 +141,29 @@ public abstract class BoardEvaluator {
 
     protected Evaluation evaluateTTTBoard(Player rootPlayer, TicTacToeBoard tictactoeBoard) {
 
-        return new Evaluation();
+        Evaluation evaluation = new Evaluation();
+
+        // Check for win ( for either player )
+        WinEval winEval = new WinEval();  // TODO should use IOC
+        DrawEval drawEval = new DrawEval();
+        if(winEval.evaluationMatches(tictactoeBoard, rootPlayer, rootPlayer.opponent())){
+            evaluation.plusWins(1);
+        }
+        else if(winEval.evaluationMatches(tictactoeBoard, rootPlayer.opponent(), rootPlayer)){
+            evaluation.plusLosses(1);
+        }
+
+        // Check for draw
+        else if(drawEval.evaluationMatches(tictactoeBoard, rootPlayer, rootPlayer.opponent())){
+            evaluation.plusDraws(1);
+        }
+
+        // Delegate to concrete Strategic Board Evaluator for relative values
+        else {
+            evaluation = evaluateRelativeValue(rootPlayer, tictactoeBoard);
+        }
+
+        return evaluation;
     }
 
     /**
@@ -157,4 +181,8 @@ public abstract class BoardEvaluator {
      */
     protected abstract int drawValue(Evaluation overallBoardEvaluation);
 
+    /**
+     * Depending on the specific strategy, evaluate the non Win / non Draw TTT board
+     */
+    protected abstract Evaluation evaluateRelativeValue(Player rootPlayer, TicTacToeBoard ticTacToeBoard);
 }

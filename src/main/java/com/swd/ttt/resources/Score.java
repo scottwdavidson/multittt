@@ -1,7 +1,7 @@
 package com.swd.ttt.resources;
 
 /**
- * Represents the score of the current game in terms of a Players' wins.
+ * Represents the score of the current game in terms of a Players' plusWins.
  */
 public class Score {
 
