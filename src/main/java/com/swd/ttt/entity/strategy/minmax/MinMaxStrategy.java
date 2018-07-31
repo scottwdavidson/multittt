@@ -6,6 +6,8 @@ import java.util.List;
 
 public class MinMaxStrategy implements Strategy {
 
+    private final Turn turn = new Turn();  // TODO Autowire Turn instance
+
     @Override
     public List<Heuristic> prioritizedAutomatonHeuristics() {
         return null;
@@ -32,7 +34,7 @@ public class MinMaxStrategy implements Strategy {
         MovePosition strategicMovePosition = rootMinMaxNode.getMovePosition();
 
         // Execute the move on the provided Board and return the updated Board
-        return Turn.executeTurn(strategicMovePosition,board);
+        return this.turn.executeTurn(strategicMovePosition,board);
     }
 
     private void createNextLevelMinMaxNodes(MinMaxNode parent, Board board, int levels){
@@ -53,7 +55,7 @@ public class MinMaxStrategy implements Strategy {
         //  4. Recursively create the next level ( make sure to decrement levels and flip MinMax )
         for(MovePosition movePosition : movePositions){
         	
-        	Board newBoard = Turn.executeTurn(movePosition, board);
+        	Board newBoard = this.turn.executeTurn(movePosition, board);
         	
         	//if there is a win or if level == 0: evaluate board
         	
