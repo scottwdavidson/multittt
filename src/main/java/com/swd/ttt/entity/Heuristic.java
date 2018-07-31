@@ -1,5 +1,8 @@
 package com.swd.ttt.entity;
 
+import com.swd.ttt.entity.play.Player;
+import com.swd.ttt.entity.play.TicTacToeBoard;
+
 import java.util.Set;
 
 public interface Heuristic {

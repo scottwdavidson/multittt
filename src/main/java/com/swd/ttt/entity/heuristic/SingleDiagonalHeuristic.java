@@ -1,12 +1,10 @@
 package com.swd.ttt.entity.heuristic;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import com.swd.ttt.entity.Player;
-import com.swd.ttt.entity.TicTacToeBoard;
+import com.swd.ttt.entity.play.Player;
+import com.swd.ttt.entity.play.TicTacToeBoard;
 
 public class SingleDiagonalHeuristic extends AbstractSingleHeuristic {
 

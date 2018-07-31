@@ -1,5 +1,7 @@
 package com.swd.ttt.entity;
 
+import com.swd.ttt.entity.play.Board;
+
 import java.util.List;
 
 /**

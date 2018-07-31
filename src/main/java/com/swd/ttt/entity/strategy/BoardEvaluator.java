@@ -1,8 +1,8 @@
 package com.swd.ttt.entity.strategy;
 
-import com.swd.ttt.entity.Board;
-import com.swd.ttt.entity.TicTacToeBoard;
-import com.swd.ttt.entity.Player;
+import com.swd.ttt.entity.play.Board;
+import com.swd.ttt.entity.play.TicTacToeBoard;
+import com.swd.ttt.entity.play.Player;
 import com.swd.ttt.entity.eval.DrawEval;
 import com.swd.ttt.entity.eval.WinEval;
 

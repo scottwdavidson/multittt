@@ -2,6 +2,7 @@ package com.swd.ttt.entity;
 
 import com.swd.ttt.entity.eval.DrawEval;
 import com.swd.ttt.entity.eval.WinEval;
+import com.swd.ttt.entity.play.*;
 
 /**
  * Represents the function of executing a "turn" in the game, collecting all of the intrinsic

@@ -1,13 +1,9 @@
 package com.swd.ttt.tui;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import com.swd.ttt.entity.Board;
-import com.swd.ttt.entity.MovePosition;
-import com.swd.ttt.entity.Player;
-import com.swd.ttt.entity.TicTacToeBoard;
-
-import java.util.Arrays;
-import java.util.List;
+import com.swd.ttt.entity.play.Board;
+import com.swd.ttt.entity.play.MovePosition;
+import com.swd.ttt.entity.play.Player;
+import com.swd.ttt.entity.play.TicTacToeBoard;
 
 /**
  * Presents the board as part of the text user interface (TUI).

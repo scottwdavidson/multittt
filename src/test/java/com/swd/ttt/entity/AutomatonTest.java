@@ -1,9 +1,11 @@
 package com.swd.ttt.entity;
 
+import com.swd.ttt.entity.play.Board;
+import com.swd.ttt.entity.play.Player;
+import com.swd.ttt.entity.play.TicTacToeBoard;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;

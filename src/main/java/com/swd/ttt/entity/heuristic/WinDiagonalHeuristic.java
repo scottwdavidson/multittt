@@ -3,8 +3,8 @@ package com.swd.ttt.entity.heuristic;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.swd.ttt.entity.Player;
-import com.swd.ttt.entity.TicTacToeBoard;
+import com.swd.ttt.entity.play.Player;
+import com.swd.ttt.entity.play.TicTacToeBoard;
 
 public class WinDiagonalHeuristic extends AbstractSingleHeuristic {
 

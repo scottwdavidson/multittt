@@ -1,4 +1,4 @@
-package com.swd.ttt.entity;
+package com.swd.ttt.entity.play;
 
 /**
  * Immutable object representing of a Cell of a Tic Tac Toe Board.

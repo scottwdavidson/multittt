@@ -1,7 +1,7 @@
 package com.swd.ttt.entity.eval;
 
-import com.swd.ttt.entity.Player;
-import com.swd.ttt.entity.TicTacToeBoard;
+import com.swd.ttt.entity.play.Player;
+import com.swd.ttt.entity.play.TicTacToeBoard;
 import com.swd.ttt.entity.heuristic.SingleColumnHeuristic;
 import com.swd.ttt.entity.heuristic.SingleDiagonalHeuristic;
 import com.swd.ttt.entity.heuristic.SingleRowHeuristic;

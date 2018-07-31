@@ -1,6 +1,6 @@
 package com.swd.ttt.tui;
 
-import com.swd.ttt.entity.Player;
+import com.swd.ttt.entity.play.Player;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;

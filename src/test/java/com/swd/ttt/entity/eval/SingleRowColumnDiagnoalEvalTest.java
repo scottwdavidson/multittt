@@ -1,8 +1,8 @@
 package com.swd.ttt.entity.eval;
 
-import com.swd.ttt.entity.MovePosition;
-import com.swd.ttt.entity.Player;
-import com.swd.ttt.entity.TicTacToeBoard;
+import com.swd.ttt.entity.play.MovePosition;
+import com.swd.ttt.entity.play.Player;
+import com.swd.ttt.entity.play.TicTacToeBoard;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;

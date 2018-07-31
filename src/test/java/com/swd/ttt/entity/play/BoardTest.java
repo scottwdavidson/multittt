@@ -1,13 +1,11 @@
-package com.swd.ttt.entity;
+package com.swd.ttt.entity.play;
 
+import com.swd.ttt.entity.play.Board;
+import com.swd.ttt.entity.play.Player;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;

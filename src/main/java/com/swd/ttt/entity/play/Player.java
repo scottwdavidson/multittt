@@ -1,4 +1,4 @@
-package com.swd.ttt.entity;
+package com.swd.ttt.entity.play;
 
 public enum Player {
     X, O, None;

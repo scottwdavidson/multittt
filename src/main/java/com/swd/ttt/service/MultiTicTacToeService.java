@@ -1,7 +1,8 @@
 package com.swd.ttt.service;
 
 import com.swd.ttt.Service;
-import com.swd.ttt.entity.*;
+import com.swd.ttt.entity.play.Board;
+import com.swd.ttt.entity.play.Player;
 import org.springframework.stereotype.Component;
 
 @Component

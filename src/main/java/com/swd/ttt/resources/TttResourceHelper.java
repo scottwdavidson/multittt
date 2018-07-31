@@ -1,7 +1,7 @@
 package com.swd.ttt.resources;
 
 import com.swd.ttt.Service;
-import com.swd.ttt.entity.Player;
+import com.swd.ttt.entity.play.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.WebApplicationException;
@@ -20,7 +20,7 @@ public class TttResourceHelper {
         try {
 
             throw new IllegalArgumentException("Testing IAE ... ");
-//            com.swd.ttt.entity.Board boardEntity = this.service.move(boardId, move.getPlayer(), move.getTictactoeBoardIndex(), move.getBoardPosition());
+//            com.swd.ttt.entity.play.Board boardEntity = this.service.move(boardId, move.getPlayer(), move.getTictactoeBoardIndex(), move.getBoardPosition());
 //            return DtoFactory.generateTicTacToeBoardDto(boardEntity);
 
         } catch (Throwable cause) {
@@ -31,6 +31,6 @@ public class TttResourceHelper {
     }
 
     public Board newGame(int activeTicTacToeBoard) {
-        return DtoFactory.generateTicTacToeBoardDto(com.swd.ttt.entity.Board.initialBoard(1000, Player.X, activeTicTacToeBoard));
+        return DtoFactory.generateTicTacToeBoardDto(com.swd.ttt.entity.play.Board.initialBoard(1000, Player.X, activeTicTacToeBoard));
     }
 }

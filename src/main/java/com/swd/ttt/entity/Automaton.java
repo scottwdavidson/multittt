@@ -1,5 +1,9 @@
 package com.swd.ttt.entity;
 
+import com.swd.ttt.entity.play.Board;
+import com.swd.ttt.entity.play.Player;
+import com.swd.ttt.entity.play.TicTacToeBoard;
+
 import java.util.*;
 
 /**

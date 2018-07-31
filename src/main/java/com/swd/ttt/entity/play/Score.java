@@ -1,4 +1,4 @@
-package com.swd.ttt.entity;
+package com.swd.ttt.entity.play;
 
 /**
  * Represents the score of the current game in terms of a Players' plusWins.

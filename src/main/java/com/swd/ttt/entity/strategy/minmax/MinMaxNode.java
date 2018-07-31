@@ -1,6 +1,6 @@
 package com.swd.ttt.entity.strategy.minmax;
 
-import com.swd.ttt.entity.MovePosition;
+import com.swd.ttt.entity.play.MovePosition;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,6 @@
-package com.swd.ttt.entity;
+package com.swd.ttt.entity.play;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TicTacToeBoard {

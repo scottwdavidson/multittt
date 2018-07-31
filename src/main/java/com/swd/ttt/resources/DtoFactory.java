@@ -1,11 +1,13 @@
 package com.swd.ttt.resources;
 
+import com.swd.ttt.entity.play.Cell;
+
 /**
  * Factory class that generates DTOs ( Data Transfer Objects ) from Business Objects.
  */
 public class DtoFactory {
 
-    public static Board generateTicTacToeBoardDto(com.swd.ttt.entity.Board boardEntity) {
+    public static Board generateTicTacToeBoardDto(com.swd.ttt.entity.play.Board boardEntity) {
 
         Board board = new Board();
 
@@ -16,32 +18,32 @@ public class DtoFactory {
         board.setScore(generateScoreDto(boardEntity.getScore()));
         board.setGameState(boardEntity.getGameState().name());
         board.setWinner(boardEntity.getWinningPlayer().name());
-        for(com.swd.ttt.entity.TicTacToeBoard ticTacToeBoardEntity : boardEntity.getTttBoards()){
+        for(com.swd.ttt.entity.play.TicTacToeBoard ticTacToeBoardEntity : boardEntity.getTttBoards()){
             board.getTictactoes().add(generateTicTacToeBoardDto(ticTacToeBoardEntity));
         }
 
         return board;
     }
 
-    protected static int deriveCurrentMoveNumber(com.swd.ttt.entity.Board boardEntity){
+    protected static int deriveCurrentMoveNumber(com.swd.ttt.entity.play.Board boardEntity){
         return boardEntity.getMoveNumber();
     }
 
-    public static TicTacToeBoard generateTicTacToeBoardDto(com.swd.ttt.entity.TicTacToeBoard ticTacToeBoardEntity) {
+    public static TicTacToeBoard generateTicTacToeBoardDto(com.swd.ttt.entity.play.TicTacToeBoard ticTacToeBoardEntity) {
 
         TicTacToeBoard ticTacToeBoardDto = new TicTacToeBoard();
 
         ticTacToeBoardDto.setIndex(ticTacToeBoardEntity.getIndex());
         ticTacToeBoardDto.setGameState(ticTacToeBoardEntity.getGameState().name());
         ticTacToeBoardDto.setWinningPlayer(ticTacToeBoardEntity.getWinningPlayer().name());
-        for (com.swd.ttt.entity.Cell cell : ticTacToeBoardEntity.getCells()) {
+        for (Cell cell : ticTacToeBoardEntity.getCells()) {
             ticTacToeBoardDto.getCells().add(generateCellDto(cell));
         }
 
         return ticTacToeBoardDto;
     }
 
-    public static TicTacToeBoard.Cell generateCellDto(com.swd.ttt.entity.Cell cellEntity) {
+    public static TicTacToeBoard.Cell generateCellDto(Cell cellEntity) {
 
         TicTacToeBoard.Cell cellDto = new TicTacToeBoard.Cell();
 
@@ -51,7 +53,7 @@ public class DtoFactory {
         return cellDto;
     }
 
-    public static Score generateScoreDto(com.swd.ttt.entity.Score scoreEntity) {
+    public static Score generateScoreDto(com.swd.ttt.entity.play.Score scoreEntity) {
         return Score.newScore(scoreEntity.getoWins(), scoreEntity.getoWins(), scoreEntity.getCats());
     }
 

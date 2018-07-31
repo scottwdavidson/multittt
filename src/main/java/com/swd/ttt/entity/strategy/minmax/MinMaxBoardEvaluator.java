@@ -1,8 +1,7 @@
 package com.swd.ttt.entity.strategy.minmax;
 
-import com.swd.ttt.entity.Board;
-import com.swd.ttt.entity.Player;
-import com.swd.ttt.entity.TicTacToeBoard;
+import com.swd.ttt.entity.play.Player;
+import com.swd.ttt.entity.play.TicTacToeBoard;
 import com.swd.ttt.entity.strategy.BoardEvaluator;
 
 /**

@@ -1,7 +1,7 @@
 package com.swd.ttt.entity.eval;
 
-import com.swd.ttt.entity.Player;
-import com.swd.ttt.entity.TicTacToeBoard;
+import com.swd.ttt.entity.play.Player;
+import com.swd.ttt.entity.play.TicTacToeBoard;
 
 public class DrawEval implements Eval {
 

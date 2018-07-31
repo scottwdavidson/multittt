@@ -1,4 +1,4 @@
-package com.swd.ttt.entity;
+package com.swd.ttt.entity.play;
 
 /**
  * Immutable representation of a proposed move including the index of which TicTacToeBoard board and the position

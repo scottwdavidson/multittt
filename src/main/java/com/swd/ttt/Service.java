@@ -1,6 +1,6 @@
 package com.swd.ttt;
 
-import com.swd.ttt.entity.Board;
+import com.swd.ttt.entity.play.Board;
 
 public interface Service {
 
