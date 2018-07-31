@@ -8,7 +8,7 @@ import com.swd.ttt.entity.play.TicTacToeBoard;
 /**
  * Presents the board as part of the text user interface (TUI).
  */
-public class BoardPresenter {
+public class Presentation {
 
     final static String TTT_BOARD_PLAY_ROW_TEMPLATE = "    |   |      ''      |   |      ''      |   |   ";
     final static String TTT_BOARD_SEPARATOR_ROW_TEMPLATE = " ---|---|---   ''   ---|---|---   ''   ---|---|---";
@@ -82,6 +82,7 @@ public class BoardPresenter {
         return builder.toString();
     }
 
+
     static String insertPlay(String boardPlayRowTemplate, Player player, int relativeBoard, int relativePosition) {
 
         int playPosition = calculatePlayPosition(relativeBoard, relativePosition);
@@ -92,6 +93,8 @@ public class BoardPresenter {
     static int calculatePlayPosition(int relativeBoard, int relativePosition) {
         return relativeBoard * BOARD_CHARACTER_OFFSET + (BOARD_POSITION_INITIAL_CHARACTER_OFFSET + relativePosition * BOARD_POSITION_CHARACTER_OFFSET);
     }
+
+
 
     public static void main(String[] args) {
 
@@ -107,7 +110,7 @@ public class BoardPresenter {
             TicTacToeBoard ticTacToeBoard = board.getTttBoards()[movePosition.getTicTacToeBoardIndex()];
             ticTacToeBoard = TicTacToeBoard.applyMove(ticTacToeBoard,activePlayer,movePosition, moveNumber);
             board = board.executeTurn(moveNumber, opponent, movePosition.getTicTacToeBoardIndex(), ticTacToeBoard, movePosition.getPosition());
-            System.out.println("--- \n" + BoardPresenter.presentation(board));
+            System.out.println("--- \n" + Presentation.presentation(board));
 
             moveNumber++;
             activePlayer = activePlayer.opponent();
@@ -119,7 +122,7 @@ public class BoardPresenter {
             TicTacToeBoard ticTacToeBoard = board.getTttBoards()[movePosition.getTicTacToeBoardIndex()];
             ticTacToeBoard = TicTacToeBoard.applyMove(ticTacToeBoard,activePlayer,movePosition, moveNumber);
             board = board.executeTurn(moveNumber, opponent, movePosition.getTicTacToeBoardIndex(), ticTacToeBoard, movePosition.getPosition());
-            System.out.println("--- \n" + BoardPresenter.presentation(board));
+            System.out.println("--- \n" + Presentation.presentation(board));
 
             moveNumber++;
             activePlayer = activePlayer.opponent();

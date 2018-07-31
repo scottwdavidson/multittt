@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(DataProviderRunner.class)
-public class BoardPresenterTest {
+public class PresentationTest {
 
     private final static String TTT_BOARD_PLAY_ROW_X_0_0 =      "  X |   |      ''      |   |      ''      |   |   ";
     private final static String TTT_BOARD_PLAY_ROW_X_0_1 =      "    | X |      ''      |   |      ''      |   |   ";
@@ -31,7 +31,7 @@ public class BoardPresenterTest {
     @Test
     @UseDataProvider("testCalculatePlayPositionData")
     public void testCalculatePlayPosition(int relativeBoard, int relativePosition, int expectedPlayPosition){
-        Assert.assertEquals(expectedPlayPosition, BoardPresenter.calculatePlayPosition(relativeBoard, relativePosition));
+        Assert.assertEquals(expectedPlayPosition, Presentation.calculatePlayPosition(relativeBoard, relativePosition));
     }
 
     @DataProvider
@@ -53,25 +53,25 @@ public class BoardPresenterTest {
     @Test
     @UseDataProvider("testInsertPlayData")
     public void testInserPlay(String template, Player player, int relativeBoard, int relativePosition,  String expectedRow){
-        Assert.assertEquals(expectedRow, BoardPresenter.insertPlay(template, player, relativeBoard, relativePosition));
+        Assert.assertEquals(expectedRow, Presentation.insertPlay(template, player, relativeBoard, relativePosition));
     }
 
     @DataProvider
     public static Object[][] testInsertPlayData() {
 
         return new Object[][] {
-                {BoardPresenter.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 0,0, TTT_BOARD_PLAY_ROW_X_0_0},
-                {BoardPresenter.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 0,1, TTT_BOARD_PLAY_ROW_X_0_1},
-                {BoardPresenter.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 0,2, TTT_BOARD_PLAY_ROW_X_0_2},
-                {BoardPresenter.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.O, 0,0, TTT_BOARD_PLAY_ROW_O_0_0},
-                {BoardPresenter.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.O, 0,1, TTT_BOARD_PLAY_ROW_O_0_1},
-                {BoardPresenter.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.O, 0,2, TTT_BOARD_PLAY_ROW_O_0_2},
-                {BoardPresenter.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 1,0, TTT_BOARD_PLAY_ROW_X_1_0},
-                {BoardPresenter.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 1,1, TTT_BOARD_PLAY_ROW_X_1_1},
-                {BoardPresenter.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 1,2, TTT_BOARD_PLAY_ROW_X_1_2},
-                {BoardPresenter.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 2,0, TTT_BOARD_PLAY_ROW_X_2_0},
-                {BoardPresenter.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 2,1, TTT_BOARD_PLAY_ROW_X_2_1},
-                {BoardPresenter.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 2,2, TTT_BOARD_PLAY_ROW_X_2_2},
+                {Presentation.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 0,0, TTT_BOARD_PLAY_ROW_X_0_0},
+                {Presentation.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 0,1, TTT_BOARD_PLAY_ROW_X_0_1},
+                {Presentation.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 0,2, TTT_BOARD_PLAY_ROW_X_0_2},
+                {Presentation.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.O, 0,0, TTT_BOARD_PLAY_ROW_O_0_0},
+                {Presentation.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.O, 0,1, TTT_BOARD_PLAY_ROW_O_0_1},
+                {Presentation.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.O, 0,2, TTT_BOARD_PLAY_ROW_O_0_2},
+                {Presentation.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 1,0, TTT_BOARD_PLAY_ROW_X_1_0},
+                {Presentation.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 1,1, TTT_BOARD_PLAY_ROW_X_1_1},
+                {Presentation.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 1,2, TTT_BOARD_PLAY_ROW_X_1_2},
+                {Presentation.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 2,0, TTT_BOARD_PLAY_ROW_X_2_0},
+                {Presentation.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 2,1, TTT_BOARD_PLAY_ROW_X_2_1},
+                {Presentation.TTT_BOARD_PLAY_ROW_TEMPLATE, Player.X, 2,2, TTT_BOARD_PLAY_ROW_X_2_2},
 
 
         };

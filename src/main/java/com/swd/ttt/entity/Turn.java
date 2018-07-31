@@ -11,8 +11,6 @@ import com.swd.ttt.entity.play.*;
  */
 public class Turn {
 
-    // TODO methods should *not* be static - we should be using Spring IOC here to manage singletons instead
-
     private WinEval winEval = new WinEval();
     private DrawEval drawEval = new DrawEval();
 
@@ -24,12 +22,12 @@ public class Turn {
         Player activePlayer = board.getActivePlayer();
         TicTacToeBoard updatedTicTacToeBoard = TicTacToeBoard.applyMove(
                 board.getTttBoards()[movePosition.getTicTacToeBoardIndex()],
-                board.getActivePlayer(),
+                activePlayer,
                 movePosition,
                 moveNumber);
 
         // If move resulted in a *win* or *cats* game, update the TicTacToeBoard and calculate new Score
-        Player opponent = board.getActivePlayer().opponent();
+        Player opponent = activePlayer.opponent();
         Score possiblyUpdateScore = board.getScore();
 
         if (winEval.evaluationMatches(updatedTicTacToeBoard, activePlayer, opponent)) {
@@ -42,14 +40,14 @@ public class Turn {
 
         // Update the board
         int updatedTicTacToeBoardIndex = movePosition.getTicTacToeBoardIndex();
-        int updateActiveTicTacToeBoardIndex = determineNextActiveTicTacToeBoardIndex(possiblyUpdateScore,board,updatedTicTacToeBoard,movePosition);
+        int nextActiveTicTacToeBoardIndex = determineNextActiveTicTacToeBoardIndex(possiblyUpdateScore,board,updatedTicTacToeBoard,movePosition);
 
         Board updatedBoard = board.executeTurn(
                 moveNumber,
                 opponent,
                 updatedTicTacToeBoardIndex,
                 updatedTicTacToeBoard,
-                updateActiveTicTacToeBoardIndex,
+                nextActiveTicTacToeBoardIndex,
                 possiblyUpdateScore);
 
         if (possiblyUpdateScore.gameIsOver()) {
@@ -63,7 +61,7 @@ public class Turn {
      * Determine what the next active TTT board should be. In general, this is simply the position played previously
      * which we get from the MovePosition argument. But, if that position points to a TTT board which is CLOSED, then
      * we must search to find the next, sequential TTT board. To further complicate things, one of the board argument's
-     * TTT boards has been updated, so we need to properly identify it to get the most update to date status from it.
+     * TTT boards has been updated, so we need to properly identify it to get the most up to date status from it.
      */
     protected int determineNextActiveTicTacToeBoardIndex(Score score, Board board, TicTacToeBoard updatedTicTacToeBoard, MovePosition movePosition){
 
