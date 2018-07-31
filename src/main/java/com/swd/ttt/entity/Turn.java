@@ -34,7 +34,7 @@ public class Turn {
         if (winEval.evaluationMatches(updatedTicTacToeBoard, activePlayer, opponent)) {
             updatedTicTacToeBoard = TicTacToeBoard.updateGameState(updatedTicTacToeBoard, GameState.Closed, activePlayer);
             possiblyUpdateScore = possiblyUpdateScore.plus(activePlayer);
-        } else if (drawEval.hasDraw(updatedTicTacToeBoard, activePlayer, opponent)) {
+        } else if (drawEval.evaluationMatches(updatedTicTacToeBoard, activePlayer, opponent)) {
             updatedTicTacToeBoard = TicTacToeBoard.updateGameState(updatedTicTacToeBoard, GameState.Closed, Player.None);
             possiblyUpdateScore = possiblyUpdateScore.plusCats();
         }
