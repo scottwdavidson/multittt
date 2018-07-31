@@ -83,7 +83,7 @@ public class WinEvalTest {
         }
 
         {
-            X_0_3_6 = TicTacToeBoard.applyMove(X_0_3_6, Player.X, MovePosition.newMovePosition(0,6),0);
+            X_0_3_6 = TicTacToeBoard.applyMove(X_0_3_6, Player.X, MovePosition.newMovePosition(0,0),0);
             X_0_3_6 = TicTacToeBoard.applyMove(X_0_3_6, Player.X, MovePosition.newMovePosition(0,3),1);
             X_0_3_6 = TicTacToeBoard.applyMove(X_0_3_6, Player.X, MovePosition.newMovePosition(0,6),2);
         }
