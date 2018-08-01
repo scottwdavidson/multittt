@@ -13,6 +13,9 @@ import org.junit.runner.RunWith;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(DataProviderRunner.class)
 public class TicTacToeBoardTest {
 
@@ -41,6 +44,15 @@ public class TicTacToeBoardTest {
 
     }
 
+    @Test
+    @UseDataProvider("testMovePositionsData")
+    public void testMovePositions(TicTacToeBoard tictactoeBoard, List<MovePosition> expectedMovePositions){
+
+        List<MovePosition> actualMovePositions = tictactoeBoard.movePositions();
+        Assert.assertEquals("Checking number of move positions", expectedMovePositions.size(), actualMovePositions.size());
+        Assert.assertTrue("Checking Expected List contains all Actual (meaning two lists are equivalent)", expectedMovePositions.containsAll(actualMovePositions));
+
+    }
 
     @DataProvider
     public static Object[][] generateRepresentationData() {
@@ -97,5 +109,31 @@ public class TicTacToeBoardTest {
                 {O_0_4_8, GameState.Closed, Player.O}
         };
     }
+
+
+
+    @DataProvider
+    public static Object[][] testMovePositionsData() {
+
+        TicTacToeBoard X_5_6_7_O_0 = TicTacToeBoard.emptyTicTacToeBoard(3);
+        List<MovePosition> mpX_5_6_7_O_0 = new ArrayList<>();
+        {
+            X_5_6_7_O_0 = TicTacToeBoard.applyMove(X_5_6_7_O_0, Player.X, MovePosition.newMovePosition(3, 5), 0);
+            X_5_6_7_O_0 = TicTacToeBoard.applyMove(X_5_6_7_O_0, Player.X, MovePosition.newMovePosition(3, 6), 1);
+            X_5_6_7_O_0 = TicTacToeBoard.applyMove(X_5_6_7_O_0, Player.X, MovePosition.newMovePosition(3, 7), 2);
+            X_5_6_7_O_0 = TicTacToeBoard.applyMove(X_5_6_7_O_0, Player.O, MovePosition.newMovePosition(3, 0), 3);
+            mpX_5_6_7_O_0.add(MovePosition.newMovePosition(3,1));
+            mpX_5_6_7_O_0.add(MovePosition.newMovePosition(3,2));
+            mpX_5_6_7_O_0.add(MovePosition.newMovePosition(3,3));
+            mpX_5_6_7_O_0.add(MovePosition.newMovePosition(3,4));
+            mpX_5_6_7_O_0.add(MovePosition.newMovePosition(3,8));
+
+        }
+
+        return new Object[][] {
+                {X_5_6_7_O_0, mpX_5_6_7_O_0}
+        };
+    }
+
 
 }

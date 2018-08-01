@@ -77,13 +77,24 @@ public class MinMaxNode {
     	this.boardEvaluation = boardEvaluation;
     }
 
+    @Override
+    public String toString() {
+        return "MinMaxNode{" +
+                "minMax=" + minMax +
+                ", movePosition=" + movePosition +
+                ", boardEvaluation=" + boardEvaluation +
+                '}';
+    }
+
     // Private constructor to force usage of factory method
     private MinMaxNode(MinMaxNode parent, MinMax minMax, MovePosition movePosition, int boardEvaluation){
         this.parent = parent;
         this.minMax = minMax;
         this.movePosition = movePosition;
         this.boardEvaluation = boardEvaluation;
-        
-        parent.getChildren().add(this);
+
+        if ( null != parent) {
+            parent.getChildren().add(this);
+        }
     }
 }

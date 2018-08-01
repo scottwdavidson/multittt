@@ -15,7 +15,7 @@ public class Turn {
     private DrawEval drawEval = new DrawEval();
 
 
-    public Board executeTurn(MovePosition movePosition, final Board board) {
+    public Board executeTurn(final Board board,MovePosition movePosition) {
 
         // Update the TicTacToeBoard first
         int moveNumber = board.getMoveNumber() + 1;

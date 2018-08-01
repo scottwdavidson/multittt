@@ -25,4 +25,26 @@ public class MovePosition {
 	public int getPosition() {
 		return position;
 	}
+
+	@Override
+    public boolean equals(Object o){
+        MovePosition comparator = (MovePosition)o;
+        return (this.position == comparator.getPosition() && this.ticTacToeBoardIndex == comparator.getTicTacToeBoardIndex());
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 3;
+        hash = 53 * hash + this.position;
+        hash = 53 * hash + this.ticTacToeBoardIndex;
+        return hash;
+    }
+
+    @Override
+    public String toString() {
+        return "MP{" +
+                "ticTacToeBoardIndex=" + ticTacToeBoardIndex +
+                ", position=" + position +
+                '}';
+    }
 }

@@ -37,7 +37,7 @@ public class HumanVHuman {
             MovePosition movePosition = solicitMove(board);
 
             // Make the move
-            board = turn.executeTurn(movePosition, board);
+            board = turn.executeTurn(board, movePosition);
 
         }
         // Game Loop ( End )
