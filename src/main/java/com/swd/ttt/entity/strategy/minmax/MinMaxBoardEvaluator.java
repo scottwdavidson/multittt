@@ -58,7 +58,7 @@ public class MinMaxBoardEvaluator extends BoardEvaluator {
     }
 
     @Override
-    protected Evaluation evaluateRelativeValue(Player rootPlayer, TicTacToeBoard ticTacToeBoard) {
+    protected Evaluation evaluateTTTBoardRelativeValue(Player rootPlayer, TicTacToeBoard ticTacToeBoard) {
         return null;
     }
 

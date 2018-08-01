@@ -84,7 +84,6 @@ public abstract class BoardEvaluator {
     }
 
     public BoardEvaluator(Board board) {
-
     }
 
     public int evaluate(Player rootPlayer, Board board) {
@@ -123,7 +122,7 @@ public abstract class BoardEvaluator {
     /**
      * Evaluate the core ( that is, the non active TTT boards which aren't changing ), storing the result in the
      * core Evaluation member variable. This is not an absolute value b/c an absolute value can't be computed until
-     * the
+     * the all boards (including the active board is evaluated).
      */
     protected Evaluation evaluateCoreBoard(Player rootPlayer, Board board) {
 
@@ -160,7 +159,7 @@ public abstract class BoardEvaluator {
 
         // Delegate to concrete Strategic Board Evaluator for relative values
         else {
-            evaluation = evaluateRelativeValue(rootPlayer, tictactoeBoard);
+            evaluation = evaluateTTTBoardRelativeValue(rootPlayer, tictactoeBoard);
         }
 
         return evaluation;
@@ -184,5 +183,5 @@ public abstract class BoardEvaluator {
     /**
      * Depending on the specific strategy, evaluate the non Win / non Draw TTT board
      */
-    protected abstract Evaluation evaluateRelativeValue(Player rootPlayer, TicTacToeBoard ticTacToeBoard);
+    protected abstract Evaluation evaluateTTTBoardRelativeValue(Player rootPlayer, TicTacToeBoard ticTacToeBoard);
 }
