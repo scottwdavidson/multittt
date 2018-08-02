@@ -31,8 +31,6 @@ public class MinMaxStrategy implements Strategy {
         // Create the Tree
         createNextLevelMinMaxNodes(board.getActivePlayer(), rootMinMaxNode, board, 5);
 
-//        System.out.println("NODE TREE: \n" + rootTreeToString(rootMinMaxNode));
-
         // Evaluate the Tree ( resulting in the root node have an evaluation )
         evaluateTree(board.getActivePlayer(), rootMinMaxNode);
 
@@ -128,9 +126,9 @@ public class MinMaxStrategy implements Strategy {
     }
 
 
-    private MovePosition getHighestValueMovePosition(MinMaxNode root) {
-        return null;
-    }
+//    private MovePosition getHighestValueMovePosition(MinMaxNode root) {
+//        return null;
+//    }
 
     /**
      * Breadth first String representation of the Node Tree

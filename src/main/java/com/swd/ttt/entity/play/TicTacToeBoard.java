@@ -43,14 +43,11 @@ public class TicTacToeBoard {
 
     public List<MovePosition> movePositions(){
 
-        // TODO Dylan to implement
-    	
     	List<MovePosition> moveList = new ArrayList<>();
     	
     	for(int i=0; i<cells.length; i++){
     		if(cells[i].getPlayer() == Player.None){
-    			MovePosition newMove = MovePosition.newMovePosition(this.index, i);
-    			moveList.add(newMove);
+    			moveList.add(MovePosition.newMovePosition(this.index, i));
     		}
     	}
     	
