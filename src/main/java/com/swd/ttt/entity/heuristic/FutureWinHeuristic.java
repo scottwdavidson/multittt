@@ -21,9 +21,9 @@ public class FutureWinHeuristic extends AbstractSingleHeuristic {
                               Player activePlayer, Player opponent) {
 
         // Get single row, column and diagonal and then intersect them
-        Set<Integer> rowMoves = singleRowHeuristic.moves(tictactoeBoard, activePlayer, opponent));
-        Set<Integer> columnMoves = singleColumnHeuristic.moves(tictactoeBoard, activePlayer, opponent));
-        Set<Integer> diagonalMoves = singleDiagonalHeuristic.moves(tictactoeBoard, activePlayer, opponent));
+        Set<Integer> rowMoves = singleRowHeuristic.moves(tictactoeBoard, activePlayer, opponent);
+        Set<Integer> columnMoves = singleColumnHeuristic.moves(tictactoeBoard, activePlayer, opponent);
+        Set<Integer> diagonalMoves = singleDiagonalHeuristic.moves(tictactoeBoard, activePlayer, opponent);
 
         // Perform intersections
         Set<Integer> rowColmnIntersectionsMoves = new HashSet<>(rowMoves);

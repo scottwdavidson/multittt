@@ -70,6 +70,10 @@ public class MinMaxBoardEvaluator extends BoardEvaluator {
     	Collections.sort(RELATIVE_EVALS);
     }
 
+    public MinMaxBoardEvaluator(){
+    	super();
+	}
+
     /**
      * The whole TTT board is worth 99 points ( e.g., 9 plusWins ). As plusDraws are introduced, plusWins (and conversely plusLosses)
      * become more valuable ( more negative valued ) as we keep the overall board value at 99.

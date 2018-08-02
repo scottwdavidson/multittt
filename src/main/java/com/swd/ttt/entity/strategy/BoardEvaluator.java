@@ -83,9 +83,6 @@ public abstract class BoardEvaluator {
         this.coreBoard = null;
     }
 
-    public BoardEvaluator(Board board) {
-    }
-
     public int evaluate(Player rootPlayer, Board board) {
 
         // Assign ( and update if necessary ) the core board and its evaluation
