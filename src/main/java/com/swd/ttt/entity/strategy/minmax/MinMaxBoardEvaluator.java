@@ -1,5 +1,16 @@
 package com.swd.ttt.entity.strategy.minmax;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import com.swd.ttt.entity.eval.EmptyEval;
+import com.swd.ttt.entity.eval.Eval;
+import com.swd.ttt.entity.eval.MultiPlayFutureWinEval;
+import com.swd.ttt.entity.eval.MultiSingleRowColumnDiagonalEval;
+import com.swd.ttt.entity.eval.PreMultiPlayFutureWinEval;
+import com.swd.ttt.entity.eval.SinglePlayFutureWinEval;
+import com.swd.ttt.entity.eval.SingleRowColumnDiagonalEval;
 import com.swd.ttt.entity.play.Player;
 import com.swd.ttt.entity.play.TicTacToeBoard;
 import com.swd.ttt.entity.strategy.BoardEvaluator;
@@ -15,8 +26,49 @@ import com.swd.ttt.entity.strategy.BoardEvaluator;
 // TODO Scott update description to account for abastract ( and concrete class approach )
 
 public class MinMaxBoardEvaluator extends BoardEvaluator {
+	
+	public static class RelativeEval implements Comparable<RelativeEval>{
+		
+		private final Eval eval;
+		private final int value;
+		
+		public static RelativeEval newRelativeEval(Eval eval, int value){
+			return new RelativeEval(eval, value);
+		}
+		
+		private RelativeEval(Eval eval, int value){
+			this.eval = eval;
+			this.value = value;
+		}
+
+		@Override
+		public int compareTo(RelativeEval o) {
+			// TODO Auto-generated method stub
+			return Integer.valueOf(o.value).compareTo(this.value);
+		}
+		
+		public Eval getEval() {
+			return eval;
+		}
+
+		public int getValue() {
+			return value;
+		}
+	}
 
     private final static int OVERALL_TTT_BOARD_VALUATION = 99;
+    
+    private final static List<RelativeEval> RELATIVE_EVALS = new ArrayList<>();
+    
+    static {
+    	RELATIVE_EVALS.add(RelativeEval.newRelativeEval(new MultiPlayFutureWinEval(), 6));
+    	RELATIVE_EVALS.add(RelativeEval.newRelativeEval(new SinglePlayFutureWinEval(), 5));
+    	RELATIVE_EVALS.add(RelativeEval.newRelativeEval(new PreMultiPlayFutureWinEval(), 4));
+    	RELATIVE_EVALS.add(RelativeEval.newRelativeEval(new MultiSingleRowColumnDiagonalEval(), 2));
+    	RELATIVE_EVALS.add(RelativeEval.newRelativeEval(new SingleRowColumnDiagonalEval(), 1));
+    	RELATIVE_EVALS.add(RelativeEval.newRelativeEval(new EmptyEval(), 0));
+    	Collections.sort(RELATIVE_EVALS);
+    }
 
     /**
      * The whole TTT board is worth 99 points ( e.g., 9 plusWins ). As plusDraws are introduced, plusWins (and conversely plusLosses)
@@ -59,6 +111,17 @@ public class MinMaxBoardEvaluator extends BoardEvaluator {
 
     @Override
     protected Evaluation evaluateTTTBoardRelativeValue(Player rootPlayer, TicTacToeBoard ticTacToeBoard) {
+    	Evaluation result = new Evaluation();
+    	MultiPlayFutureWinEval multiPlay = new MultiPlayFutureWinEval();
+    	SinglePlayFutureWinEval singlePlay = new SinglePlayFutureWinEval();
+    	
+    	List<RelativeEval> relativeEvals = new ArrayList<RelativeEval>();
+    	
+    	
+    	
+    	if(multiPlay.evaluationMatches(ticTacToeBoard, rootPlayer, rootPlayer.opponent())){
+    	}else if(singlePlay.evaluationMatches(ticTacToeBoard, rootPlayer, rootPlayer.opponent()));
+    	
         return null;
     }
 
