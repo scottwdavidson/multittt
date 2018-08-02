@@ -111,18 +111,18 @@ public class MinMaxBoardEvaluator extends BoardEvaluator {
 
     @Override
     protected Evaluation evaluateTTTBoardRelativeValue(Player rootPlayer, TicTacToeBoard ticTacToeBoard) {
-    	Evaluation result = new Evaluation();
-    	MultiPlayFutureWinEval multiPlay = new MultiPlayFutureWinEval();
-    	SinglePlayFutureWinEval singlePlay = new SinglePlayFutureWinEval();
+    	Evaluation evaluation = new Evaluation();
     	
-    	List<RelativeEval> relativeEvals = new ArrayList<RelativeEval>();
+    	for(RelativeEval relativeEval : RELATIVE_EVALS){
+    		if(relativeEval.getEval().evaluationMatches(ticTacToeBoard, rootPlayer, rootPlayer.opponent())){
+    			return evaluation.relativeValues(relativeEval.getValue());
+    		}
+    		if(relativeEval.getEval().evaluationMatches(ticTacToeBoard, rootPlayer.opponent(), rootPlayer)){
+    			return evaluation.relativeValues(-1 * relativeEval.getValue());
+    		}
+    	}
     	
-    	
-    	
-    	if(multiPlay.evaluationMatches(ticTacToeBoard, rootPlayer, rootPlayer.opponent())){
-    	}else if(singlePlay.evaluationMatches(ticTacToeBoard, rootPlayer, rootPlayer.opponent()));
-    	
-        return null;
+    	return evaluation.relativeValues(0);
     }
 
 }
