@@ -4,6 +4,7 @@ import com.swd.ttt.entity.*;
 import com.swd.ttt.entity.eval.DrawEval;
 import com.swd.ttt.entity.eval.WinEval;
 import com.swd.ttt.entity.play.Board;
+import com.swd.ttt.entity.play.GameState;
 import com.swd.ttt.entity.play.MovePosition;
 import com.swd.ttt.entity.play.Player;
 
@@ -47,7 +48,7 @@ public class MinMaxStrategy implements Strategy {
 
     private void createNextLevelMinMaxNodes(Player rootPlayer, MinMaxNode parent, Board board, int levels) {
 
-        if ( levels == 0 ){
+        if (levels == 0) {
             return;
         }
 
@@ -68,22 +69,19 @@ public class MinMaxStrategy implements Strategy {
 
             // If a leaf *or* an overall win *or* an overall draw, evaluate the board and break recursive loop
             int boardEvaluation = 0;
-//            boolean done = false;
-            if ( (levels == 1) ){
-//                if ( (levels == 1) ||
-//                        winEval.evaluationMatches(newBoard.getTttBoards()[movePosition.getTicTacToeBoardIndex()], rootPlayer, rootPlayer.opponent()) ||
-//                        drawEval.evaluationMatches(newBoard.getTttBoards()[movePosition.getTicTacToeBoardIndex()], rootPlayer, rootPlayer.opponent())){
+            boolean done = false;
+            if ((levels == 1) || (newBoard.getGameState() == GameState.Closed)) {
                 boardEvaluation = this.minMaxBoardEvaluator.evaluate(rootPlayer, newBoard);
-//                done = true;
+                done = true;
             }
 
             MinMaxNode minMaxNodeChild = MinMaxNode.newMinMaxNode(parent,
                     parent.getMinMax().next(), movePosition, boardEvaluation);
 
-            // Recursively create the next level node for this child
-//            if ( !done ) {
+            // Recursively create the next level node for this child ( if not done )
+            if (!done) {
                 createNextLevelMinMaxNodes(rootPlayer, minMaxNodeChild, newBoard, levels - 1);
-//            }
+            }
         }
     }
 
@@ -100,6 +98,11 @@ public class MinMaxStrategy implements Strategy {
             // Assign the evaluation value of the children to this node
             MinMaxNode minMaxEvalValue = childrenEvaluation(minMaxNode, minMaxNode.getChildren().get(0).getMinMax());
             minMaxNode.setBoardEvaluation(minMaxEvalValue.getBoardEvaluation());
+
+            // If root node, also add the MovePosition
+            if (minMaxNode.getMinMax() == MinMaxNode.MinMax.ROOT) {
+                minMaxNode.setMovePosition(minMaxEvalValue.getMovePosition());
+            }
         }
     }
 
