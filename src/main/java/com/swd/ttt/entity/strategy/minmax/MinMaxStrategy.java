@@ -9,6 +9,7 @@ import com.swd.ttt.entity.play.MovePosition;
 import com.swd.ttt.entity.play.Player;
 
 import java.util.List;
+import java.util.Random;
 
 public class MinMaxStrategy implements Strategy {
 
@@ -16,6 +17,7 @@ public class MinMaxStrategy implements Strategy {
     private final MinMaxBoardEvaluator minMaxBoardEvaluator = new MinMaxBoardEvaluator();  // TODO Autowire
     private final WinEval winEval = new WinEval();  // TODO Autowire
     private final DrawEval drawEval = new DrawEval();
+    private final Random RANDOM = new Random( 99991);
 
     @Override
     public List<Heuristic> prioritizedAutomatonHeuristics() {
@@ -34,7 +36,7 @@ public class MinMaxStrategy implements Strategy {
         MinMaxNode rootMinMaxNode = MinMaxNode.newRootMinMaxNode();
 
         // Create the Tree
-        createNextLevelMinMaxNodes(board.getActivePlayer(), rootMinMaxNode, board, 3);
+        createNextLevelMinMaxNodes(board.getActivePlayer(), rootMinMaxNode, board, 5);
 
         // Evaluate the Tree ( resulting in the root node have an evaluation )
         evaluateTree(board.getActivePlayer(), rootMinMaxNode);
@@ -120,7 +122,8 @@ public class MinMaxStrategy implements Strategy {
      * Find and return the maximum value of the children nodes
      */
     private MinMaxNode maxEvaluation(MinMaxNode parent) {
-        MinMaxNode maxValue = parent.getChildren().get(0);
+        int randomStartIndex = RANDOM.nextInt(parent.getChildren().size());
+        MinMaxNode maxValue = parent.getChildren().get(randomStartIndex);
         for (MinMaxNode child : parent.getChildren()) {
             if (child.getBoardEvaluation() > maxValue.getBoardEvaluation()) {
                 maxValue = child;
@@ -133,7 +136,8 @@ public class MinMaxStrategy implements Strategy {
      * Find and return the minimum value of the children nodes
      */
     private MinMaxNode minEvaluation(MinMaxNode parent) {
-        MinMaxNode minValue = parent.getChildren().get(0);
+        int randomStartIndex = RANDOM.nextInt(parent.getChildren().size());
+        MinMaxNode minValue = parent.getChildren().get(randomStartIndex);
         for (MinMaxNode child : parent.getChildren()) {
             if (child.getBoardEvaluation() < minValue.getBoardEvaluation()) {
                 minValue = child;
