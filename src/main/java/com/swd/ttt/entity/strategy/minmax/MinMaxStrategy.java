@@ -1,6 +1,8 @@
 package com.swd.ttt.entity.strategy.minmax;
 
 import com.swd.ttt.entity.*;
+import com.swd.ttt.entity.eval.DrawEval;
+import com.swd.ttt.entity.eval.WinEval;
 import com.swd.ttt.entity.play.Board;
 import com.swd.ttt.entity.play.MovePosition;
 import com.swd.ttt.entity.play.Player;
@@ -11,6 +13,8 @@ public class MinMaxStrategy implements Strategy {
 
     private final Turn turn = new Turn();  // TODO Autowire Turn instance
     private final MinMaxBoardEvaluator minMaxBoardEvaluator = new MinMaxBoardEvaluator();  // TODO Autowire
+    private final WinEval winEval = new WinEval();  // TODO Autowire
+    private final DrawEval drawEval = new DrawEval();
 
     @Override
     public List<Heuristic> prioritizedAutomatonHeuristics() {
@@ -29,7 +33,7 @@ public class MinMaxStrategy implements Strategy {
         MinMaxNode rootMinMaxNode = MinMaxNode.newRootMinMaxNode();
 
         // Create the Tree
-        createNextLevelMinMaxNodes(board.getActivePlayer(), rootMinMaxNode, board, 5);
+        createNextLevelMinMaxNodes(board.getActivePlayer(), rootMinMaxNode, board, 3);
 
         // Evaluate the Tree ( resulting in the root node have an evaluation )
         evaluateTree(board.getActivePlayer(), rootMinMaxNode);
@@ -43,7 +47,7 @@ public class MinMaxStrategy implements Strategy {
 
     private void createNextLevelMinMaxNodes(Player rootPlayer, MinMaxNode parent, Board board, int levels) {
 
-        if (levels == 0) {
+        if ( levels == 0 ){
             return;
         }
 
@@ -59,32 +63,43 @@ public class MinMaxStrategy implements Strategy {
         //  4. Recursively create the next level ( make sure to decrement levels and flip MinMax )
         for (MovePosition movePosition : movePositions) {
 
-            // Create new board by applying move, evaluate the new board (if a leaf) and generate child MinMaxNode
+            // Create new board by applying move
             Board newBoard = this.turn.executeTurn(board, movePosition);
+
+            // If a leaf *or* an overall win *or* an overall draw, evaluate the board and break recursive loop
             int boardEvaluation = 0;
-            if (levels == 1) {
+//            boolean done = false;
+            if ( (levels == 1) ){
+//                if ( (levels == 1) ||
+//                        winEval.evaluationMatches(newBoard.getTttBoards()[movePosition.getTicTacToeBoardIndex()], rootPlayer, rootPlayer.opponent()) ||
+//                        drawEval.evaluationMatches(newBoard.getTttBoards()[movePosition.getTicTacToeBoardIndex()], rootPlayer, rootPlayer.opponent())){
                 boardEvaluation = this.minMaxBoardEvaluator.evaluate(rootPlayer, newBoard);
+//                done = true;
             }
+
             MinMaxNode minMaxNodeChild = MinMaxNode.newMinMaxNode(parent,
                     parent.getMinMax().next(), movePosition, boardEvaluation);
 
             // Recursively create the next level node for this child
-            createNextLevelMinMaxNodes(rootPlayer, minMaxNodeChild, newBoard, levels - 1);
+//            if ( !done ) {
+                createNextLevelMinMaxNodes(rootPlayer, minMaxNodeChild, newBoard, levels - 1);
+//            }
         }
     }
 
     private void evaluateTree(Player rootPlayer, MinMaxNode minMaxNode) {
 
-        // Leaf node - just return so actual min/max evaluation can start
+        // If Leaf node - just return so actual min/max evaluation can start
         if (!minMaxNode.getChildren().isEmpty()) {
 
+            // Recursively iterate through all of the children of the current node to get them evaluated
             for (MinMaxNode child : minMaxNode.getChildren()) {
                 evaluateTree(rootPlayer, child);
             }
 
+            // Assign the evaluation value of the children to this node
             MinMaxNode minMaxEvalValue = childrenEvaluation(minMaxNode, minMaxNode.getChildren().get(0).getMinMax());
             minMaxNode.setBoardEvaluation(minMaxEvalValue.getBoardEvaluation());
-            minMaxNode.setMovePosition(minMaxEvalValue.getMovePosition());
         }
     }
 
@@ -125,10 +140,6 @@ public class MinMaxStrategy implements Strategy {
         return minValue;
     }
 
-
-//    private MovePosition getHighestValueMovePosition(MinMaxNode root) {
-//        return null;
-//    }
 
     /**
      * Breadth first String representation of the Node Tree
