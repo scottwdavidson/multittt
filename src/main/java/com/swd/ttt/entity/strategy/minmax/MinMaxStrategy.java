@@ -36,7 +36,7 @@ public class MinMaxStrategy implements Strategy {
         MinMaxNode rootMinMaxNode = MinMaxNode.newRootMinMaxNode();
 
         // Create the Tree
-        createNextLevelMinMaxNodes(board.getActivePlayer(), rootMinMaxNode, board, 5);
+        createNextLevelMinMaxNodes(board.getActivePlayer(), rootMinMaxNode, board, 7);
 
         // Evaluate the Tree ( resulting in the root node have an evaluation )
         evaluateTree(board.getActivePlayer(), rootMinMaxNode);
@@ -56,6 +56,9 @@ public class MinMaxStrategy implements Strategy {
 
         // Get the set of all available MovePositions from the Board
         List<MovePosition> movePositions = board.activeTttBoardMovePositions();
+        
+        //If there are > 6 moves, delete extras
+        movePositions = adjustMovePositions(movePositions);
 
         // For each MovePosition
         //  1. Execute a turn on the Board for each MovePosition
@@ -179,6 +182,17 @@ public class MinMaxStrategy implements Strategy {
         }
 
         return builder.toString();
+    }
+    
+    private List<MovePosition> adjustMovePositions(List<MovePosition> movePositions){
+    	if(movePositions.size() > 6){
+    		int numberMovesToDrop = movePositions.size() - 7;
+    		for(int i=0; i<numberMovesToDrop; i++){
+    			int nextRandomIndex = RANDOM.nextInt(movePositions.size());
+    			movePositions.remove(nextRandomIndex);
+    		}
+    	}
+    	return movePositions;
     }
 
 }

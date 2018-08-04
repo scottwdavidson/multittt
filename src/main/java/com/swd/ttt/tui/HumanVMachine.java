@@ -30,10 +30,11 @@ public class HumanVMachine {
 
         // ***********************
         // Game Loop ( Start )
+        long machineMoveRuntimeMillis = -1;
         while (board.getGameState() == GameState.Open){
 
             // Display current board
-            System.out.println(Presentation.presentation(board));
+            System.out.println(Presentation.presentation(board, machineMoveRuntimeMillis));
 
             // Solicit move from active player
             MovePosition movePosition = solicitMove(board);
@@ -48,9 +49,12 @@ public class HumanVMachine {
 
             // Display current board
             System.out.println(Presentation.presentation(board));
-
+            
             // Machine move
+            long start = System.currentTimeMillis();
             board = minMaxStrategy.executeMove(board);
+            long end = System.currentTimeMillis();
+            machineMoveRuntimeMillis = end - start;
 
         }
         // Game Loop ( End )
