@@ -19,17 +19,21 @@ public class Presentation {
 
     final static String BOARD_METADATA_HEADER_HORIZONTAL = "--------------------------------------------------";
     final static String BOARD_METADATA_HEADER_VERTICAL = "|                                                |";
+    
+    private final static long NO_MACHINE_RUNTIME = -1;
 
-    public static String presentation(Board board) {
+    public static String presentation(Board board, long machineMoveRuntimeMillis) {
 
         StringBuilder builder = new StringBuilder();
 
         {
+        	String machineRuntime = (machineMoveRuntimeMillis == NO_MACHINE_RUNTIME) ? "" : "  [" + machineMoveRuntimeMillis + "ms]";
+        	
             builder.append(BOARD_METADATA_HEADER_HORIZONTAL).append(NEW_LINE);
             builder.append(BOARD_METADATA_HEADER_VERTICAL).append(NEW_LINE);
             builder.append(BOARD_METADATA_HEADER_VERTICAL).append(NEW_LINE);
             builder.append("| ID: ").append(board.getId()).append("  ");
-            builder.append("| Move Number: ").append(board.getMoveNumber()).append(NEW_LINE);
+            builder.append("| Move Number: ").append(board.getMoveNumber()).append(machineRuntime).append(NEW_LINE);
             builder.append("| Active Player: ").append(board.getActivePlayer().name()).append("   ");
             builder.append("| Active TTT Board: ").append(board.getActiveTicTacToeBoardIndex()).append(NEW_LINE);
             builder.append("| Game State: ").append(board.getGameState()).append("   ");
@@ -80,6 +84,10 @@ public class Presentation {
         }
 
         return builder.toString();
+    }
+    
+    public static String presentation(Board board){
+    	return presentation(board, NO_MACHINE_RUNTIME);
     }
 
 
