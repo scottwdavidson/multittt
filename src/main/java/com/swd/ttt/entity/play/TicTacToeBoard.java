@@ -1,7 +1,9 @@
 package com.swd.ttt.entity.play;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TicTacToeBoard {
 
@@ -52,6 +54,18 @@ public class TicTacToeBoard {
     	}
     	
         return moveList;
+    }
+    
+    public Set<Integer> playedMoves(Player player){
+    	Set<Integer> playedMoves = new HashSet<>();
+    	
+    	for(int i=0; i<cells.length; i++){
+    		if(cells[i].getPlayer() == player){
+    			playedMoves.add(i);
+    		}
+    	}
+    	
+    	return playedMoves;
     }
 
     /**
