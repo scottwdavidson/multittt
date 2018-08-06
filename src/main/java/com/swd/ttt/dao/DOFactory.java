@@ -15,8 +15,10 @@ public class DOFactory {
         board.setScore(generateScoreDO(boardEntity.getScore()));
         board.setGameState(boardEntity.getGameState().name());
         board.setWinningPlayer(boardEntity.getWinningPlayer().name());
-        board.setId(boardEntity.getId());
 
+        for(com.swd.ttt.entity.play.TicTacToeBoard ticTacToeBoardEntity: boardEntity.getTttBoards()){
+            board.getTttBoards().add(generateTttBoardDO(ticTacToeBoardEntity));
+        }
         return board;
 
     }

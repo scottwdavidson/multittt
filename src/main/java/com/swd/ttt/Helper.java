@@ -9,4 +9,7 @@ public interface Helper {
     Board move(String boardId, Move move);
 
     Board newGame(int activeTicTacToeBoard);
+
+    Board getLatest(int boardId);
+
 }

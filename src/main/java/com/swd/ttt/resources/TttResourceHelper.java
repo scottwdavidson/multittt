@@ -40,4 +40,23 @@ public class TttResourceHelper implements Helper {
         com.swd.ttt.entity.play.Board boardEntity = this.service.newGame(activeTicTacToeBoard);
         return DtoFactory.generateBoardDto(boardEntity);
     }
+
+    public Board getLatest(int boardId) {
+
+        try {
+
+            com.swd.ttt.entity.play.Board boardEntity = this.service.getLatest(boardId);
+            return DtoFactory.generateBoardDto(boardEntity);
+
+//            throw new IllegalArgumentException("Testing IAE ... ");
+//            com.swd.ttt.entity.play.Board boardEntity = this.service.move(boardId, move.getPlayer(), move.getTictactoeBoardIndex(), move.getBoardPosition());
+//            return DtoFactory.generateTicTacToeBoardDto(boardEntity);
+
+        } catch (Throwable cause) {
+
+            throw new WebApplicationException(cause.getMessage(), cause, Response.status(
+                    Response.Status.INTERNAL_SERVER_ERROR).build());
+        }
+    }
+
 }

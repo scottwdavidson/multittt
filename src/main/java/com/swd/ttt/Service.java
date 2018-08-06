@@ -15,4 +15,9 @@ public interface Service {
      */
     Board move(String boardId, String player, int tictactoeBoardIndex, int boardPosition);
 
+    /**
+     * Get the latest board for the provided id
+     */
+    Board getLatest(int boardId);
+
 }

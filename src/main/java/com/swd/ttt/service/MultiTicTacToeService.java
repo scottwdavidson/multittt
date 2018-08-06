@@ -30,4 +30,12 @@ public class MultiTicTacToeService implements Service {
         return board;
     }
 
+    @Override
+    public Board getLatest(int boardId) {
+        Board board = this.boardDao.retrieve(boardId);
+        return board;
+    }
+
+
+
 }

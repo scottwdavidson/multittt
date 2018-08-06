@@ -69,4 +69,21 @@ public class TttResource {
         }
     }
 
+    @GET
+    @Path("/board/{boardId}/latest")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Board getLatest(@PathParam("boardId") int boardId){
+
+        try {
+            return this.tttResourceHelper.getLatest(boardId);
+        } catch ( WebApplicationException wae ){
+            throw wae;
+        } catch (Throwable cause) {
+
+            throw new WebApplicationException(cause, Response.status(
+                    Response.Status.INTERNAL_SERVER_ERROR).build());
+        }
+    }
+
 }
