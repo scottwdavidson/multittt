@@ -11,7 +11,7 @@ public class EntityFactory {
 
         com.swd.ttt.entity.play.Score scoreEntity = generateScoreEntity(boardDO.getScore());
         com.swd.ttt.entity.play.Board boardEntity = com.swd.ttt.entity.play.Board.initialBoard(
-                boardDO.getId(),
+                boardDO.getBoardId(),
                 boardDO.getMoveNumber(),
                 Player.valueOf(boardDO.getActivePlayer()),
                 boardDO.getActiveTicTacToeBoardIndex(),

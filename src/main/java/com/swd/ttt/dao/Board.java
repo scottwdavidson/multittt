@@ -1,6 +1,9 @@
 package com.swd.ttt.dao;
 
 import com.swd.ttt.entity.play.*;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,9 +12,12 @@ import java.util.List;
 /**
  * Represents the overall playing board for the Multi Tic Tac Toe game.
  */
+@Document(collection = "board")
 public class Board {
 
-    private int id;
+    @Id
+    private ObjectId id;
+    private int boardId;
     private int moveNumber;
     private String activePlayer;
     private int activeTicTacToeBoardIndex;
@@ -20,12 +26,20 @@ public class Board {
     private String winningPlayer;
     private List<TicTacToeBoard> tttBoards = new ArrayList<>();
 
-    public int getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(ObjectId id) {
         this.id = id;
+    }
+
+    public int getBoardId() {
+        return boardId;
+    }
+
+    public void setBoardId(int boardId) {
+        this.boardId = boardId;
     }
 
     public int getMoveNumber() {

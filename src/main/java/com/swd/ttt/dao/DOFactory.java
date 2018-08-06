@@ -8,7 +8,7 @@ public class DOFactory {
 
         Board board = new Board();
 
-        board.setId(boardEntity.getId());
+        board.setBoardId(boardEntity.getId());
         board.setMoveNumber(boardEntity.getMoveNumber());
         board.setActivePlayer(boardEntity.getActivePlayer().name());
         board.setActiveTicTacToeBoardIndex(boardEntity.getActiveTicTacToeBoardIndex());

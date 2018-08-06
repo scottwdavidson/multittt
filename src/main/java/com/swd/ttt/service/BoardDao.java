@@ -13,7 +13,12 @@ public interface BoardDao {
     void persist(Board board);
 
     /**
-     * Retrieve the requested Board
+     * Retrieve the requested Board ( the latest played )
      */
     Board retrieve(int id);
+
+    /**
+     * Get the latest move number from the provided game id
+     */
+    int latestMoveNumber(int id);
 }
