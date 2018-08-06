@@ -1,8 +1,10 @@
 package com.swd.ttt.resources;
 
+import com.swd.ttt.Helper;
 import com.swd.ttt.Service;
 import com.swd.ttt.entity.play.Player;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -10,16 +12,20 @@ import javax.ws.rs.core.Response;
 /**
  * Helper class to handle the basic delegation of this request to the *Interactor*.
  */
-public class TttResourceHelper {
+@Component
+public class TttResourceHelper implements Helper {
 
     @Autowired
-    Service service;
+    private Service service;
 
     public Board move(String boardId, Move move) {
 
         try {
 
-            throw new IllegalArgumentException("Testing IAE ... ");
+            com.swd.ttt.entity.play.Board boardEntity = this.service.move(boardId, move.getPlayer(), move.getTictactoeBoardIndex(), move.getBoardPosition());
+            return DtoFactory.generateBoardDto(boardEntity);
+
+//            throw new IllegalArgumentException("Testing IAE ... ");
 //            com.swd.ttt.entity.play.Board boardEntity = this.service.move(boardId, move.getPlayer(), move.getTictactoeBoardIndex(), move.getBoardPosition());
 //            return DtoFactory.generateTicTacToeBoardDto(boardEntity);
 
@@ -31,6 +37,7 @@ public class TttResourceHelper {
     }
 
     public Board newGame(int activeTicTacToeBoard) {
-        return DtoFactory.generateTicTacToeBoardDto(com.swd.ttt.entity.play.Board.initialBoard(1000, Player.X, activeTicTacToeBoard));
+        com.swd.ttt.entity.play.Board boardEntity = this.service.newGame(activeTicTacToeBoard);
+        return DtoFactory.generateBoardDto(boardEntity);
     }
 }

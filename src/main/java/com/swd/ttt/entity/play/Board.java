@@ -17,8 +17,6 @@ public class Board {
     private final Player winningPlayer;
     private final TicTacToeBoard[] tttBoards = new TicTacToeBoard[9];
 
-    // TODO Create a factory method to create an initial board ( id and moveNumber should probably be immutable )
-
     /**
      * Factory method for creating the initial board
      */
@@ -30,6 +28,16 @@ public class Board {
         }
         return initialBoard;
     }
+
+    /**
+     * RESTRICTED FACTORY METHOD! This factory method is to *only* be used for persistence classes which need to a Board object from
+     * a datastore.
+     */
+    // TODO Scott is there a way to get around this issue (i.e., keep Board immutability and managed factory but also support DAO?
+    public static Board initialBoard(int id, int moveNumber, Player activePlayer, int activeTicTacToeBoardIndex, Score score, GameState gameState, Player winningPlayer) {
+        return new Board(id, moveNumber, activePlayer,activeTicTacToeBoardIndex, score, gameState, winningPlayer);
+    }
+
 
     /**
      * Creates a new Board, updating properties as specified by the arguments. Call the overloaded version which requires the Score.

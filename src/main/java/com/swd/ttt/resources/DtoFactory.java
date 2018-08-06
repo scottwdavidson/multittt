@@ -7,7 +7,7 @@ import com.swd.ttt.entity.play.Cell;
  */
 public class DtoFactory {
 
-    public static Board generateTicTacToeBoardDto(com.swd.ttt.entity.play.Board boardEntity) {
+    public static Board generateBoardDto(com.swd.ttt.entity.play.Board boardEntity) {
 
         Board board = new Board();
 

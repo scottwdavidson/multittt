@@ -1,8 +1,14 @@
 package com.swd.ttt;
 
 import com.swd.ttt.entity.play.Board;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public interface Service {
+
+    /**
+     * Generate new game Board
+     */
+    Board newGame(int activeTicTacToeBoard);
 
     /**
      * Perform a move against the identified board.

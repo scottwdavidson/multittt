@@ -1,5 +1,7 @@
 package com.swd.ttt.resources;
 
+import com.swd.ttt.Helper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,21 +19,29 @@ import java.io.IOException;
 @Path("/")
 public class TttResource {
 
-    private final TttResourceHelper tttResourceHelper = new TttResourceHelper();
+    @Autowired
+    private Helper tttResourceHelper;
 
     @GET
     @Path("/hello")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public String hello(){
         return "Hello --- from DEMO !!";
     }
 
-    @POST
+    @GET
     @Path("/boards/{activeTicTacToeBoard}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Board newGame(@PathParam("activeTicTacToeBoard") int activeTicTacToeBoard){
 
         try {
+            System.out.println("----- HHHHHEEEEERRRRREEEE ");
+            System.out.println("----- HHHHHEEEEERRRRREEEE ");
+            System.out.println("----- HHHHHEEEEERRRRREEEE ");
+            System.out.println("----- HHHHHEEEEERRRRREEEE ");
+            System.out.println("----- HHHHHEEEEERRRRREEEE ");
             return this.tttResourceHelper.newGame(activeTicTacToeBoard);
         } catch ( WebApplicationException wae ){
             throw wae;
