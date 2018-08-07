@@ -110,7 +110,10 @@ public abstract class BoardEvaluator {
     protected void assignCoreBoard(Player rootPlayer, Board coreBoard) {
 
         // If same core, nothing to do ...
-        if (this.coreBoard == null || this.coreBoard.getId() != coreBoard.getId()) {
+        if (this.coreBoard != null && (this.coreBoard.getId() == coreBoard.getId() && this.coreBoard.getMoveNumber() == coreBoard.getMoveNumber())) {
+            ;
+        }
+        else {
             this.coreBoard = coreBoard;
             this.coreEvaluation = evaluateCoreBoard(rootPlayer, this.coreBoard);
         }
