@@ -167,15 +167,15 @@ public class MinMaxStrategy implements Strategy {
 
     private List<MovePosition> adjustMovePositions(
             List<MovePosition> movePositions, Player rootPlayer, Board board) {
-        Set<Integer> minimizationHuristicMoves = minimizeInitialMovesHeuristic
+        Set<Integer> minimizationHeuristicMoves = minimizeInitialMovesHeuristic
                 .moves(board.getTttBoards()[board
                                 .getActiveTicTacToeBoardIndex()], rootPlayer,
                         rootPlayer.opponent());
-        if (minimizationHuristicMoves.isEmpty()) {
+        if (minimizationHeuristicMoves.isEmpty()) {
             return movePositions;
         }
-        List<Integer> minimizationHuristicMovesList = new ArrayList<>(minimizationHuristicMoves);
-        return MovePosition.newMovePositionList(board.getActiveTicTacToeBoardIndex(), minimizationHuristicMovesList);
+        List<Integer> minimizationHeuristicMovesList = new ArrayList<>(minimizationHeuristicMoves);
+        return MovePosition.newMovePositionList(board.getActiveTicTacToeBoardIndex(), minimizationHeuristicMovesList);
     }
 
 }
