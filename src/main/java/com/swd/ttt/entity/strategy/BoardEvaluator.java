@@ -23,7 +23,7 @@ public abstract class BoardEvaluator {
         public Evaluation() {
         }
 
-        public Evaluation combineEvalutions(Evaluation coreEvalution) {
+        public Evaluation combineEvaluations(Evaluation coreEvalution) {
             Evaluation combinedEvalution = new Evaluation();
             combinedEvalution.plus(this);
             combinedEvalution.plus(coreEvalution);
@@ -76,48 +76,71 @@ public abstract class BoardEvaluator {
 
     }
 
-    private Board coreBoard;
-    private Evaluation coreEvaluation;
+//    private Board coreBoard;
+//    private Evaluation coreEvaluation;
 
     public BoardEvaluator() {
-        this.coreBoard = null;
+//        this.coreBoard = null;
     }
 
     public int evaluate(Player rootPlayer, Board board) {
 
-        // Assign ( and update if necessary ) the core board and its evaluation
-        this.assignCoreBoard(rootPlayer, board);
-
-        // Evaluate the Active TTT Board and then combine it with the core evaluation
-        Evaluation activeTttBoardEvaluation = evaluateTTTBoard(rootPlayer, board.getTttBoards()[board.getActiveTicTacToeBoardIndex()]);
-        Evaluation overallBoardEvaluation = activeTttBoardEvaluation.combineEvalutions(this.coreEvaluation);
+        // Restart of this method w/out any optimizations ( which may be causing issues )
+        //
+        // Iterate through all of the boards, evaluate them and return a score
+        Evaluation summaryEvaluation = new Evaluation();
+        for(TicTacToeBoard ticTacToeBoard: board.getTttBoards()){
+            Evaluation evaluation = evaluateTTTBoard(rootPlayer, ticTacToeBoard);
+            summaryEvaluation = summaryEvaluation.combineEvaluations(evaluation);
+        }
 
         // Determine win/loss/draw relative values
-        int winRelativeValue = winValue(overallBoardEvaluation);
-        int lossRelativeValue = lossValue(overallBoardEvaluation);
-        int drawRelativeValue = drawValue(overallBoardEvaluation);
+        int winRelativeValue = winValue(summaryEvaluation);
+        int lossRelativeValue = lossValue(summaryEvaluation);
+        int drawRelativeValue = drawValue(summaryEvaluation);
 
         // Calculate the overall evaluation - sum up plusWins versus plusLosses + relative values
-        int overallBoardEvaluationValue =
-                (overallBoardEvaluation.getWins() * winRelativeValue) +
-                        (overallBoardEvaluation.getLosses() * lossRelativeValue) +
-                        (overallBoardEvaluation.getDraws() * drawRelativeValue) +
-                        (overallBoardEvaluation.getRelativeValues());
+        int summaryBoardEvaluationValue =
+                (summaryEvaluation.getWins() * winRelativeValue) +
+                        (summaryEvaluation.getLosses() * lossRelativeValue) +
+                        (summaryEvaluation.getDraws() * drawRelativeValue) +
+                        (summaryEvaluation.getRelativeValues());
 
-        return overallBoardEvaluationValue;
+        return summaryBoardEvaluationValue;
+
+//        // Assign ( and update if necessary ) the core board and its evaluation
+////        this.assignCoreBoard(rootPlayer, board);
+//
+//        // Evaluate the Active TTT Board and then combine it with the core evaluation
+//        Evaluation activeTttBoardEvaluation = evaluateTTTBoard(rootPlayer, board.getTttBoards()[board.getActiveTicTacToeBoardIndex()]);
+//        Evaluation overallBoardEvaluation = activeTttBoardEvaluation.combineEvalutions(this.coreEvaluation);
+//
+//        // Determine win/loss/draw relative values
+//        int winRelativeValue = winValue(overallBoardEvaluation);
+//        int lossRelativeValue = lossValue(overallBoardEvaluation);
+//        int drawRelativeValue = drawValue(overallBoardEvaluation);
+//
+//        // Calculate the overall evaluation - sum up plusWins versus plusLosses + relative values
+//        int overallBoardEvaluationValue =
+//                (overallBoardEvaluation.getWins() * winRelativeValue) +
+//                        (overallBoardEvaluation.getLosses() * lossRelativeValue) +
+//                        (overallBoardEvaluation.getDraws() * drawRelativeValue) +
+//                        (overallBoardEvaluation.getRelativeValues());
+//
+//        return overallBoardEvaluationValue;
     }
 
-    protected void assignCoreBoard(Player rootPlayer, Board coreBoard) {
-
-        // If same core, nothing to do ...
-        if (this.coreBoard != null && (this.coreBoard.getId() == coreBoard.getId() && this.coreBoard.getMoveNumber() == coreBoard.getMoveNumber())) {
-            ;
-        }
-        else {
-            this.coreBoard = coreBoard;
-            this.coreEvaluation = evaluateCoreBoard(rootPlayer, this.coreBoard);
-        }
-    }
+//    protected void assignCoreBoard(Player rootPlayer, Board coreBoard) {
+//
+//        // If same core, nothing to do ...
+//        if (this.coreBoard != null && (this.coreBoard.getId() == coreBoard.getId() && this.coreBoard.getMoveNumber() == coreBoard.getMoveNumber())) {
+//            ;
+//        }
+//        else {
+//            this.coreBoard = coreBoard;
+//            this.coreEvaluation = evaluateCoreBoard(rootPlayer, this.coreBoard);
+//        }
+//    }
 
     /**
      * Evaluate the core ( that is, the non active TTT boards which aren't changing ), storing the result in the
