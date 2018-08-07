@@ -6,6 +6,7 @@ import com.swd.ttt.entity.play.Board;
 import com.swd.ttt.entity.play.MovePosition;
 import com.swd.ttt.entity.play.Player;
 import com.swd.ttt.entity.play.TicTacToeBoard;
+import com.swd.ttt.entity.strategy.minmax.MinMaxNode;
 import com.swd.ttt.entity.strategy.minmax.MinMaxStrategy;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
@@ -30,7 +31,6 @@ public class MinMaxStrategyTest {
         Assert.assertNotNull( minMaxStrategy.executeMove(board) );
 
     }
-
 
     @DataProvider
     public static Object[][] testExecuteMoveData() {
