@@ -14,6 +14,7 @@ import com.swd.ttt.entity.eval.SingleRowColumnDiagonalEval;
 import com.swd.ttt.entity.play.Player;
 import com.swd.ttt.entity.play.TicTacToeBoard;
 import com.swd.ttt.entity.strategy.BoardEvaluator;
+import com.swd.ttt.entity.strategy.Evaluation;
 
 /**
  * Provides full Board evaluation logic in support of the MinMax strategy, identifying both *definite* cases and
@@ -119,14 +120,24 @@ public class MinMaxBoardEvaluator extends BoardEvaluator {
     	
     	for(RelativeEval relativeEval : RELATIVE_EVALS){
     		if(relativeEval.getEval().evaluationMatches(ticTacToeBoard, rootPlayer, rootPlayer.opponent())){
-    			return evaluation.relativeValues(relativeEval.getValue());
+    			return evaluation.plusRelativeValues(relativeEval.getValue());
     		}
     		if(relativeEval.getEval().evaluationMatches(ticTacToeBoard, rootPlayer.opponent(), rootPlayer)){
-    			return evaluation.relativeValues(-1 * relativeEval.getValue());
+    			return evaluation.plusRelativeValues(-1 * relativeEval.getValue());
     		}
     	}
     	
-    	return evaluation.relativeValues(0);
+    	return evaluation.plusRelativeValues(0);
     }
 
+    public static void main(String[] args){
+    	Evaluation evaluation = new Evaluation();
+    	evaluation = evaluation.plusWins(3);
+    	evaluation = evaluation.plusLosses(2);
+    	evaluation = evaluation.plusDraws(4);
+    	System.out.println("winValue = " + new MinMaxBoardEvaluator().winValue(evaluation));
+		System.out.println("lossValue = " + new MinMaxBoardEvaluator().lossValue(evaluation));
+		System.out.println("drawValue = " + new MinMaxBoardEvaluator().drawValue(evaluation));
+
+	}
 }

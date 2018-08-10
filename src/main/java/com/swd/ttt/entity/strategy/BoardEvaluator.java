@@ -7,74 +7,11 @@ import com.swd.ttt.entity.eval.DrawEval;
 import com.swd.ttt.entity.eval.WinEval;
 
 /**
- * Provides a general Board evaluation algorithm in the context of the provided root player, leaving the specific
+ * Provides an abstracted Board evaluation algorithm in the context of the provided root player, leaving the specific
  * calculation of a win, loss, draw or other relative score to be determined by a concrete BoardEvaluator.
  */
-
-// TODO Scott update description to account for abstract ( and concrete class approach )
 public abstract class BoardEvaluator {
 
-    public static class Evaluation {
-        private int wins = 0;
-        private int losses = 0;
-        private int draws = 0;
-        private int relativeValues = 0;
-
-        public Evaluation() {
-        }
-
-        public Evaluation combineEvaluations(Evaluation coreEvalution) {
-            Evaluation combinedEvalution = new Evaluation();
-            combinedEvalution.plus(this);
-            combinedEvalution.plus(coreEvalution);
-            return combinedEvalution;
-        }
-
-        public Evaluation plus(Evaluation evaluation){
-            this.plusWins(this.wins).plusWins(evaluation.wins);
-            this.plusLosses(this.wins).plusLosses(evaluation.wins);
-            this.plusDraws(this.wins).plusDraws(evaluation.wins);
-            this.relativeValues(this.wins).relativeValues(evaluation.wins);
-            return this;
-        }
-
-        public int getWins() {
-            return wins;
-        }
-
-        public Evaluation plusWins(int wins) {
-            this.wins += wins;
-            return this;
-        }
-
-        public int getLosses() {
-            return losses;
-        }
-
-        public Evaluation plusLosses(int losses) {
-            this.losses += losses;
-            return this;
-        }
-
-        public int getDraws() {
-            return draws;
-        }
-
-        public Evaluation plusDraws(int draws) {
-            this.draws += draws;
-            return this;
-        }
-
-        public int getRelativeValues() {
-            return relativeValues;
-        }
-
-        public Evaluation relativeValues(int relativeValues) {
-            this.relativeValues += relativeValues;
-            return this;
-        }
-
-    }
 
 //    private Board coreBoard;
 //    private Evaluation coreEvaluation;
