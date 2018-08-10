@@ -14,12 +14,12 @@ public class Evaluation implements Comparable<Evaluation> {
     public Evaluation() {
     }
 
-    public Evaluation combineEvaluations(Evaluation coreEvaluation) {
-        Evaluation combinedEvaluation = new Evaluation();
-        combinedEvaluation.plus(this);
-        combinedEvaluation.plus(coreEvaluation);
-        return combinedEvaluation;
-    }
+//    public Evaluation combineEvaluations(Evaluation coreEvaluation) {
+//        Evaluation combinedEvaluation = new Evaluation();
+//        combinedEvaluation.plus(this);
+//        combinedEvaluation.plus(coreEvaluation);
+//        return combinedEvaluation;
+//    }
 
     public Evaluation plus(Evaluation evaluation) {
         Evaluation plusEvaluation = new Evaluation();
@@ -64,6 +64,16 @@ public class Evaluation implements Comparable<Evaluation> {
     public Evaluation plusRelativeValues(int relativeValues) {
         this.relativeValues += relativeValues;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Evaluation{" +
+                "wins=" + wins +
+                ", losses=" + losses +
+                ", draws=" + draws +
+                ", relativeValues=" + relativeValues +
+                '}';
     }
 
     @Override

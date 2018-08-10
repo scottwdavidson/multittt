@@ -28,7 +28,7 @@ public abstract class BoardEvaluator {
         Evaluation summaryEvaluation = new Evaluation();
         for(TicTacToeBoard ticTacToeBoard: board.getTttBoards()){
             Evaluation evaluation = evaluateTTTBoard(rootPlayer, ticTacToeBoard);
-            summaryEvaluation = summaryEvaluation.combineEvaluations(evaluation);
+            summaryEvaluation = summaryEvaluation.plus(evaluation);
         }
 
         // Determine win/loss/draw relative values
@@ -42,6 +42,8 @@ public abstract class BoardEvaluator {
                         (summaryEvaluation.getLosses() * lossRelativeValue) +
                         (summaryEvaluation.getDraws() * drawRelativeValue) +
                         (summaryEvaluation.getRelativeValues());
+
+
 
         return summaryBoardEvaluationValue;
 
