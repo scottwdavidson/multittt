@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.swd.ttt.entity.Turn;
 import com.swd.ttt.entity.eval.EmptyEval;
 import com.swd.ttt.entity.eval.Eval;
 import com.swd.ttt.entity.eval.MultiPlayFutureWinEval;
@@ -11,9 +12,12 @@ import com.swd.ttt.entity.eval.MultiSingleRowColumnDiagonalEval;
 import com.swd.ttt.entity.eval.PreMultiPlayFutureWinEval;
 import com.swd.ttt.entity.eval.SinglePlayFutureWinEval;
 import com.swd.ttt.entity.eval.SingleRowColumnDiagonalEval;
+import com.swd.ttt.entity.play.Board;
+import com.swd.ttt.entity.play.MovePosition;
 import com.swd.ttt.entity.play.Player;
 import com.swd.ttt.entity.play.TicTacToeBoard;
 import com.swd.ttt.entity.strategy.BoardEvaluator;
+import com.swd.ttt.entity.strategy.Evaluation;
 
 /**
  * Provides full Board evaluation logic in support of the MinMax strategy, identifying both *definite* cases and
@@ -119,14 +123,51 @@ public class MinMaxBoardEvaluator extends BoardEvaluator {
     	
     	for(RelativeEval relativeEval : RELATIVE_EVALS){
     		if(relativeEval.getEval().evaluationMatches(ticTacToeBoard, rootPlayer, rootPlayer.opponent())){
-    			return evaluation.relativeValues(relativeEval.getValue());
+    			return evaluation.plusRelativeValues(relativeEval.getValue());
     		}
     		if(relativeEval.getEval().evaluationMatches(ticTacToeBoard, rootPlayer.opponent(), rootPlayer)){
-    			return evaluation.relativeValues(-1 * relativeEval.getValue());
+    			return evaluation.plusRelativeValues(-1 * relativeEval.getValue());
     		}
     	}
     	
-    	return evaluation.relativeValues(0);
+    	return evaluation.plusRelativeValues(0);
     }
 
+    public static void main(String[] args){
+
+		MinMaxBoardEvaluator minMaxBoardEvaluator = new MinMaxBoardEvaluator();
+
+		List<MovePosition> movePositions = new ArrayList<MovePosition>();
+		movePositions.add(MovePosition.newMovePosition(4,4));  // X
+		movePositions.add(MovePosition.newMovePosition(4,2));  // O
+		movePositions.add(MovePosition.newMovePosition(2,0));
+		movePositions.add(MovePosition.newMovePosition(0,6));
+		movePositions.add(MovePosition.newMovePosition(6,1));
+		movePositions.add(MovePosition.newMovePosition(1,4));
+		movePositions.add(MovePosition.newMovePosition(4,5));  // X
+		movePositions.add(MovePosition.newMovePosition(5,4));
+		movePositions.add(MovePosition.newMovePosition(4,1));  // X
+		movePositions.add(MovePosition.newMovePosition(1,7));
+		movePositions.add(MovePosition.newMovePosition(7,4));
+		movePositions.add(MovePosition.newMovePosition(4,3));  // O
+		movePositions.add(MovePosition.newMovePosition(3,4));
+		movePositions.add(MovePosition.newMovePosition(4,7));  // O
+		movePositions.add(MovePosition.newMovePosition(7,6));
+		movePositions.add(MovePosition.newMovePosition(6,4));
+		movePositions.add(MovePosition.newMovePosition(4,8));  // X
+		movePositions.add(MovePosition.newMovePosition(8,4));  // O
+		movePositions.add(MovePosition.newMovePosition(4,0));  // X
+
+		Board board = Board.initialBoard(1000, Player.X, 4);
+		Turn turn = new Turn();
+		for(MovePosition movePosition : movePositions){
+			board = turn.executeTurn(board, movePosition);
+		}
+
+		System.out.println(minMaxBoardEvaluator.evaluateTTTBoard(Player.X,board.getTttBoards()[4]));
+		System.out.println(minMaxBoardEvaluator.evaluate(Player.X,board));
+		System.out.println(minMaxBoardEvaluator.evaluate(Player.O,board));
+
+
+	}
 }
