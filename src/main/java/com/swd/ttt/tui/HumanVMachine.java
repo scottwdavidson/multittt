@@ -7,6 +7,9 @@ import com.swd.ttt.entity.play.MovePosition;
 import com.swd.ttt.entity.play.Player;
 import com.swd.ttt.entity.strategy.minmax.MinMaxStrategy;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -41,6 +44,12 @@ public class HumanVMachine {
 
             // Make the move
             board = turn.executeTurn(board, movePosition);
+            try {
+				printBoardToDebugFile(board, true);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
             // Break if necessary
             if ( board.getGameState() == GameState.Closed ){
@@ -55,6 +64,12 @@ public class HumanVMachine {
             board = minMaxStrategy.executeMove(board);
             long end = System.currentTimeMillis();
             machineMoveRuntimeMillis = end - start;
+            try {
+				printBoardToDebugFile(board, false);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
         }
         // Game Loop ( End )
@@ -84,6 +99,18 @@ public class HumanVMachine {
     	
     	
         return nextMove; // TODO DYLAN ...
+    }
+    
+    protected void printBoardToDebugFile(Board board, boolean humanMove) throws IOException {
+    	BufferedWriter writer = new BufferedWriter(new FileWriter("src/test/java/com/swd/ttt/strategy/machineMoveDebugTrace.txt", true));
+        if(humanMove){
+        	writer.write("=============== Player made move: ================");
+        }else{
+        	writer.write("========== Computer chose to make move: ==========");
+        }
+        writer.newLine();
+        writer.write(Presentation.presentation(board));
+        writer.close();
     }
 
 }

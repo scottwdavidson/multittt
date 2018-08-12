@@ -1,5 +1,10 @@
 package com.swd.ttt.entity.strategy;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import com.swd.ttt.entity.play.Board;
 import com.swd.ttt.entity.play.TicTacToeBoard;
 import com.swd.ttt.entity.play.Player;
@@ -13,12 +18,17 @@ import com.swd.ttt.tui.Presentation;
  */
 public abstract class BoardEvaluator {
 
-
 //    private Board coreBoard;
 //    private Evaluation coreEvaluation;
 
     public BoardEvaluator() {
 //        this.coreBoard = null;
+    	try {
+			clearDebugInfoFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     public int evaluate(Player rootPlayer, Board board) {
@@ -44,9 +54,20 @@ public abstract class BoardEvaluator {
                         (summaryEvaluation.getDraws() * drawRelativeValue) +
                         (summaryEvaluation.getRelativeValues());
 
+        
+        
+        
         System.out.println("+++++++++++++ possible machine move ++++++++++++++");
         System.out.println("Board move#: " + board.getMoveNumber() + ", activePlayer: " + board.getActivePlayer() + ", summaryEval: " + summaryBoardEvaluationValue);
         System.out.println(Presentation.presentation(board));
+        
+        try {
+			printDebugInfoToFile(board, summaryBoardEvaluationValue);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         return summaryBoardEvaluationValue;
 
 //        // Assign ( and update if necessary ) the core board and its evaluation
@@ -127,6 +148,29 @@ public abstract class BoardEvaluator {
         }
 
         return evaluation;
+    }
+    
+    protected void printDebugInfoToFile(Board board, int summaryEvaluation) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter("src/test/java/com/swd/ttt/strategy/machineMoveDebugTrace.txt", true));
+        writer.write("+++++++++++++ possible machine move ++++++++++++++");
+        writer.newLine();
+        writer.write("Board move#: " + board.getMoveNumber() + ", activePlayer: " + board.getActivePlayer() + ", summaryEval: " + summaryEvaluation);
+        writer.newLine();
+        writer.write(Presentation.presentation(board));
+        writer.close();
+    }
+    
+    protected void clearDebugInfoFile() throws IOException{
+    	FileWriter fileWriter = null;
+		try {
+			fileWriter = new FileWriter("src/test/java/com/swd/ttt/strategy/machineMoveDebugTrace.txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        printWriter.print("");
+        printWriter.close();
     }
 
     /**
