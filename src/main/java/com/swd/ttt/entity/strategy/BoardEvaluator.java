@@ -5,6 +5,7 @@ import com.swd.ttt.entity.play.TicTacToeBoard;
 import com.swd.ttt.entity.play.Player;
 import com.swd.ttt.entity.eval.DrawEval;
 import com.swd.ttt.entity.eval.WinEval;
+import com.swd.ttt.tui.Presentation;
 
 /**
  * Provides an abstracted Board evaluation algorithm in the context of the provided root player, leaving the specific
@@ -43,8 +44,9 @@ public abstract class BoardEvaluator {
                         (summaryEvaluation.getDraws() * drawRelativeValue) +
                         (summaryEvaluation.getRelativeValues());
 
-
-
+        System.out.println("+++++++++++++ possible machine move ++++++++++++++");
+        System.out.println("Board move#: " + board.getMoveNumber() + ", activePlayer: " + board.getActivePlayer() + ", summaryEval: " + summaryBoardEvaluationValue);
+        System.out.println(Presentation.presentation(board));
         return summaryBoardEvaluationValue;
 
 //        // Assign ( and update if necessary ) the core board and its evaluation
