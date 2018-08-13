@@ -7,6 +7,9 @@ import com.swd.ttt.entity.play.MovePosition;
 import com.swd.ttt.entity.play.Player;
 import com.swd.ttt.entity.strategy.minmax.MinMaxStrategy;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -42,6 +45,13 @@ public class MachineVMachine {
             board = minMaxStrategy.executeMove(board);
             long end = System.currentTimeMillis();
             machineMoveRuntimeMillis = end - start;
+            
+            try {
+				printBoardToDebugFile(board);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
         }
         // Game Loop ( End )
@@ -50,6 +60,14 @@ public class MachineVMachine {
         System.out.println(Presentation.presentation(board));
         System.out.println("Player " + board.getScore().winningPlayer() + " Wins the game!");
 
+    }
+    
+    protected void printBoardToDebugFile(Board board) throws IOException {
+    	BufferedWriter writer = new BufferedWriter(new FileWriter("src/test/java/com/swd/ttt/strategy/machineMoveDebugTrace.txt", true));
+        writer.write("========== " + board.getActivePlayer().opponent() + " chose to make move: ==========");
+        writer.newLine();
+        writer.write(Presentation.presentation(board));
+        writer.close();
     }
 
 }

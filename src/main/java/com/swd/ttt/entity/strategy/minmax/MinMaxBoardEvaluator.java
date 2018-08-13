@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.swd.ttt.entity.Turn;
+import com.swd.ttt.entity.eval.BlockedWinEval;
 import com.swd.ttt.entity.eval.EmptyEval;
 import com.swd.ttt.entity.eval.Eval;
 import com.swd.ttt.entity.eval.MultiPlayFutureWinEval;
@@ -68,6 +69,7 @@ public class MinMaxBoardEvaluator extends BoardEvaluator {
     	RELATIVE_EVALS.add(RelativeEval.newRelativeEval(new MultiPlayFutureWinEval(), 6));
     	RELATIVE_EVALS.add(RelativeEval.newRelativeEval(new SinglePlayFutureWinEval(), 5));
     	RELATIVE_EVALS.add(RelativeEval.newRelativeEval(new PreMultiPlayFutureWinEval(), 4));
+    	RELATIVE_EVALS.add(RelativeEval.newRelativeEval(new BlockedWinEval(), 4));
     	RELATIVE_EVALS.add(RelativeEval.newRelativeEval(new MultiSingleRowColumnDiagonalEval(), 2));
     	RELATIVE_EVALS.add(RelativeEval.newRelativeEval(new SingleRowColumnDiagonalEval(), 1));
     	RELATIVE_EVALS.add(RelativeEval.newRelativeEval(new EmptyEval(), 0));
