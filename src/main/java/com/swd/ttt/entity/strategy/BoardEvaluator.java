@@ -57,9 +57,9 @@ public abstract class BoardEvaluator {
         
         
         
-        System.out.println("+++++++++++++ possible machine move ++++++++++++++");
-        System.out.println("Board move#: " + board.getMoveNumber() + ", activePlayer: " + board.getActivePlayer() + ", summaryEval: " + summaryBoardEvaluationValue);
-        System.out.println(Presentation.presentation(board));
+//        System.out.println("+++++++++++++ possible machine move ++++++++++++++");
+//        System.out.println("Board move#: " + board.getMoveNumber() + ", activePlayer: " + board.getActivePlayer() + ", summaryEval: " + summaryBoardEvaluationValue);
+//        System.out.println(Presentation.presentation(board));
         
         try {
 			printDebugInfoToFile(board, summaryBoardEvaluationValue);
