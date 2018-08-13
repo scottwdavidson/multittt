@@ -82,11 +82,11 @@ public class HumanVMachine {
 
 
     protected MovePosition solicitMove(Board board){
-    	System.out.println("Player " + board.getActivePlayer() + ": It is your turn." + "\t\t\tRemember: \t 0 | 1 | 2 ");
-    	System.out.println("You must play in board #" + board.getActiveTicTacToeBoardIndex() + ".\t\t\t\t\t---|---|---");
-    	System.out.println("Where would you like to play? \t\t\t\t\t 3 | 4 | 5 ");
-    	System.out.println("Type the integer for the corresponding cell.\t\t\t---|---|---");
-    	System.out.print("Then press 'Enter'.\t\t\t\t\t\t 6 | 7 | 8 " + "\n>");
+    	System.out.println(" 0 | 1 | 2   Player " + board.getActivePlayer() + ": It is your turn.");
+    	System.out.println("---|---|---  You must play in board #" + board.getActiveTicTacToeBoardIndex());
+    	System.out.println(" 3 | 4 | 5   Where would you like to play?");
+    	System.out.println("---|---|---  Type the integer for the corresponding cell.");
+    	System.out.println(" 6 | 7 | 8   Then press 'Enter'" + "\n\n>");
     	Scanner scanner = new Scanner(System.in);
     	int input = scanner.nextInt();
     	
