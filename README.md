@@ -113,3 +113,6 @@ Example Game Play ( board ):
 ### The Rules (a few more)
 * __Which board to play on if specified board is already won or full?__: in the situation when the previous play position directs you to a board which has already been won __or__ is completely full ( __draw__ ), then you simply go to the next higher board ( to the right ). If the last board is won or full, then go to the first board. 
 * __Can a player elect to not play?__: each player *must* play every turn. If the active board has only 1 position to play on, the that position must be played on.
+
+### Clone and Run
+The code is still in development but if you'd like to play against our computer player, please clone this repo and then run the [ManVMachine](https://github.com/scottwdavidson/multitttsvc/blob/master/src/main/java/com/swd/ttt/tui/HumanVMachine.java). The current [MinMaxStrategy](https://github.com/scottwdavidson/multitttsvc/blob/master/src/main/java/com/swd/ttt/entity/strategy/minmax/MinMaxStrategy.java) implementation looks *7* moves ahead. It can be a little slow at 7 and we're not seeing much different performance from the computer player w/ 5 moves ahead, so feel free to tweak. (Note: typically this value should be odd to perform the lowest level board evaluation with respect to the computer player's final move - even configuration value (2,4,6) would be the opponent's final move).
