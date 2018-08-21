@@ -23,12 +23,12 @@ public abstract class BoardEvaluator {
 
     public BoardEvaluator() {
 //        this.coreBoard = null;
-    	try {
-			clearDebugInfoFile();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//    	try {
+//			clearDebugInfoFile();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
     }
 
     public int evaluate(Player rootPlayer, Board board) {
@@ -160,18 +160,18 @@ public abstract class BoardEvaluator {
         writer.close();
     }
     
-    protected void clearDebugInfoFile() throws IOException{
-    	FileWriter fileWriter = null;
-		try {
-			fileWriter = new FileWriter("src/test/java/com/swd/ttt/strategy/machineMoveDebugTrace.txt");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.print("");
-        printWriter.close();
-    }
+//    protected void clearDebugInfoFile() throws IOException{
+//    	FileWriter fileWriter = null;
+//		try {
+//			fileWriter = new FileWriter("src/test/java/com/swd/ttt/strategy/machineMoveDebugTrace.txt");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//        PrintWriter printWriter = new PrintWriter(fileWriter);
+//        printWriter.print("");
+//        printWriter.close();
+//    }
 
     /**
      * Depending on the specific strategy, determine the value of a win.
